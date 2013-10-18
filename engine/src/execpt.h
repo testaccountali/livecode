@@ -81,11 +81,43 @@ public:
 	
 	//////////
 	
+	void setempty(void);
+	void setpoint(const MCPoint& point);
+	void setboolean(Bool value);
+	void setuint(uint4 value);
+	void setint(int4 value);
+	void setsvalue(const MCString& value);
+	void setnvalue(double value);
+	void setstaticcstring(const char *value);
+	
+	//////////
+	
+	bool isempty(void);
+	bool isarray(void);
+	
+	MCString getsvalue(void);
+	double getnvalue(void);
+	
+	int4 getint4(void);
+	uint4 getuint4(void);
+	int2 getint2(void);
+	uint2 getuint2(void);
+	
+	//////////
+	
 	void clear(void);
 	
 	//////////
 	
+	bool ton(void);
+	bool tos(void);
+	bool tona(void);
+	
+	//////////
+	
+	void concatcstring(const char *str, Exec_context sep, Boolean first);
 	void concatmcstring(const MCString& str, Exec_concat sep, Boolean first);
+	void concatstringref(MCStringRef str, Exec_context sep, Boolean first);
 	
 	//////////
 	

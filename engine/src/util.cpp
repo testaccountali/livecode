@@ -2322,7 +2322,7 @@ void MCU_geturl(MCExecPoint &ep)
     MCAutoStringRef t_filename, t_output;
     MCStringCreateWithOldString(ep.getsvalue(), &t_filename);
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCU_geturl(ctxt, *t_filename, &t_output);
     
