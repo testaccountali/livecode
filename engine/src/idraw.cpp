@@ -168,7 +168,7 @@ void MCImage::startmag(int2 x, int2 y)
 	state |= CS_MAGNIFY;
 
     MCExecPoint ep(this, NULL, NULL);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     sptr->setintprop(ctxt, 0, P_MAX_WIDTH, False, rect.width * MCmagnification);
 

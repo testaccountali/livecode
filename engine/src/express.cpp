@@ -650,7 +650,7 @@ Parse_stat MCFuncref::parse(MCScriptPoint &sp, Boolean the)
 
 Exec_stat MCFuncref::eval(MCExecPoint &ep)
 {
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (MCscreen->abortkey())
 	{
 		MCeerror->add(EE_HANDLER_ABORT, line, pos);
@@ -696,7 +696,7 @@ Exec_stat MCFuncref::eval(MCExecPoint &ep)
 		{
 			tptr -> clear_argument();
 			Exec_stat stat;
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			while ((stat = tptr->eval(ep)) != ES_NORMAL && (MCtrace || MCnbreakpoints) && !MCtrylock && !MClockerrors)
 				MCB_error(ctxt, line, pos, EE_FUNCTION_BADSOURCE);
 			if (stat != ES_NORMAL)

@@ -663,7 +663,7 @@ Exec_stat MCPrint::exec(MCExecPoint &ep)
 #endif /* MCPrint */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (mode == PM_ANCHOR)
 	{

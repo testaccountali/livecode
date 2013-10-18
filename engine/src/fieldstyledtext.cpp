@@ -488,7 +488,7 @@ static bool copy_element_as_color_if_non_empty(MCExecContext& ctxt, MCArrayRef a
 void MCField::parsestyledtextappendblock(MCParagraph *p_paragraph, MCArrayRef p_style, const char *p_initial, const char *p_final, MCStringRef p_metadata, bool p_is_unicode)
 {
 	MCExecPoint ep(NULL, NULL, NULL);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	// Make sure we don't try and append any more than 64K worth of bytes.
 	uint32_t t_text_length;
 	t_text_length = MCMin(p_final - p_initial, 65534 - p_paragraph -> textsize);
@@ -633,7 +633,7 @@ void MCField::parsestyledtextappendblock(MCParagraph *p_paragraph, MCArrayRef p_
 void MCField::parsestyledtextblockarray(MCArrayRef p_block_value, MCParagraph*& x_paragraphs)
 {	
 	MCExecPoint ep(NULL, NULL, NULL);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	// If the value is a sequence, recurse for each element.
 	if (MCArrayIsSequence(p_block_value))
 	{

@@ -155,7 +155,7 @@ Exec_stat MCAbsFunction::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCAbsFunction */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -214,7 +214,7 @@ Exec_stat MCAcos::eval(MCExecPoint &ep)
 #endif /* MCAcos */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -273,7 +273,7 @@ Exec_stat MCAnnuity::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCAnnuity */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_rate, t_periods;
 	real64_t t_result;
 
@@ -344,7 +344,7 @@ Exec_stat MCAsin::eval(MCExecPoint &ep)
 #endif /* MCAsin */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -403,7 +403,7 @@ Exec_stat MCAtan::eval(MCExecPoint &ep)
 #endif /* MCAtan */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -471,7 +471,7 @@ Exec_stat MCAtan2::eval(MCExecPoint &ep)
 #endif /* MCAtan2 */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_y, t_x;
 	real64_t t_result;
 
@@ -539,7 +539,7 @@ Exec_stat MCAverage::eval(MCExecPoint &ep)
 #endif /* MCAverage */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoArray<real64_t> t_values;
 	real64_t t_result;
 
@@ -597,7 +597,7 @@ Exec_stat MCCompound::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCCompound */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_rate, t_periods;
 	real64_t t_result;
 
@@ -668,7 +668,7 @@ Exec_stat MCCos::eval(MCExecPoint &ep)
 #endif /* MCCos */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -727,7 +727,7 @@ Exec_stat MCExp::eval(MCExecPoint &ep)
 #endif /* MCExp */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -789,7 +789,7 @@ Exec_stat MCExp1::eval(MCExecPoint &ep)
 #endif /* MCExp1 */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -849,7 +849,7 @@ Exec_stat MCExp2::eval(MCExecPoint &ep)
 #endif /* MCExp2 */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -908,7 +908,7 @@ Exec_stat MCExp10::eval(MCExecPoint &ep)
 #endif /* MCExp10 */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -967,7 +967,7 @@ Exec_stat MCLn::eval(MCExecPoint &ep)
 #endif /* MCLn */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -1026,7 +1026,7 @@ Exec_stat MCLn1::eval(MCExecPoint &ep)
 #endif /* MCLn1 */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -1085,7 +1085,7 @@ Exec_stat MCLog2::eval(MCExecPoint &ep)
 #endif /* MCLog2 */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -1144,7 +1144,7 @@ Exec_stat MCLog10::eval(MCExecPoint &ep)
 #endif /* MCLog10 */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -1234,7 +1234,7 @@ Exec_stat MCMatrixMultiply::eval(MCExecPoint &ep)
     
 	return ES_NORMAL;
 #endif /* MCMatrixMultiply */
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (dest -> eval(ep) != ES_NORMAL)
 	{
@@ -1304,7 +1304,7 @@ Exec_stat MCMaxFunction::eval(MCExecPoint &ep)
 #endif /* MCMaxFunction */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoArray<real64_t> t_values;
 	real64_t t_result;
 
@@ -1359,7 +1359,7 @@ Exec_stat MCMedian::eval(MCExecPoint &ep)
 #endif /* MCMedian */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoArray<real64_t> t_values;
 	real64_t t_result;
 
@@ -1415,7 +1415,7 @@ Exec_stat MCMD5Digest::eval(MCExecPoint &ep)
 #endif /* MCMD5Digest */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoDataRef t_source;
 	MCAutoDataRef t_result;
 
@@ -1472,7 +1472,7 @@ Exec_stat MCSHA1Digest::eval(MCExecPoint &ep)
 #endif /* MCSHA1Digest */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoDataRef t_source;
 	MCAutoDataRef t_result;
 
@@ -1528,7 +1528,7 @@ Exec_stat MCMinFunction::eval(MCExecPoint &ep)
 #endif /* MCMinFunction */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoArray<real64_t> t_values;
 	real64_t t_result;
 
@@ -1597,7 +1597,7 @@ Exec_stat MCRandom::eval(MCExecPoint &ep)
 #endif /* MCRandom */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -1668,7 +1668,7 @@ Exec_stat MCRound::eval(MCExecPoint &ep)
 #endif /* MCRound */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source, t_digit;
 	real64_t t_result;
 
@@ -1745,7 +1745,7 @@ Exec_stat MCSin::eval(MCExecPoint &ep)
 #endif /* MCSin */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -1804,7 +1804,7 @@ Exec_stat MCSqrt::eval(MCExecPoint &ep)
 #endif /* MCSqrt */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -1884,7 +1884,7 @@ Exec_stat MCStatRound::eval(MCExecPoint &ep)
 #endif /* MCStatRound */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source, t_digit;
 	real64_t t_result;
 
@@ -1958,7 +1958,7 @@ Exec_stat MCStdDev::eval(MCExecPoint &ep)
 #endif /* MCStdDev */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoArray<real64_t> t_values;
 	real64_t t_result;
 
@@ -2013,7 +2013,7 @@ Exec_stat MCSum::eval(MCExecPoint &ep)
 #endif /* MCSum */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoArray<real64_t> t_values;
 	real64_t t_result;
 
@@ -2072,7 +2072,7 @@ Exec_stat MCTan::eval(MCExecPoint &ep)
 #endif /* MCTan */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 
@@ -2149,7 +2149,7 @@ Exec_stat MCTranspose::eval(MCExecPoint &ep)
     
 	return ES_NORMAL;
 #endif /* MCTranspose */
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	// ARRAYEVAL
 	if (source -> eval(ep) != ES_NORMAL)
@@ -2211,7 +2211,7 @@ Exec_stat MCTrunc::eval(MCExecPoint &ep)
 #endif /* MCTrunc */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_source;
 	real64_t t_result;
 

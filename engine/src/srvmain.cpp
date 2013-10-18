@@ -531,7 +531,7 @@ void X_main_loop(void)
 #endif
 	
 	MCExecPoint ep;
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (!MCserverscript -> Include(ctxt, MCserverinitialscript, false) &&
 		MCS_get_errormode() != kMCSErrorModeDebugger)
 	{

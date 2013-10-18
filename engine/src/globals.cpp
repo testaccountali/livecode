@@ -951,7 +951,7 @@ bool X_open(int argc, char *argv[], char *envp[])
 	}
 	
 	MCExecPoint ep;
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceInitialize(ctxt);
 	
 	// MW-2012-02-14: [[ FontRefs ]] Open the dispatcher after we have an open
@@ -1002,7 +1002,7 @@ int X_close(void)
 	}
 
 	MCExecPoint ep;
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceFinalize(ctxt);
 
 	MCstacks->closeall();

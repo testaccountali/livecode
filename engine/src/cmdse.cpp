@@ -133,7 +133,7 @@ Exec_stat MCAccept::exec(MCExecPoint &ep)
 #endif /* MCAccept */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (port->eval(ep) != ES_NORMAL || ep.ton() != ES_NORMAL)
 	{
 		MCeerror->add(EE_ACCEPT_BADEXP, line, pos);
@@ -203,7 +203,7 @@ Parse_stat MCBeep::parse(MCScriptPoint &sp)
 	return PS_NORMAL;
 }
 
-Exec_stat MCBeep::exec(MCExecPoint &ep)
+bool MCBeep::exec_ctxt(MCExecContext& ctxt)
 {
 #ifdef /* MCBeep */ LEGACY_EXEC
 uint4 i = 1;
@@ -234,7 +234,7 @@ uint4 i = 1;
 	return ES_NORMAL;
 #endif /* MCBeep */
 
-
+#if 0
 	uint4 i = 1;
 	if (times != NULL)
 	{
@@ -246,12 +246,17 @@ uint4 i = 1;
 		i = ep.getuint4();
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecBeep(ctxt, i);
 	if (!ctxt . HasError())
 		return ES_NORMAL;
 
 	return ctxt . Catch(line, pos);
+#endif
+
+	uinteger_t t_count;
+	if (ctxt . EvalOptionalExpressionAsUInt(times, 1, EE_BEEP_BADEXP, t_count))
+		MCInterfaceExecBeep(ctxt, t_count);
 }
 
 void MCBeep::compile(MCSyntaxFactoryRef ctxt)
@@ -276,7 +281,7 @@ MCB_break(ep, getline(), getpos());
 #endif /* MCBreakPoint */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCDebuggingExecBreakpoint(ctxt, line, pos);
 
 	if (!ctxt . HasError())
@@ -342,7 +347,7 @@ if (id == NULL)
 	return ES_NORMAL;
 #endif /* MCCancel */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (id == NULL)
 		MCPrintingExecCancelPrinting(ctxt);
@@ -516,7 +521,7 @@ if (button != NULL)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecClickCmd(ctxt, which, t_location, mstate);
 
 	if (!ctxt . HasError())
@@ -738,7 +743,7 @@ if (button != NULL)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecDrag(ctxt, which, t_start, t_end, mstate);
 
 	if (!ctxt . HasError())
@@ -819,7 +824,7 @@ MCObject *optr;
 #endif /* MCFocus */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (object == NULL)
 		MCInterfaceExecFocusOnNothing(ctxt);
 	else
@@ -939,7 +944,7 @@ Exec_stat MCInsert::exec(MCExecPoint &ep)
 		MCeerror->add(EE_INSERT_BADTARGET, line, pos);
 		return ES_ERROR;
 	}
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCEngineExecInsertScriptOfObjectInto(ctxt, optr, where == IP_FRONT);
 	
 	if (!ctxt . HasError())
@@ -1204,7 +1209,7 @@ Exec_stat MCDispatchCmd::exec(MCExecPoint& ep)
 
 		if (t_var == NULL)
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			tptr -> clear_argument();
 			while ((stat = tptr->eval(ep)) != ES_NORMAL && (MCtrace || MCnbreakpoints) && !MCtrylock && !MClockerrors)
 				MCB_error(ctxt, line, pos, EE_STATEMENT_BADPARAM);
@@ -1472,7 +1477,7 @@ Exec_stat MCMessage::exec(MCExecPoint &ep)
 	}
 	return ES_NORMAL;
 #endif /* MCMessage */
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 		
 	if (program)
 	{
@@ -1767,7 +1772,7 @@ Exec_stat MCMove::exec(MCExecPoint &ep)
 #endif /* MCMove */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCObject *optr;
 	uint4 parid;
 
@@ -1796,7 +1801,7 @@ Exec_stat MCMove::exec(MCExecPoint &ep)
 	if (startloc != NULL)
 	{
 		MCPoint t_to;
-		if (!ep . copyaspoint(t_to))
+		if (!ep . copyaslegacypoint(t_to))
 		{
 			MCeerror->add(EE_MOVE_ENDNAP, line, pos);
 			return ES_ERROR;
@@ -1807,7 +1812,7 @@ Exec_stat MCMove::exec(MCExecPoint &ep)
 			return ES_ERROR;
 		}
 		MCPoint t_from;
-		if (!ep . copyaspoint(t_from))
+		if (!ep . copyaslegacypoint(t_from))
 		{
 			MCeerror->add(EE_MOVE_STARTNAP, line, pos);
 			return ES_ERROR;
@@ -2363,7 +2368,7 @@ Exec_stat MCMM::exec(MCExecPoint &ep)
 #endif /* MCMM */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
 	
 	if (prepare && image)
@@ -2468,7 +2473,7 @@ Exec_stat MCMM::exec(MCExecPoint &ep)
 						MCeerror->add(EE_PLAY_BADLOC, line, pos);
 						return ES_ERROR;
 					}
-					/* UNCHECKED */  ep . copyaspoint(t_loc);
+					/* UNCHECKED */  ep . copyaslegacypoint(t_loc);
 					t_loc_ptr = &t_loc;
 				}
 				MCAutoStringRef t_options;
@@ -2690,7 +2695,7 @@ Exec_stat MCReply::exec(MCExecPoint &ep)
 		/* UNCHECKED */ ep . copyasstringref(&t_keyword);
 	}
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (!error)
 		MCScriptingExecReply(ctxt, *t_message, *t_keyword);
 	else
@@ -3055,7 +3060,7 @@ Exec_stat MCStart::exec(MCExecPoint &ep)
 #endif /* MCStart */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (mode == SC_USING)
 	{
 		if (target != NULL)
@@ -3353,7 +3358,7 @@ MCObject *optr = NULL;
 			return ES_ERROR;
 		}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	switch (mode)
 	{
 	case SC_EDITING:
@@ -3565,7 +3570,7 @@ Exec_stat MCType::exec(MCExecPoint &ep)
 	}
 	MCAutoStringRef t_typing;
 	ep . copyasstringref(&t_typing);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecType(ctxt, *t_typing, mstate);
 
 	if (!ctxt . HasError())

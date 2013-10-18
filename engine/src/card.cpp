@@ -1099,10 +1099,6 @@ Exec_stat MCCard::getprop_legacy(uint4 parid, Properties which, MCExecPoint& ep,
 
 Exec_stat MCCard::setprop_legacy(uint4 parid, Properties which, MCExecPoint &ep, Boolean effective)
 {
-	Boolean dirty = False;
-	uint4 newnumber;
-	MCString data = ep.getsvalue();
-
 	switch (which)
 	{
 #ifdef /* MCCard::setprop */ LEGACY_EXEC

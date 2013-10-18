@@ -252,7 +252,7 @@ Exec_stat MCVariable::eval(MCExecPoint& ep)
 
 Exec_stat MCVariable::eval(MCExecPoint& ep, MCNameRef *p_path, uindex_t p_length)
 {
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
     MCAutoValueRef t_value;
     if (eval(ctxt, p_path, p_length, &t_value) &&
@@ -278,7 +278,7 @@ Exec_stat MCVariable::set(MCExecPoint& ep, MCNameRef *p_path, uindex_t p_length)
     if (!ep . copyasvalueref(&t_value))
         return ES_ERROR;
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     if (set(ctxt, *t_value, p_path, p_length))
         return ES_NORMAL;
 
@@ -315,7 +315,7 @@ Exec_stat MCVariable::append(MCExecPoint& ep, MCNameRef *p_path, uindex_t p_leng
     if (!ep . copyasvalueref(&t_value))
         return ES_ERROR;
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     if (append(ctxt, *t_value, p_path, p_length))
         return ES_NORMAL;
 
@@ -372,7 +372,7 @@ Exec_stat MCVariable::remove(MCExecPoint& ep)
 
 Exec_stat MCVariable::remove(MCExecPoint& ep, MCNameRef *p_path, uindex_t p_length)
 {
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     if (remove(ctxt, p_path, p_length))
         return ES_NORMAL;
 
@@ -579,7 +579,7 @@ bool MCVariable::ensureglobal(MCNameRef p_name, MCVariable*& r_var)
 #if 0
 void MCVariable::synchronize(MCExecPoint& ep, Boolean notify)
 {
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (is_env)
 	{
 		if (!isdigit(MCNameGetCharAtIndex(name, 1)) && MCNameGetCharAtIndex(name, 1) != '#')

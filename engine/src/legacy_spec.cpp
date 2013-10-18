@@ -69,7 +69,7 @@ const char *MCS_tmpnam()
 
 void MCS_getspecialfolder(MCExecPoint &ep)
 {
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCNewAutoNameRef t_path;
 	MCAutoStringRef t_special_folder_path;
 	/* UNCHECKED */ ep.copyasnameref(&t_path);

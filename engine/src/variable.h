@@ -25,6 +25,7 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 #define VAR_MASK 0xFFFFFFF0
 #define VAR_APPEND_MAX (MAXUINT2 * 4)
 
+#ifdef LEGACY_EXEC
 ///////////////////////////////////////////////////////////////////////////////
 //
 // The MCVariableArray class represents Revolution's 'hash' value.
@@ -228,6 +229,7 @@ inline uint32_t MCVariableArray::getnfilled(void) const
 {
 	return nfilled;
 }
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 //

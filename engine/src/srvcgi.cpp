@@ -1432,7 +1432,7 @@ static bool cgi_send_cookies(void)
 	
 	char *t_cookie_header = NULL;
 	MCExecPoint ep;
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	for (uint32_t i = 0; t_success && i < MCservercgicookiecount; i++)
 	{
@@ -1765,7 +1765,7 @@ bool MCServerGetSessionIdFromCookie(MCStringRef &r_id)
 		return false;
 	
 	MCExecPoint ep;
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_name;
 	if (!MCS_get_session_name(&t_name))
 		return false;

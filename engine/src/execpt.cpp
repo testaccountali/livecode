@@ -31,6 +31,8 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 #include "osspec.h"
 #include "uidc.h"
 
+#if 0
+
 #include "osxprefix-legacy.h"
 
 //////////
@@ -2583,5 +2585,7 @@ bool MCExecPoint::copyasstringref(MCStringRef& r_string)
 }
 
 /////////
+
+#endif
 
 #endif

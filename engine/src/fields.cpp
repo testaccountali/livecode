@@ -2259,7 +2259,7 @@ Boolean MCField::selectedmark(Boolean whole, int4 &si, int4 &ei,
 bool MCField::returnchunk(int4 p_si, int4 p_ei, MCStringRef& r_chunk)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_number;
 	/* UNCHECKED */ getintprop(ctxt, 0, P_NUMBER, False, t_number);
 
@@ -2275,7 +2275,7 @@ bool MCField::returnchunk(int4 p_si, int4 p_ei, MCStringRef& r_chunk)
 bool MCField::returnline(int4 si, int4 ei, MCStringRef& r_string)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_number;
 	/* UNCHECKED */ getintprop(ctxt, 0, P_NUMBER, False, t_number);
 

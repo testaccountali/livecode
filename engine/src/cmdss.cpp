@@ -103,7 +103,7 @@ MCObject *optr;
 		return ES_ERROR;
 	}
 	MCStack *sptr = (MCStack *)optr;
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCLegacyExecCompactStack(ctxt, sptr);
 
 	if (!ctxt . HasError()) 
@@ -1143,7 +1143,7 @@ Exec_stat MCGo::exec(MCExecPoint &ep)
 	}
 
 	ep . setline(line);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (t_is_home)
 		MCInterfaceExecGoHome(ctxt, cptr);
 	else if (t_is_recent)
@@ -1531,7 +1531,7 @@ Exec_stat MCHide::exec(MCExecPoint &ep)
 #endif /* MCHide */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	switch (which)
 	{
 	case SO_GROUPS:
@@ -1731,7 +1731,7 @@ Exec_stat MCLock::exec(MCExecPoint &ep)
 #endif /* MCLock */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	switch(which)
 	{
@@ -1915,7 +1915,7 @@ MCCard *cptr = MCcstack->popcard();
 #endif /* MCPop */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (dest == NULL) 
 		MCInterfaceExecPopToLast(ctxt);
 	else
@@ -2023,7 +2023,7 @@ MCObject *optr;
 #endif /* MCPush */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (card == NULL)
 	{
 		if (recent)
@@ -2152,7 +2152,7 @@ MCObject *optr;
 #endif /* MCSave */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCObject *optr;
 	uint4 parid;
 
@@ -2440,7 +2440,7 @@ Exec_stat MCShow::exec(MCExecPoint &ep)
 #endif /* MCShow */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	switch (which)
 	{
 	case SO_GROUPS:
@@ -2481,7 +2481,7 @@ Exec_stat MCShow::exec(MCExecPoint &ep)
 				MCeerror->add(EE_SHOW_NOLOCATION, line, pos);
 				return ES_ERROR;
 			}
-			/* UNCHECKED */ ep . copyaspoint(t_location);
+			/* UNCHECKED */ ep . copyaslegacypoint(t_location);
 			t_location_ptr = &t_location;
 		}
 		else
@@ -2854,7 +2854,7 @@ Exec_stat MCSubwindow::exec(MCExecPoint &ep)
 #endif /* MCSubwindow */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCObject *optr;
 	MCAutoStringRef optr_name;
 	uint4 parid;
@@ -2891,7 +2891,7 @@ Exec_stat MCSubwindow::exec(MCExecPoint &ep)
 				MCeerror->add(EE_SUBWINDOW_BADEXP, line, pos);
 				return ES_ERROR;
 			}
-			ep . copyaspoint(t_location);
+			ep . copyaslegacypoint(t_location);
 			t_location_ptr = &t_location;
 		}
 		else
@@ -3008,7 +3008,7 @@ Exec_stat MCSubwindow::exec(MCExecPoint &ep)
 					MCeerror->add(EE_SUBWINDOW_BADEXP, line, pos);
 					return ES_ERROR;
 				}
-				ep . copyaspoint(t_location);
+				ep . copyaslegacypoint(t_location);
 				t_location_ptr = &t_location;
 			}
 			else
@@ -3191,7 +3191,7 @@ Exec_stat MCUnlock::exec(MCExecPoint &ep)
 #endif /* MCUnlock */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	switch (which)
 	{
 		case LC_COLORMAP:

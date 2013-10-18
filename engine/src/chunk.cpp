@@ -1297,7 +1297,7 @@ bool MCChunk::getobj(MCExecContext& ctxt, MCObjectPtr& r_object, bool p_recurse)
 Exec_stat MCChunk::getobj(MCExecPoint& ep, MCObjectPtr& r_object, Boolean p_recurse)
 {
     MCExecPoint ep2(ep);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCObjectPtr t_object;
     
@@ -1348,7 +1348,7 @@ Exec_stat MCChunk::getobj(MCExecPoint& ep, MCObjectPtr& r_object, Boolean p_recu
 			}
 			if (stat != ES_NORMAL)
 			{
-				MCeerror->add(EE_CHUNK_BADOBJECTEXP, line, pos, ep2.getsvalue());
+				MCeerror->add(EE_CHUNK_BADOBJECTEXP, line, pos, ep2.getvalueref());
 				return ES_ERROR;
 			}
         }
@@ -1374,11 +1374,11 @@ Exec_stat MCChunk::getobj(MCExecPoint& ep, MCObjectPtr& r_object, Boolean p_recu
             switch(desttype)
 			{
                 case DT_ME:
-                    //MCEngineEvalMeAsObject(ctxt, t_object);
-                    if (ep.getparentscript() == NULL)
+                    // MCEngineEvalMeAsObject(ctxt, t_object);
+                    if (ctxt.GetParentScript() == NULL)
                         t_object . object = destobj;
                     else
-                        t_object . object = ep . getobj();
+                        t_object . object = ctxt . GetObject();
                     t_object . part_id = 0;
                     break;
                 case DT_MENU_OBJECT:
@@ -2754,7 +2754,7 @@ static void skip_word(const char *&sptr, const char *&eptr)
 
 Exec_stat MCChunk::mark(MCExecPoint &ep, Boolean force, Boolean wholechunk, MCMarkedText& x_mark, bool includechars)
 {
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     int4 t_first, t_last;
     
     if (cline != nil)
@@ -3267,7 +3267,7 @@ Exec_stat MCChunk::eval_legacy(MCExecPoint &ep)
     
 #if 0
     MCAutoStringRef t_text;
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
  	if (source != NULL && url == NULL && stack == NULL && background == NULL && card == NULL
         && group == NULL && object == NULL)
@@ -3411,7 +3411,7 @@ Exec_stat MCChunk::eval_legacy(MCExecPoint &ep)
 
 Exec_stat MCChunk::evaltextchunk(MCExecPoint &ep, MCCRef *ref, MCStringRef p_source, Chunk_term p_chunk_type, MCStringRef& r_text)
 {
-    MCExecContext ctxt(ep); 
+    MCExecContext& ctxt = ep . GetContext(); 
 	if (ref != nil)
     {
         int4 t_start;
@@ -3464,7 +3464,7 @@ Exec_stat MCChunk::evaltextchunk(MCExecPoint &ep, MCCRef *ref, MCStringRef p_sou
 Exec_stat MCChunk::eval(MCExecPoint &ep)
 {
     MCAutoStringRef t_text;
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
  	if (source != NULL && url == NULL && stack == NULL && background == NULL && card == NULL
         && group == NULL && object == NULL)
@@ -3802,7 +3802,7 @@ Exec_stat MCChunk::set_legacy(MCExecPoint &ep, Preposition_type ptype)
     
     
 #if 0
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     MCAutoValueRef t_value;
     
     ep . copyasvalueref(&t_value);
@@ -3918,7 +3918,7 @@ Exec_stat MCChunk::set_legacy(MCExecPoint &ep, Preposition_type ptype)
 
 Exec_stat MCChunk::set(MCExecPoint& ep, Preposition_type p_type, MCValueRef p_value)
 {
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (isvarchunk())
     {
@@ -4110,7 +4110,7 @@ Exec_stat MCChunk::count(Chunk_term tocount, Chunk_term ptype, MCExecPoint &ep)
 		{
             MCAutoStringRef t_string;
             ep . copyasstringref(&t_string);
-            MCExecContext ctxt(ep);
+            MCExecContext& ctxt = ep . GetContext();
             MCStringsCountChunks(ctxt, tocount, *t_string, i);
         }
 		else
@@ -4603,7 +4603,7 @@ Exec_stat MCChunk::getprop(Properties which, MCExecPoint &ep, MCNameRef index, B
     
     MCAutoValueRef t_value;
     MCPropertyInfo *t_info;
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (t_obj_chunk . chunk == CT_UNDEFINED)
     {
@@ -4717,7 +4717,7 @@ Exec_stat MCChunk::setprop(Properties which, MCExecPoint &ep, MCNameRef index, B
 
     MCAutoValueRef t_value;
     MCPropertyInfo *t_info;
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     ep . copyasvalueref(&t_value);
     if (t_obj_chunk . chunk == CT_UNDEFINED)
@@ -4827,7 +4827,7 @@ Chunk_term MCChunk::getlastchunktype(void)
 
 Exec_stat MCChunk::evalvarchunk(MCExecPoint& ep, bool p_whole_chunk, bool p_force, MCVariableChunkPtr& r_chunk)
 {
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     MCEngineMarkVariable(ctxt, destvar, r_chunk . mark);
 
 	if (mark(ep, p_force, p_whole_chunk, r_chunk . mark) != ES_NORMAL)
@@ -4854,7 +4854,7 @@ Exec_stat MCChunk::evalurlchunk(MCExecPoint& ep, bool p_whole_chunk, bool p_forc
     MCAutoStringRef t_string;
 	/* UNCHECKED */ ep . copyasstringref(&t_url);
 	
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     MCNetworkMarkUrl(ctxt, *t_url, r_chunk . mark);
     
 	if (mark(ep, p_force, p_whole_chunk, r_chunk . mark) != ES_NORMAL)
@@ -4885,7 +4885,7 @@ Exec_stat MCChunk::evalobjectchunk(MCExecPoint& ep, bool p_whole_chunk, bool p_f
         && function != F_DRAG_SOURCE && function != F_DRAG_DESTINATION)
 		t_function = true;
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     if (t_function)
         MCInterfaceMarkFunction(ctxt, t_object, function, p_whole_chunk, r_chunk . mark);
     else

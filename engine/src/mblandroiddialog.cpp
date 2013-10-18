@@ -159,7 +159,7 @@ bool MCSystemPickDate(MCDateTime *p_current, MCDateTime *p_min, MCDateTime *p_ma
     t_use_max = p_max != nil;
     
     MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     
     if (p_current != nil)
     {
@@ -231,7 +231,7 @@ bool MCSystemPickTime(MCDateTime *p_current, MCDateTime *p_min, MCDateTime *p_ma
     int32_t t_hour, t_minute;
     
     MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     
     MCDateTime t_current;
     if (p_current != nil)

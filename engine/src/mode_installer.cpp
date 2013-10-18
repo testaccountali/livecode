@@ -644,7 +644,7 @@ private:
 		else
 		{
 			MCExecPoint ep(NULL, NULL, NULL);
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_data;
 			/* UNCHECKED */ MCStringCreateWithBytes((const byte_t *)p_data, p_data_length, kMCStringEncodingNative, false, &t_data);
 			MCStringRef t_value; 

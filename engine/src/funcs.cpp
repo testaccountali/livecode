@@ -228,7 +228,7 @@ Exec_stat MCArrayDecode::eval(MCExecPoint& ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_string;
 	if (!ep . copyasstringref(&t_string))
@@ -272,7 +272,7 @@ Exec_stat MCArrayEncode::eval(MCExecPoint& ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoArrayRef t_array;
 	if (!ep . copyasarrayref(&t_array))
@@ -326,7 +326,7 @@ Exec_stat MCBase64Decode::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	/* UNCHECKED */ ep . copyasstringref(&t_source);
 
@@ -376,7 +376,7 @@ Exec_stat MCBase64Encode::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoDataRef t_source;
 	/* UNCHECKED */ ep . copyasdataref(&t_source);
 
@@ -529,7 +529,7 @@ Exec_stat MCBaseConvert::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	/* UNCHECKED */ ep . copyasstringref(&t_source);
 
@@ -931,7 +931,7 @@ Exec_stat MCBinaryDecode::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCBinaryDecode */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_format;
 	MCAutoDataRef t_data;
 	MCParameter *t_params = nil;
@@ -1358,7 +1358,7 @@ Exec_stat MCBinaryEncode::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCBinaryEncode */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_format;
 	MCAutoValueRefArray t_values;
@@ -1427,7 +1427,7 @@ Exec_stat MCBuildNumber::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCBuildNumber */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	integer_t t_result;
 	MCEngineEvalBuildNumber(ctxt, t_result);
@@ -1449,7 +1449,7 @@ Exec_stat MCCachedUrls::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCCachedUrls */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCNetworkEvalCachedUrls(ctxt, &t_result);
@@ -1471,7 +1471,7 @@ Exec_stat MCCapsLockKey::eval(MCExecPoint &ep)
 #endif /* MCCapsLockKey */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCInterfaceEvalCapsLockKey(ctxt, &t_result);
@@ -1542,7 +1542,7 @@ Exec_stat MCCharToNum::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_source;
 	/* UNCHECKED */ ep . copyasstringref(&t_source);
@@ -1593,7 +1593,7 @@ Exec_stat MCByteToNum::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_source;
 	/* UNCHECKED */ ep . copyasstringref(&t_source);
@@ -1706,7 +1706,7 @@ Exec_stat MCChunkOffset::eval(MCExecPoint &ep)
 #endif /* MCChunkOffset */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_chunk, t_string;
 	uinteger_t t_start = 0;
 	uinteger_t t_result;
@@ -1791,7 +1791,7 @@ void MCChunkOffset::compile(MCSyntaxFactoryRef ctxt)
 
 Exec_stat MCClickChar::eval(MCExecPoint &ep)
 {
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickChar(ctxt, &t_result);
@@ -1815,7 +1815,7 @@ Exec_stat MCClickCharChunk::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickCharChunk */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickCharChunk(ctxt, &t_result);
@@ -1839,7 +1839,7 @@ Exec_stat MCClickChunk::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickChunk */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickChunk(ctxt, &t_result);
@@ -1866,7 +1866,7 @@ Exec_stat MCClickField::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickField */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickField(ctxt, &t_result);
@@ -1887,7 +1887,7 @@ Exec_stat MCClickH::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickH */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	integer_t t_result;
 	MCInterfaceEvalClickH(ctxt, t_result);
@@ -1911,7 +1911,7 @@ Exec_stat MCClickLine::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickLine */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickLine(ctxt, &t_result);
@@ -1932,7 +1932,7 @@ Exec_stat MCClickLoc::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickLoc */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickLoc(ctxt, &t_result);
@@ -1957,7 +1957,7 @@ Exec_stat MCClickStack::eval(MCExecPoint &ep)
 	return MCclickstackptr->getprop(0, P_LONG_NAME, ep, False);
 #endif /* MCClickStack */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickStack(ctxt, &t_result);
@@ -1981,7 +1981,7 @@ Exec_stat MCClickText::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickText */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalClickText(ctxt, &t_result);
@@ -2002,7 +2002,7 @@ Exec_stat MCClickV::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClickV */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	integer_t t_result;
 	MCInterfaceEvalClickV(ctxt, t_result);
@@ -2051,7 +2051,7 @@ Exec_stat MCClipboard::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCClipboard */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCPasteboardEvalClipboard(ctxt, &t_result);
@@ -2073,7 +2073,7 @@ Exec_stat MCCommandKey::eval(MCExecPoint &ep)
 #endif /* MCCommandKey */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCInterfaceEvalCommandKey(ctxt, &t_result);
@@ -2156,7 +2156,7 @@ Exec_stat MCCompress::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoDataRef t_source;
 	/* UNCHECKED */ ep . copyasdataref(&t_source);
 
@@ -2180,7 +2180,7 @@ Exec_stat MCControlKey::eval(MCExecPoint &ep)
 #endif /* MCControlKey */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCInterfaceEvalControlKey(ctxt, &t_result);
@@ -2201,7 +2201,7 @@ Exec_stat MCColorNames::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCColorNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalColorNames(ctxt, &t_result);
@@ -2223,7 +2223,7 @@ Exec_stat MCCommandNames::eval(MCExecPoint &ep)
 	return sp.getcommands(ep);
 #endif /* MCCommandNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalCommandNames(ctxt, &t_result);
@@ -2245,7 +2245,7 @@ Exec_stat MCConstantNames::eval(MCExecPoint &ep)
 	return sp.getconstants(ep);
 #endif /* MCConstantNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalConstantNames(ctxt, &t_result);
@@ -2266,7 +2266,7 @@ Exec_stat MCDate::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDate */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCDateTimeEvalDate(ctxt, &t_result);
@@ -2287,7 +2287,7 @@ Exec_stat MCDateFormat::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDateFormat */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCDateTimeEvalDateFormat(ctxt, &t_result);
@@ -2333,7 +2333,7 @@ Exec_stat MCDecompress::eval(MCExecPoint &ep)
 		MCeerror->add(EE_DECOMPRESS_BADSOURCE, line, pos);
 		return ES_ERROR;
 	}
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoDataRef t_source;
 	/* UNCHECKED */ ep . copyasdataref(&t_source);
 
@@ -2431,7 +2431,7 @@ Exec_stat MCDirectories::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDirectories */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCFilesEvalDirectories(ctxt, &t_result);
@@ -2452,7 +2452,7 @@ Exec_stat MCDiskSpace::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDiskSpace */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	real64_t t_result;
 	MCFilesEvalDiskSpace(ctxt, t_result);
@@ -2476,7 +2476,7 @@ Exec_stat MCDNSServers::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDNSServers */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCNetworkEvalDNSServers(ctxt, &t_result);
@@ -2500,7 +2500,7 @@ Exec_stat MCDragDestination::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDragDestination */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCPasteboardEvalDragDestination(ctxt, &t_result);
@@ -2524,7 +2524,7 @@ Exec_stat MCDragSource::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDragSource */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCPasteboardEvalDragSource(ctxt, &t_result);
@@ -2579,7 +2579,7 @@ Exec_stat MCDriverNames::eval(MCExecPoint &ep)
 	return MCS_getdevices(ep) ? ES_NORMAL : ES_ERROR;
 #endif /* MCDriverNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCFilesEvalDriverNames(ctxt, &t_result);
@@ -2634,7 +2634,7 @@ Exec_stat MCDrives::eval(MCExecPoint &ep)
 	return MCS_getdrives(ep) ? ES_NORMAL : ES_ERROR;
 #endif /* MCDrives */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCFilesEvalDrives(ctxt, &t_result);
@@ -2659,7 +2659,7 @@ Exec_stat MCDropChunk::eval(MCExecPoint &ep)
 #endif /* MCDropChunk */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCPasteboardEvalDropChunk(ctxt, &t_result);
@@ -2680,7 +2680,7 @@ Exec_stat MCQTEffects::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCQTEffects */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCMultimediaEvalQTEffects(ctxt, &t_result);
@@ -2701,7 +2701,7 @@ Exec_stat MCRecordCompressionTypes::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCRecordCompressionTypes */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCMultimediaEvalRecordCompressionTypes(ctxt, &t_result);
@@ -2722,7 +2722,7 @@ Exec_stat MCRecordLoudness::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCRecordLoudness */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	integer_t t_result;
 	MCMultimediaEvalRecordLoudness(ctxt, t_result);
@@ -2772,7 +2772,7 @@ Exec_stat MCEncrypt::eval(MCExecPoint &ep)
 #endif /* MCEncrypt */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCAutoStringRef t_result;
 
@@ -2802,7 +2802,7 @@ Exec_stat MCEnvironment::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCEnvironment */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCEngineEvalEnvironment(ctxt, &t_result);
@@ -2838,7 +2838,7 @@ MCObject *optr;
 #endif /* MCExists */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_exists;
 	MCInterfaceEvalThereIsAnObject(ctxt, object, t_exists);
@@ -2904,7 +2904,7 @@ Exec_stat MCExtents::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCExtents */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoArrayRef t_array;
 	MCAutoStringRef t_result;
@@ -2942,7 +2942,7 @@ Exec_stat MCTheFiles::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCTheFiles */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCFilesEvalFiles(ctxt, &t_result);
@@ -3000,7 +3000,7 @@ Exec_stat MCFlushEvents::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCNewAutoNameRef t_type;
 	/* UNCHECKED */ ep.copyasnameref(&t_type);
 
@@ -3030,7 +3030,7 @@ Exec_stat MCFocusedObject::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCFocusedObject */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalFocusedObject(ctxt, &t_result);
@@ -3094,7 +3094,7 @@ Exec_stat MCFontNames::eval(MCExecPoint &ep)
 		}
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_type;
 	/* UNCHECKED */ ep.copyasstringref(&t_type);
 
@@ -3147,7 +3147,7 @@ Exec_stat MCFontLanguage::eval(MCExecPoint &ep)
 		MCeerror->add(EE_FONTSIZES_BADFONTNAME, line, pos);
 		return ES_ERROR;
 	}
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_font;
 	/* UNCHECKED */ ep.copyasstringref(&t_font);
 
@@ -3198,7 +3198,7 @@ Exec_stat MCFontSizes::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_font;
 	/* UNCHECKED */ ep.copyasstringref(&t_font);
 
@@ -3256,7 +3256,7 @@ Exec_stat MCFontStyles::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_fontname;
 	/* UNCHECKED */ ep.copyasstringref(&t_fontname);
 
@@ -3561,7 +3561,7 @@ fmtError:
 #endif /* MCFormat */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_format;
 	MCAutoValueRefArray t_values;
@@ -3633,7 +3633,7 @@ Exec_stat MCFoundChunk::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCFoundChunk */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalFoundChunk(ctxt, &t_result);
@@ -3661,7 +3661,7 @@ Exec_stat MCFoundField::eval(MCExecPoint &ep)
 #endif /* MCFoundField */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalFoundField(ctxt, &t_result);
@@ -3685,7 +3685,7 @@ Exec_stat MCFoundLine::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCFoundLine */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalFoundLine(ctxt, &t_result);
@@ -3709,7 +3709,7 @@ Exec_stat MCFoundLoc::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCFoundLoc */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalFoundLoc(ctxt, &t_result);
@@ -3733,7 +3733,7 @@ Exec_stat MCFoundText::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCFoundText */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalFoundText(ctxt, &t_result);
@@ -3755,7 +3755,7 @@ Exec_stat MCFunctionNames::eval(MCExecPoint &ep)
 	return sp.getfactors(ep, TT_FUNCTION);
 #endif /* MCFunctionNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalFunctionNames(ctxt, &t_result);
@@ -3807,7 +3807,7 @@ Exec_stat MCGlobalLoc::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCPoint t_result;
 	MCInterfaceEvalGlobalLoc(ctxt, t_point, t_result);
 	if (!ctxt . HasError())
@@ -3831,7 +3831,7 @@ Exec_stat MCGlobals::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCGlobals */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalGlobalNames(ctxt, &t_result);
@@ -3883,7 +3883,7 @@ Exec_stat MCHasMemory::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	uinteger_t t_bytes;
 	/* UNCHECKED */ ep.copyasuint(t_bytes);
 
@@ -3907,7 +3907,7 @@ Exec_stat MCHeapSpace::eval(MCExecPoint &ep)
 #endif /* MCHeapSpace */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_result;
 	MCLegacyEvalHeapSpace(ctxt, t_result);
 
@@ -3959,7 +3959,7 @@ Exec_stat MCHostAddress::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCNewAutoNameRef t_socket;
 
 	/* UNCHECKED */ ep.copyasnameref(&t_socket);
@@ -4018,7 +4018,7 @@ Exec_stat MCHostAtoN::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_address;
 
 	/* UNCHECKED */ ep.copyasstringref(&t_address);
@@ -4043,7 +4043,7 @@ Exec_stat MCHostName::eval(MCExecPoint &ep)
 #endif /* MCHostName */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCNetworkEvalHostName(ctxt, &t_result);
@@ -4109,7 +4109,7 @@ Exec_stat MCHostNtoA::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_hostname;
 	MCNewAutoNameRef t_message;
 
@@ -4180,7 +4180,7 @@ Exec_stat MCInsertScripts::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCInsertScripts */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	if (front)
@@ -4204,7 +4204,7 @@ Exec_stat MCInterrupt::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCInterrupt */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCEngineEvalInterrupt(ctxt, t_result);
@@ -4328,7 +4328,7 @@ Exec_stat MCIntersect::eval(MCExecPoint &ep)
 #endif /* MCIntersect */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_threshold;
 	bool t_result;
 
@@ -4417,7 +4417,7 @@ Exec_stat MCIsNumber::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_string;
 
 	/* UNCHECKED */ ep.copyasstringref(&t_string);
@@ -4470,7 +4470,7 @@ Exec_stat MCIsoToMac::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoDataRef t_source;
 	/* UNCHECKED */ ep . copyasdataref(&t_source);
 
@@ -4637,7 +4637,7 @@ Exec_stat MCKeys::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCKeys */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	if (source != NULL)
@@ -4700,7 +4700,7 @@ Exec_stat MCKeysDown::eval(MCExecPoint &ep)
 #endif /* MCKeysDown */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalKeysDown(ctxt, &t_result);
@@ -4747,7 +4747,7 @@ Exec_stat MCLength::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_string;
 
 	/* UNCHECKED */ ep.copyasstringref(&t_string);
@@ -4789,7 +4789,7 @@ Exec_stat MCLicensed::eval(MCExecPoint &ep)
 #endif /* MCLicensed */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCLegacyEvalLicensed(ctxt, t_result);
@@ -4841,7 +4841,7 @@ Exec_stat MCLocalLoc::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCPoint t_result;
 	MCInterfaceEvalLocalLoc(ctxt, t_point, t_result);
@@ -4867,7 +4867,7 @@ Exec_stat MCLocals::eval(MCExecPoint &ep)
 	return h->getvarnames(ep, False);
 #endif /* MCLocals */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalLocalNames(ctxt, &t_result);
@@ -4889,7 +4889,7 @@ Exec_stat MCMachine::eval(MCExecPoint &ep)
 #endif /* MCMachine */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalMachine(ctxt, &t_result);
@@ -4939,7 +4939,7 @@ Exec_stat MCMacToIso::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoDataRef t_source;
 	/* UNCHECKED */ ep . copyasdataref(&t_source);
 
@@ -4963,7 +4963,7 @@ Exec_stat MCMainStacks::eval(MCExecPoint &ep)
 #endif /* MCMainStacks */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMainStacks(ctxt, &t_result);
@@ -5132,7 +5132,7 @@ Exec_stat MCMatch::eval(MCExecPoint &ep)
 	ep.setboolean(match);
 	return ES_NORMAL;
 #endif /* MCMatch */
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_source;
     MCAutoStringRef t_pattern;
@@ -5235,7 +5235,7 @@ Exec_stat MCMe::eval(MCExecPoint &ep)
 #endif /* MCMe */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalMe(ctxt, &t_result);
@@ -5261,7 +5261,7 @@ if (MCmenuobjectptr == NULL)
 #endif /* MCMenuObject */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCLegacyEvalMenuObject(ctxt, &t_result);
@@ -5282,7 +5282,7 @@ Exec_stat MCMenus::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMenus */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCLegacyEvalMenus(ctxt, &t_result);
@@ -5401,7 +5401,7 @@ Exec_stat MCMerge::eval(MCExecPoint &ep)
 #endif /* MCMerge */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCAutoStringRef t_result;
 
@@ -5431,7 +5431,7 @@ Exec_stat MCMillisecs::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMillisecs */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	real64_t t_result;
 	MCDateTimeEvalMilliseconds(ctxt, t_result);
@@ -5452,7 +5452,7 @@ Exec_stat MCMonthNames::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMonthNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCDateTimeEvalMonthNames(ctxt, &t_result);
@@ -5525,7 +5525,7 @@ Exec_stat MCMouse::eval(MCExecPoint &ep)
 		b = ep.getuint2();
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCInterfaceEvalMouse(ctxt, b, &t_result);
@@ -5568,7 +5568,7 @@ Exec_stat MCMouseChar::eval(MCExecPoint &ep)
 	}
 	return ES_NORMAL;
 #endif /* MCMouseChar */
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseChar(ctxt, &t_result);
@@ -5599,7 +5599,7 @@ Exec_stat MCMouseCharChunk::eval(MCExecPoint &ep)
 #endif /* MCMouseCharChunk */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseCharChunk(ctxt, &t_result);
@@ -5629,7 +5629,7 @@ Exec_stat MCMouseChunk::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMouseChunk */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseChunk(ctxt, &t_result);
@@ -5660,7 +5660,7 @@ Exec_stat MCMouseClick::eval(MCExecPoint &ep)
 #endif /* MCMouseClick */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCInterfaceEvalMouseClick(ctxt, t_result);
@@ -5686,7 +5686,7 @@ Exec_stat MCMouseColor::eval(MCExecPoint &ep)
 #endif /* MCMouseColor */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCColor t_result;
 	MCInterfaceEvalMouseColor(ctxt, t_result);
@@ -5718,7 +5718,7 @@ Exec_stat MCMouseControl::eval(MCExecPoint &ep)
 #endif /* MCMouseControl */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseControl(ctxt, &t_result);
@@ -5745,7 +5745,7 @@ Exec_stat MCMouseH::eval(MCExecPoint &ep)
 #endif /* MCMouseH */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	integer_t t_result;
 	MCInterfaceEvalMouseH(ctxt, t_result);
@@ -5775,7 +5775,7 @@ Exec_stat MCMouseLine::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMouseLine */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseLine(ctxt, &t_result);
@@ -5800,7 +5800,7 @@ Exec_stat MCMouseLoc::eval(MCExecPoint &ep)
 #endif /* MCMouseLoc */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseLoc(ctxt, &t_result);
@@ -5825,7 +5825,7 @@ Exec_stat MCMouseStack::eval(MCExecPoint &ep)
 	return MCmousestackptr->getprop(0, P_SHORT_NAME, ep, False);
 #endif /* MCMouseStack */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseStack(ctxt, &t_result);
@@ -5855,7 +5855,7 @@ Exec_stat MCMouseText::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMouseText */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMouseText(ctxt, &t_result);
@@ -5879,7 +5879,7 @@ Exec_stat MCMouseV::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMouseV */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	integer_t t_result;
 	MCInterfaceEvalMouseV(ctxt, t_result);
@@ -5927,7 +5927,7 @@ Exec_stat MCMovie::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMovie */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCMultimediaEvalMovie(ctxt, &t_result);
@@ -5948,7 +5948,7 @@ Exec_stat MCMovingControls::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCMovingControls */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalMovingControls(ctxt, &t_result);
@@ -6005,7 +6005,7 @@ Exec_stat MCNumToChar::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCStringsEvalNumToChar(ctxt, ep . getint4(), &t_result);
@@ -6055,7 +6055,7 @@ if (source->eval(ep) != ES_NORMAL || ep.ton() != ES_NORMAL)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCStringsEvalNumToByte(ctxt, ep . getint4(), &t_result);
@@ -6079,7 +6079,7 @@ Exec_stat MCOpenFiles::eval(MCExecPoint &ep)
 #endif /* MCOpenFiles */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCFilesEvalOpenFiles(ctxt, &t_result);
@@ -6104,7 +6104,7 @@ Exec_stat MCOpenProcesses::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCOpenProcesses */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCFilesEvalOpenProcesses(ctxt, &t_result);
@@ -6128,7 +6128,7 @@ Exec_stat MCOpenProcessIds::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCOpenProcessIds */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCFilesEvalOpenProcessesIds(ctxt, &t_result);
@@ -6154,7 +6154,7 @@ Exec_stat MCOpenSockets::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCOpenSockets */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCNetworkEvalOpenSockets(ctxt, &t_result);
@@ -6175,7 +6175,7 @@ Exec_stat MCOpenStacks::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCOpenStacks */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalOpenStacks(ctxt, &t_result);
@@ -6197,7 +6197,7 @@ Exec_stat MCOptionKey::eval(MCExecPoint &ep)
 #endif /* MCOptionKey */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCInterfaceEvalOptionKey(ctxt, &t_result);
@@ -6245,7 +6245,7 @@ Exec_stat MCParam::eval(MCExecPoint &ep)
      
 #endif /* MCParam */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     
     integer_t t_index;
     
@@ -6286,7 +6286,7 @@ Exec_stat MCParamCount::eval(MCExecPoint &ep)
 #endif /* MCParamCount */
 
     
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     
     integer_t t_result;
     
@@ -6331,7 +6331,7 @@ Exec_stat MCParams::eval(MCExecPoint &ep)
 #endif /* MCParams */
 
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_result;
     MCEngineEvalParams(ctxt, &t_result);
@@ -6385,7 +6385,7 @@ Exec_stat MCPeerAddress::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCNewAutoNameRef t_socket;
 
 	/* UNCHECKED */ ep.copyasnameref(&t_socket);
@@ -6409,7 +6409,7 @@ Exec_stat MCPendingMessages::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCPendingMessages */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCEngineEvalPendingMessages(ctxt, &t_result);
@@ -6431,7 +6431,7 @@ Exec_stat MCPid::eval(MCExecPoint &ep)
     
 #endif /* MCPid */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     integer_t t_result;
     MCFilesEvalProcessId(ctxt, t_result);
@@ -6453,7 +6453,7 @@ Exec_stat MCPlatform::eval(MCExecPoint &ep)
     
 #endif /* MCPlatform */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCNewAutoNameRef t_result;
 	MCEngineEvalPlatform(ctxt, &t_result);
@@ -6475,7 +6475,7 @@ Exec_stat MCProcessor::eval(MCExecPoint &ep)
     
 #endif /* MCProcessor */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCNewAutoNameRef t_result;
 	MCEngineEvalProcessor(ctxt, &t_result);
@@ -6497,7 +6497,7 @@ Exec_stat MCPropertyNames::eval(MCExecPoint &ep)
 	return sp.getfactors(ep, TT_PROPERTY);
 #endif /* MCPropertyNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalPropertyNames(ctxt, &t_result);
@@ -6519,7 +6519,7 @@ Exec_stat MCQTVersion::eval(MCExecPoint &ep)
      
 #endif /* MCQTVersion */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCAutoStringRef t_result;
 	MCMultimediaEvalQTVersion(ctxt, &t_result);
@@ -6688,7 +6688,7 @@ Exec_stat MCReplaceText::eval(MCExecPoint &ep)
 #endif /* MCReplaceText */
 
     
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     MCAutoStringRef t_source;
     MCAutoStringRef t_pattern;
     MCAutoStringRef t_replacement;
@@ -6747,7 +6747,7 @@ Exec_stat MCTheResult::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCTheResult */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoValueRef t_result;
     MCEngineEvalResult(ctxt, &t_result);
@@ -6770,7 +6770,7 @@ Exec_stat MCScreenColors::eval(MCExecPoint &ep)
      
 #endif /* MCScreenColors */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     real64_t t_result;
     MCInterfaceEvalScreenColors(ctxt, t_result);
@@ -6792,7 +6792,7 @@ Exec_stat MCScreenDepth::eval(MCExecPoint &ep)
      
 #endif /* MCScreenDepth */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     integer_t t_result;
     MCInterfaceEvalScreenDepth(ctxt, t_result);
@@ -6816,7 +6816,7 @@ Exec_stat MCScreenLoc::eval(MCExecPoint &ep)
      
 #endif /* MCScreenLoc */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_result;
     MCInterfaceEvalScreenLoc(ctxt, &t_result);
@@ -6837,7 +6837,7 @@ Exec_stat MCScreenName::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCScreenName */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCNewAutoNameRef t_result;
     MCInterfaceEvalScreenName(ctxt, &t_result);
@@ -6859,7 +6859,7 @@ Exec_stat MCScreenRect::eval(MCExecPoint &ep)
 #endif /* MCScreenRect */
 
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCAutoStringRef t_result;
     MCInterfaceEvalScreenRect(ctxt, false, f_plural, false, &t_result);
@@ -6937,7 +6937,7 @@ Exec_stat MCScreenType::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCScreenType */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCNewAutoNameRef t_result;
     MCLegacyEvalScreenType(ctxt, &t_result);
@@ -6958,7 +6958,7 @@ Exec_stat MCScreenVendor::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCScreenVendor */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCNewAutoNameRef t_result;
     MCLegacyEvalScreenVendor(ctxt, &t_result);
@@ -6979,7 +6979,7 @@ Exec_stat MCScriptLimits::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCScriptLimits */
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_result;
     MCEngineEvalScriptLimits(ctxt, &t_result);
@@ -7000,7 +7000,7 @@ Exec_stat MCSeconds::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSeconds */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	real64_t t_result;
 	MCDateTimeEvalSeconds(ctxt, t_result);
@@ -7094,7 +7094,7 @@ Exec_stat MCSelectedButton::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedButton */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_family;
 
 	if (family->eval(ep) != ES_NORMAL || ep.ton() != ES_NORMAL)
@@ -7198,7 +7198,7 @@ Exec_stat MCSelectedChunk::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedChunk */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	if (object != NULL)
@@ -7253,7 +7253,7 @@ Exec_stat MCSelectedField::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedField */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCInterfaceEvalSelectedField(ctxt, &t_result);
@@ -7281,7 +7281,7 @@ Exec_stat MCSelectedImage::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedImage */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCInterfaceEvalSelectedImage(ctxt, &t_result);
@@ -7344,7 +7344,7 @@ Exec_stat MCSelectedLine::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedLine */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	if (object != NULL)
@@ -7432,7 +7432,7 @@ Exec_stat MCSelectedLoc::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedLoc */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	if (object != NULL)
@@ -7481,7 +7481,7 @@ Exec_stat MCSelectedObject::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedObject */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCInterfaceEvalSelectedObject(ctxt, &t_result);
@@ -7544,7 +7544,7 @@ Exec_stat MCSelectedText::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSelectedText */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	if (object != NULL)
@@ -7623,7 +7623,7 @@ if (source->eval(ep) != ES_NORMAL)
 #endif /* MCShell */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (source -> eval(ep) != ES_NORMAL)
 	{
@@ -7651,7 +7651,7 @@ Exec_stat MCShiftKey::eval(MCExecPoint &ep)
 #endif /* MCShiftKey */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_result;
 	MCInterfaceEvalShiftKey(ctxt, &t_result);
@@ -7689,7 +7689,7 @@ Exec_stat MCSound::eval(MCExecPoint &ep)
 #endif /* MCSound */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_sound;
 	MCMultimediaEvalSound(ctxt, &t_sound);
@@ -7710,7 +7710,7 @@ Exec_stat MCStacks::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCStacks */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCInterfaceEvalStacks(ctxt, &t_result);
@@ -7732,7 +7732,7 @@ Exec_stat MCStackSpace::eval(MCExecPoint &ep)
 #endif /* MCStackSpace */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_result;
 
 	MCLegacyEvalStackSpace(ctxt, t_result);
@@ -7753,7 +7753,7 @@ Exec_stat MCSysError::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSysError */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	uinteger_t t_result;
 
 	MCEngineEvalSysError(ctxt, t_result);
@@ -7774,7 +7774,7 @@ Exec_stat MCSystemVersion::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSystemVersion */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCEngineEvalSystemVersion(ctxt, &t_result);
@@ -7820,7 +7820,7 @@ Exec_stat MCTarget::eval(MCExecPoint &ep)
 #endif /* MCTarget */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	if (contents)
@@ -7868,7 +7868,7 @@ Exec_stat MCOwner::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCEngineEvalOwner(ctxt, t_objptr, &t_result);
@@ -7901,7 +7901,7 @@ Exec_stat MCTempName::eval(MCExecPoint &ep)
 #endif /* MCTempName */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCFilesEvalTempName(ctxt, &t_result);
@@ -7939,7 +7939,7 @@ Exec_stat MCTextHeightSum::eval(MCExecPoint &ep)
 #endif /* MCTextHeightSum */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_result;
 
 	MCObjectPtr t_object;
@@ -7979,7 +7979,7 @@ Exec_stat MCTicks::eval(MCExecPoint &ep)
 #endif /* MCTicks */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_result;
 
 	MCDateTimeEvalTicks(ctxt, t_result);
@@ -8000,7 +8000,7 @@ Exec_stat MCTheTime::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCTheTime */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCDateTimeEvalTime(ctxt, &t_result);
@@ -8042,7 +8042,7 @@ Exec_stat MCToLower::eval(MCExecPoint &ep)
 #endif /* MCToLower */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCAutoStringRef t_result;
 
@@ -8093,7 +8093,7 @@ Exec_stat MCToUpper::eval(MCExecPoint &ep)
 #endif /* MCToUpper */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCAutoStringRef t_result;
 
@@ -8154,7 +8154,7 @@ Exec_stat MCTopStack::eval(MCExecPoint &ep)
 	}
 #endif /* MCTopStack */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_stack_number;
 	MCAutoStringRef t_result;
 
@@ -8239,7 +8239,7 @@ Exec_stat MCUniDecode::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCUniDecode */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCNewAutoNameRef t_language;
 	MCAutoStringRef t_result;
@@ -8342,7 +8342,7 @@ Exec_stat MCUniEncode::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCUniEncode */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCNewAutoNameRef t_language;
 	MCAutoStringRef t_result;
@@ -8427,7 +8427,7 @@ Exec_stat MCUrlDecode::eval(MCExecPoint &ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	/* UNCHECKED */ ep . copyasstringref(&t_source);
 
@@ -8475,7 +8475,7 @@ Exec_stat MCUrlEncode::eval(MCExecPoint &ep)
 		MCeerror->add(EE_URLENCODE_BADSOURCE, line, pos);
 		return ES_ERROR;
 	}
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	/* UNCHECKED */ ep . copyasstringref(&t_source);
 
@@ -8521,7 +8521,7 @@ Exec_stat MCUrlStatus::eval(MCExecPoint &ep)
 #endif /* MCUrlStatus */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 
 	if (url->eval(ep) != ES_NORMAL)
@@ -8666,7 +8666,7 @@ Exec_stat MCValue::eval(MCExecPoint &ep)
 #endif /* MCValue */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCAutoValueRef t_result;
 	
@@ -8737,7 +8737,7 @@ Exec_stat MCVariables::eval(MCExecPoint &ep)
 	return h->getvarnames(ep, True);
 #endif /* MCVariables */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_result;
 	MCEngineEvalVariableNames(ctxt, &t_result);
@@ -8758,7 +8758,7 @@ Exec_stat MCVersion::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCVersion */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCNewAutoNameRef t_result;
 
 	MCEngineEvalVersion(ctxt, &t_result);
@@ -8779,7 +8779,7 @@ Exec_stat MCWeekDayNames::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCWeekDayNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 
 	MCDateTimeEvalWeekDayNames(ctxt, &t_result);
@@ -8800,7 +8800,7 @@ Exec_stat MCWaitDepth::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCWaitDepth */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_result;
 
 	MCInterfaceEvalWaitDepth(ctxt, t_result);
@@ -8879,7 +8879,7 @@ Exec_stat MCWithin::eval(MCExecPoint &ep)
 #endif /* MCWithin */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCObjectPtr t_object;
 
@@ -8973,7 +8973,7 @@ Exec_stat MCMCISendString::eval(MCExecPoint &ep)
 #endif /* MCMCISendString */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCAutoStringRef t_result;
 
@@ -9030,7 +9030,7 @@ Exec_stat MCDeleteRegistry::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCDeleteRegistry */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_key;
 	bool t_result;
 
@@ -9085,7 +9085,7 @@ Exec_stat MCListRegistry::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCListRegistry */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_key;
 	MCAutoStringRef t_result;
 
@@ -9166,7 +9166,7 @@ Exec_stat MCQueryRegistry::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCQueryRegistry */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_key;
 	MCAutoStringRef t_result;
 	MCAutoStringRef t_type;
@@ -9279,7 +9279,7 @@ Exec_stat MCSetRegistry::eval(MCExecPoint &ep)
 #endif /* MCSetRegistry */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_key, t_value, t_type;
 	bool t_result;
 
@@ -9411,7 +9411,7 @@ Exec_stat MCCopyResource::eval(MCExecPoint &ep)
 #endif /* MCCopyResource */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source, t_dest, t_type, t_name, t_newid, t_result;
 	
 	bool t_success = true;
@@ -9534,7 +9534,7 @@ Exec_stat MCDeleteResource::eval(MCExecPoint &ep)
 #endif /* MCDeleteResource */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source, t_type, t_name, t_result;
 	
 	bool t_success = true;
@@ -9640,7 +9640,7 @@ Exec_stat MCGetResource::eval(MCExecPoint &ep)
 #endif /* MCGetResource */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source, t_type, t_name;
 	MCAutoStringRef t_result;
 	
@@ -9743,7 +9743,7 @@ Exec_stat MCGetResources::eval(MCExecPoint &ep)
 #endif /* MCGetResources */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source, t_type;
 	MCAutoStringRef t_result;
 	
@@ -9870,7 +9870,7 @@ Exec_stat MCSetResource::eval(MCExecPoint &ep)
 #endif /* MCSetResource */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source, t_type, t_id, t_name, t_flags, t_value, t_result;
 	
 	bool t_success = true;
@@ -9960,7 +9960,7 @@ Exec_stat MCSpecialFolderPath::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCSpecialFolderPath */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_type;
 	MCAutoStringRef t_result;
 
@@ -10018,7 +10018,7 @@ Exec_stat MCLongFilePath::eval(MCExecPoint &ep)
 #endif /* MCLongFilePath */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_type;
 	MCAutoStringRef t_result;
 
@@ -10080,7 +10080,7 @@ Exec_stat MCShortFilePath::eval(MCExecPoint &ep)
 #endif /* MCShortFilePath */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_type;
 	MCAutoStringRef t_result;
 
@@ -10136,7 +10136,7 @@ Exec_stat MCAliasReference::eval(MCExecPoint &ep)
 #endif /* MCAliasReference */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_source;
 	MCAutoStringRef t_result;
 	
@@ -10176,7 +10176,7 @@ Exec_stat MCAlternateLanguages::eval(MCExecPoint &ep)
 #endif /* MCAlternateLanguages */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 	
 	MCScriptingEvalAlternateLanguages(ctxt, &t_result);
@@ -10197,7 +10197,7 @@ Exec_stat MCCipherNames::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCCipherNames */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_result;
 	
 	MCSecurityEvalCipherNames(ctxt, &t_result);
@@ -10325,7 +10325,7 @@ Exec_stat t_result;
 #endif /* MCHTTPProxyForURL */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_url;
 	if (url -> eval(ep) != ES_NORMAL)
@@ -10446,7 +10446,7 @@ Exec_stat MCRandomBytes::eval(MCExecPoint &ep)
 #endif /* MCRandomBytes */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	uinteger_t t_count;
 	MCAutoDataRef t_result;
@@ -10540,11 +10540,11 @@ Exec_stat MCControlAtLoc::eval(MCExecPoint &ep)
 #endif /* MCControlAtLoc */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCPoint t_location;
 	if (location -> eval(ep) != ES_NORMAL ||
-		!ep . copyaspoint(t_location))
+		!ep . copyaslegacypoint(t_location))
 	{
 		MCeerror -> add(EE_CONTROLATLOC_NAP, line, pos);
 		return ES_ERROR;

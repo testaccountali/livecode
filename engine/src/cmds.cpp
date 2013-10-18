@@ -120,7 +120,7 @@ Exec_stat MCChoose::exec(MCExecPoint &ep)
 #endif /* MCChoose */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (etool != NULL)
 		if (etool->eval(ep) != ES_NORMAL)
 		{
@@ -532,7 +532,7 @@ Exec_stat MCDo::exec(MCExecPoint &ep)
 		MCAutoStringRef t_script;
 		/* UNCHECKED */ ep . copyasstringref(&t_script);
 
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 
 		MCLegacyExecDoInBrowser(ctxt, *t_script);
 		if (!ctxt . HasError())
@@ -561,7 +561,7 @@ Exec_stat MCDo::exec(MCExecPoint &ep)
 		MCAutoStringRef t_script;
 		/* UNCHECKED */ ep . copyasstringref(&t_script);
 
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		MCScriptingExecDoAsAlternateLanguage(ctxt, *t_script, *t_language);
 
 		if (!ctxt . HasError())
@@ -581,7 +581,7 @@ Exec_stat MCDo::exec(MCExecPoint &ep)
 		MCAutoStringRef t_script;
 		/* UNCHECKED */ ep . copyasstringref(&t_script);
 
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		MCDebuggingExecDebugDo(ctxt, *t_script, line, pos);
 
 		if (!ctxt . HasError())
@@ -599,7 +599,7 @@ Exec_stat MCDo::exec(MCExecPoint &ep)
 	MCAutoStringRef t_script;
 	/* UNCHECKED */ ep . copyasstringref(&t_script);
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCEngineExecDo(ctxt, *t_script, line, pos);
 
@@ -761,7 +761,7 @@ Exec_stat MCDoMenu::exec(MCExecPoint &ep)
 #endif /* MCDoMenu */
 
 
-	MCExecContext ctxt(ep); 
+	MCExecContext& ctxt = ep . GetContext(); 
 	if (source->eval(ep) != ES_NORMAL)
 	{
 		MCeerror->add(EE_DOMENU_BADEXP, line, pos);
@@ -848,7 +848,7 @@ MCObject *optr;
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCIdeExecEditScriptOfObject(ctxt, optr);
 	if (!ctxt . HasError())
 		return ES_NORMAL;
@@ -930,7 +930,7 @@ Exec_stat MCFind::exec(MCExecPoint &ep)
 #endif /* MCFind */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_needle;
 	if (tofind->eval(ep) != ES_NORMAL)
 	{
@@ -1188,7 +1188,7 @@ Exec_stat MCMarking::exec(MCExecPoint &ep)
 		}
         MCAutoStringRef t_value;
         ep . copyasstringref(&t_value);
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		MCdefaultstackptr->markfind(ctxt, mode, *t_value, field, mark);
 	}
 	return ES_NORMAL;
@@ -1449,7 +1449,7 @@ Exec_stat MCPut::exec(MCExecPoint &ep)
 	}
 	/* UNCHECKED */ ep . copyasvalueref(&t_value);
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (dest != nil)
 	{
@@ -1843,7 +1843,7 @@ Exec_stat MCQuit::exec(MCExecPoint &ep)
 	        && ep.ton() == ES_NORMAL)
 		t_retcode = ep.getint4();
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCEngineExecQuit(ctxt, t_retcode);
 
 	if (!ctxt . HasError())
@@ -1986,7 +1986,7 @@ Exec_stat MCReset::exec(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCReset */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	switch (which)
 	{
 		case RT_CURSORS:
@@ -2115,7 +2115,7 @@ Exec_stat MCReturn::exec(MCExecPoint &ep)
 #endif /* MCReturn */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCAutoValueRef t_result;
 	if (source -> eval(ep) != ES_NORMAL)
@@ -2238,7 +2238,7 @@ Exec_stat MCSet::exec(MCExecPoint &ep)
 #endif /* MCSet */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCAutoValueRef t_value;
 	if (value->eval(ep) != ES_NORMAL)
@@ -2593,7 +2593,7 @@ Exec_stat MCSort::exec(MCExecPoint &ep)
 	}
 	return ES_NORMAL;
 #endif /* MCSort */
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCObjectPtr t_object;
 	if (of != NULL)
 	{
@@ -2807,7 +2807,7 @@ while (True)
 #endif /* MCWait */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (duration == NULL)
 		MCEngineExecWaitFor(ctxt, MCmaxwait, F_UNDEFINED, messages == True);
 	else
@@ -2941,7 +2941,7 @@ Exec_stat MCInclude::exec(MCExecPoint& ep)
 		return ES_ERROR;
 	}
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCServerExecInclude(ctxt, *t_filename, is_require);
 	if (!ctxt . HasError())
 		return ES_NORMAL;
@@ -2983,7 +2983,7 @@ Exec_stat MCEcho::exec(MCExecPoint& ep)
 	return ES_NORMAL;
 #endif /* MCEcho */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCServerExecEcho(ctxt, data);
 	if (!ctxt . HasError())
 		return ES_NORMAL;

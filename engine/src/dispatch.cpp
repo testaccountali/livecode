@@ -1715,7 +1715,7 @@ bool MCDispatch::dopaste(MCObject*& r_objptr, bool p_explicit)
 		if (MCclipboarddata -> Fetch(TRANSFER_TYPE_IMAGE, &t_data))
 		{
 			MCExecPoint ep(NULL, NULL, NULL);
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 
 			MCImage *t_image;
 			t_image = new MCImage;
@@ -1754,7 +1754,7 @@ bool MCDispatch::dopaste(MCObject*& r_objptr, bool p_explicit)
 			if (MCclipboarddata -> Fetch(TRANSFER_TYPE_IMAGE, &t_data))
 			{
 				MCExecPoint ep(NULL, NULL, NULL);
-				MCExecContext ctxt(ep);
+				MCExecContext& ctxt = ep . GetContext();
 				
 				t_objects = new MCImage(*MCtemplateimage);
 				t_objects -> open();

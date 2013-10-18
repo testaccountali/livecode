@@ -370,7 +370,7 @@ Exec_stat MCObject::sendgetprop(MCExecPoint& ep, MCNameRef p_set_name, MCNameRef
 		MCObject *oldtargetptr = MCtargetptr;
 		MCtargetptr = this;
 		Boolean added = False;
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		if (MCnexecutioncontexts < MAX_CONTEXTS)
 		{
 			MCexecutioncontexts[MCnexecutioncontexts++] = &ctxt;
@@ -1341,7 +1341,7 @@ Exec_stat MCObject::sendsetprop(MCExecPoint& ep, MCNameRef p_set_name, MCNameRef
 		MCObject *oldtargetptr = MCtargetptr;
 		MCtargetptr = this;
 		Boolean added = False;
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		if (MCnexecutioncontexts < MAX_CONTEXTS)
 		{
 			MCexecutioncontexts[MCnexecutioncontexts++] = &ctxt;
@@ -2223,7 +2223,7 @@ Exec_stat MCObject::getarrayprop(uint32_t p_part_id, Properties p_which, MCExecP
 	
 	if (t_info != nil)
 	{
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		
 		MCObjectIndexPtr t_object;
 		t_object . object = this;
@@ -2268,7 +2268,7 @@ Exec_stat MCObject::setarrayprop(uint32_t p_part_id, Properties p_which, MCExecP
     
 	if (t_info != nil)
 	{
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		
 		MCObjectIndexPtr t_object;
 		t_object . object = this;
@@ -2311,7 +2311,7 @@ Exec_stat MCObject::getprop(uint32_t p_part_id, Properties p_which, MCExecPoint&
 	
 	if (t_info != nil)
 	{
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		
 		MCObjectPtr t_object;
 		t_object . object = this;
@@ -2344,7 +2344,7 @@ Exec_stat MCObject::setprop(uint32_t p_part_id, Properties p_which, MCExecPoint&
 
 	if (t_info != nil)
 	{
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		
 		MCObjectPtr t_object;
 		t_object . object = this;
@@ -2501,7 +2501,7 @@ void MCObject::setdataprop(MCExecContext& ctxt, uint32_t p_part_id, Properties p
 void MCObject::getpointprop(MCExecContext& ctxt, uint32_t p_part_id, Properties p_which, Boolean p_effective, MCPoint &r_point)
 {
 	if (getprop(p_part_id, p_which, ctxt.GetEP(), p_effective) == ES_NORMAL
-		&& ctxt.GetEP().copyaspoint(r_point))
+		&& ctxt.GetEP().copyaslegacypoint(r_point))
 		return;
 	
 	ctxt.Throw();

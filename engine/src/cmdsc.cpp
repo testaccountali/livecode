@@ -1616,7 +1616,7 @@ if (var != NULL)
 #endif /* MCDelete */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (var != NULL)
 		MCEngineExecDeleteVariable(ctxt, var);
 	else if (file != NULL)
@@ -1788,7 +1788,7 @@ Exec_stat MCChangeProp::exec(MCExecPoint &ep)
     return targets->changeprop(ep, prop, value);
 #endif /* MCChangeProp */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (targets != NULL)
 	{
 		if (targets -> istextchunk())
@@ -1966,7 +1966,7 @@ bool t_created_selection;
 	return ES_NORMAL;
 #endif /* MCFlip */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (image != NULL)
 	{
 		MCObject *optr;
@@ -2057,7 +2057,7 @@ MCObject *optr;
 		MCeerror->add(EE_GRAB_NOOBJ, line, pos);
 		return ES_ERROR;
 	}
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecGrab(ctxt, static_cast<MCControl *>(optr));
 
 	if (!ctxt . HasError())
@@ -2221,7 +2221,7 @@ if (MCsecuremode & MC_SECUREMODE_PROCESS)
 #endif /* MCLaunch */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCNewAutoNameRef t_app;
 	if (app != NULL)
 	{
@@ -2343,7 +2343,7 @@ Exec_stat MCLoad::exec(MCExecPoint &ep)
 #endif /* MCLoad */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCNewAutoNameRef t_message;
 	if (message != NULL)
@@ -2422,7 +2422,7 @@ Exec_stat MCUnload::exec(MCExecPoint &ep)
 #endif /* MCUnload */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (url->eval(ep) != ES_NORMAL)
 	{
@@ -2613,7 +2613,7 @@ if (targets != NULL)
 #endif /* MCMakeGroup */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (targets != NULL)
 	{
 		MCAutoArray<MCObjectPtr> t_objects;
@@ -2817,7 +2817,7 @@ MCObject *gptr;
 		return ES_ERROR;
 	}
 	MCCard *cptr = (MCCard *)optr;
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecPlaceGroupOnCard(ctxt, gptr, cptr);
 
 	if (!ctxt . HasError())
@@ -2876,7 +2876,7 @@ if (MCsecuremode & MC_SECUREMODE_PRIVACY)
 #endif /* MCRecord */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (file->eval(ep) != ES_NORMAL)
 	{
@@ -3052,7 +3052,7 @@ if (all)
 #endif /* MCRemove */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (all)
 		MCEngineExecRemoveAllScriptsFrom(ctxt, where == IP_FRONT);
 	else 
@@ -3202,7 +3202,7 @@ Exec_stat MCRename::exec(MCExecPoint &ep)
 
 	MCAutoStringRef t_to;
 	/* UNCHECKED */ ep.copyasstringref(&t_to);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCFilesExecRename(ctxt, *t_from, *t_to);
 
 	if (!ctxt.HasError())
@@ -3429,7 +3429,7 @@ Exec_stat MCReplace::exec(MCExecPoint &ep)
 	}
 	MCAutoStringRef t_target;
 	ep.copyasmutablestringref(&t_target);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCStringsExecReplace(ctxt, *t_pattern, *t_replacement, *t_target);
 
 	if (!ctxt . HasError())
@@ -3487,7 +3487,7 @@ Exec_stat MCRevert::exec(MCExecPoint &ep)
 #endif /* MCRevert */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecRevert(ctxt);
 	
 	if (!ctxt . HasError())
@@ -3583,7 +3583,7 @@ Exec_stat MCRotate::exec(MCExecPoint &ep)
 
 	// MW-2012-01-05: [[ Bug 9909 ]] If we are a mobile platform, the image
 	//   editing operations are not supported yet.
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
     
 #ifndef _MOBILE
@@ -3727,7 +3727,7 @@ Exec_stat MCCrop::exec(MCExecPoint &ep)
 #endif /* MCCrop */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCImage *iptr;
 	MCRectangle t_rect;
 	
@@ -3862,7 +3862,7 @@ if (targets == NULL)
 #endif /* MCSelect */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (targets == NULL)
 		MCInterfaceExecSelectEmpty(ctxt);
 	else if (text)
@@ -3985,7 +3985,7 @@ MCundos->undo();
 #endif /* MCUndoCmd */
 
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCInterfaceExecUndo(ctxt);
 
 	if (!ctxt . HasError())
@@ -4051,7 +4051,7 @@ MCObject *gptr;
 #endif /* MCUngroup */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (group != NULL)
 	{
 		MCObject *gptr;

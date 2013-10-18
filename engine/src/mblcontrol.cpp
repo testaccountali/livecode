@@ -931,7 +931,7 @@ Exec_stat MCHandleControlGet(void *context, MCParameter *p_parameters)
 	if (t_success)
 		t_success = t_control -> Get(t_property, ep) == ES_NORMAL;
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (t_success)
 	{
 		MCAutoStringRef t_value;
@@ -1012,7 +1012,7 @@ Exec_stat MCHandleControlList(void *context, MCParameter *p_parameters)
 	MCExecPoint ep(nil, nil, nil);
 	MCNativeControl::List(list_native_controls, &ep);
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_value;
     ep . copyasstringref(&t_value);
     ctxt . SetTheResultToValue(*t_value);

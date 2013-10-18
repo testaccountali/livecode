@@ -201,7 +201,7 @@ char *name;
 #endif /* MCClose */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (arg == OA_OBJECT)
 	{
 		if (stack == NULL)
@@ -1394,7 +1394,7 @@ Exec_stat MCExport::exec(MCExecPoint &ep)
 	return t_status;
 #endif /* MCExport */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_return_data;
 	MCAutoStringRef t_filename;
 	if (fname != NULL)
@@ -1538,7 +1538,7 @@ Exec_stat MCExport::exec(MCExecPoint &ep)
 				}
 				else
 				{
-					ep . copyaspoint(t_size);
+					ep . copyaslegacypoint(t_size);
 					t_size_ptr = &t_size;
 				}
 			}
@@ -1931,7 +1931,7 @@ Exec_stat MCFilter::exec(MCExecPoint &ep)
 #endif /* MCFilter */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_source;
 	if (container->eval(ep) != ES_NORMAL)
@@ -2398,7 +2398,7 @@ Exec_stat MCImport::exec(MCExecPoint &ep)
 #endif /* MCImport */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (format == EX_SNAPSHOT)
 	{
@@ -2425,7 +2425,7 @@ Exec_stat MCImport::exec(MCExecPoint &ep)
 					MCeerror->add(EE_EXPORT_NOSELECTED, line, pos);
 					return ES_ERROR;
 				}
-				ep . copyaspoint(t_size);
+				ep . copyaslegacypoint(t_size);
 				t_size_ptr = &t_size;
 			}
 			MCObject *t_parent = nil;
@@ -2752,7 +2752,7 @@ Exec_stat MCKill::exec(MCExecPoint &ep)
 #endif /* MCKill */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCAutoStringRef t_signal;
 	if (sig != NULL)
@@ -3130,7 +3130,7 @@ if (go != NULL)
 #endif /* MCOpen */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (go != NULL)
 		return go->exec(ep);
@@ -4577,7 +4577,7 @@ Exec_stat MCSeek::exec(MCExecPoint &ep)
 #endif /* MCSeek */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (fname->eval(ep) != ES_NORMAL)
 	{
 		MCeerror->add(EE_SEEK_BADNAME, line, pos);
@@ -4929,7 +4929,7 @@ Exec_stat MCWrite::exec(MCExecPoint &ep)
 #endif /* MCWrite */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCresult->clear(False);
 	
 	MCAutoStringRef t_data;

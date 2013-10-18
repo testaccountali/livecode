@@ -428,7 +428,7 @@ Exec_stat MCComref::exec(MCExecPoint &ep)
 		resolved = true;
     }
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     Exec_stat stat;
     MCParameter *tptr = params;
 	while (tptr != NULL)

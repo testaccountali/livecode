@@ -27,37 +27,69 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 #define EP_PAD 256
 #define EP_MASK 0xFFFFFF00
 
+#ifndef __MC_EXEC_CONTEXT__
+#include "exec-context.h"
+#endif
+
 class MCExecPoint
 {
-	MCObject *curobj;
-
-	// MW-2009-01-30: [[ Inherited parentScripts ]]
-	// We store a reference to the parentScript use which is the current context
-	// so we can retrieve the correct script locals. If this is NULL, then we
-	// are not in parentScript context.
-	MCParentScriptUse *parentscript;
-
-	MCHandlerlist *curhlist;
-	MCHandler *curhandler;
-	uint2 nffw;
-	uint2 nftrailing;
-	uint2 nfforce;
-	uint2 cutoff;
-	uint2 line;
-	Boolean convertoctals;
-	Boolean casesensitive;
-	Boolean wholematches;
-	Boolean usesystemdate;
-	Boolean useunicode;
-	Boolean deletearray;
-	char itemdel;
-	char columndel;
-	char linedel;
-	char rowdel;
-
+	MCExecContext& ctxt;
 	MCValueRef value;
 
 public:
+	MCExecPoint(MCExecContext& p_ctxt)
+		: ctxt(p_ctxt)
+	{
+		value = MCValueRetain(kMCEmptyString);
+	}
+	
+	MCExecPoint(MCExecPoint& p_other)
+		: ctxt(p_other . ctxt)
+	{
+		value = MCValueRetain(kMCEmptyString);
+	}
+	
+	~MCExecPoint(void)
+	{
+		MCValueRelease(value);
+	}
+	
+	MCExecContext& GetContext(void)
+	{
+		return ctxt;
+	}
+	
+	//////////
+	
+	MCValueRef getvalueref(void);
+	bool setvalueref(MCValueRef value);
+	
+	bool copyasbool(bool& r_value);
+	bool copyasint(integer_t& r_value);
+	bool copyasuint(uinteger_t& r_value);
+	bool copyasdouble(double& r_value);
+	
+	bool copyasvalueref(MCValueRef& r_value);
+	bool copyasstringref(MCStringRef& r_value);
+	bool copyasnameref(MCNameRef& r_value);
+	bool copyasdataref(MCDataRef& r_value);
+	bool copyasarrayref(MCArrayRef& r_value);
+	
+	bool copyaslegacypoint(MCPoint& r_point);
+	bool copyaslegacyrectangle(MCRectangle& r_rectangle);
+	bool copyaslegacycolor(MCColor& r_color);
+	
+	//////////
+	
+	void clear(void);
+	
+	//////////
+	
+	void concatmcstring(const MCString& str, Exec_concat sep, Boolean first);
+	
+	//////////
+	
+#if 0
 	MCExecPoint()
 	{
 		memset(this, 0, sizeof(MCExecPoint));
@@ -303,6 +335,7 @@ public:
 	void fill(uint4 s, char c, uint4 n);
 	void texttobinary();
 	void binarytotext();
+#endif
 
 #if 0
 	Boolean isempty(void) const
@@ -453,6 +486,7 @@ public:
 
 #endif
 
+#if 0
 	void utf16toutf8(void);
 	void utf8toutf16(void);
 
@@ -637,8 +671,10 @@ private:
 	bool converttoboolean(void);
 	bool converttoarray(void);
 	bool converttomutablearray(void);
+#endif
 };
 
+#if 0
 inline void MCExecPoint::utf16toutf8(void)
 {
 	dounicodetomultibyte(false, false);
@@ -670,5 +706,6 @@ inline void MCExecPoint::nativetoutf8(void)
 	nativetoutf16();
 	utf16toutf8();
 }
+#endif
 
 #endif

@@ -3011,7 +3011,7 @@ Exec_stat MCProperty::set_global_property(MCExecPoint& ep)
 	const MCPropertyInfo *t_info;
 	if (MCPropertyInfoTableLookup(which, effective, t_info))
 	{
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
         MCAutoValueRef t_value;
         /* UNCHECKED */ ep . copyasvalueref(&t_value);
         
@@ -4826,7 +4826,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 	{
 		case F_DATE:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_date;
 
 			MCDateTimeGetDate(ctxt, which, &t_date);
@@ -4841,7 +4841,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_TIME:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_time;
 
 			MCDateTimeGetTime(ctxt, which, &t_time);
@@ -4856,7 +4856,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_MILLISECS:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			double t_millisecs;
 
 			if (which == P_LONG)
@@ -4874,7 +4874,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_SECONDS:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			double t_secs;
 
 			if (which == P_LONG)
@@ -4892,7 +4892,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_TICKS:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			double t_ticks;
 
 			if (which == P_LONG)
@@ -4910,7 +4910,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_FILES:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_files;
 
 			if (which == P_LONG)
@@ -4928,7 +4928,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_DIRECTORIES:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_folders;
 
 			if (which == P_LONG)
@@ -4946,7 +4946,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_MONTH_NAMES:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_month_names;
 
 			MCDateTimeGetMonthNames(ctxt, which, &t_month_names);
@@ -4961,7 +4961,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_WEEK_DAY_NAMES:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_week_day_names;
 
 			MCDateTimeGetWeekDayNames(ctxt, which, &t_week_day_names);
@@ -4976,7 +4976,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_DATE_FORMAT:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			MCAutoStringRef t_date_format;
 
 			MCDateTimeGetDateFormat(ctxt, which, &t_date_format);
@@ -4991,7 +4991,7 @@ Exec_stat MCProperty::eval_function(MCExecPoint& ep)
 		}
 		case F_SCREEN_RECT:
 		{
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 
 			if ((which % 1000) == P_LONG)
 			{
@@ -5033,7 +5033,7 @@ Exec_stat MCProperty::eval_global_property(MCExecPoint& ep)
 	const MCPropertyInfo *t_info;
 	if (MCPropertyInfoTableLookup(which, effective, t_info))
 	{
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
         MCAutoValueRef t_value;
         
         if (t_info -> custom_index)

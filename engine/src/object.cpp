@@ -849,7 +849,7 @@ Exec_stat MCObject::exechandler(MCHandler *hptr, MCParameter *params)
 	if (scriptdepth == 255)
 		MCfreescripts = False; // prevent recursion wrap
 	MCExecPoint ep(this, hlist, hptr);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (MCtracestackptr != NULL && MCtracereturn)
 	{
 		Boolean oldtrace = MCtrace;
@@ -909,7 +909,7 @@ Exec_stat MCObject::execparenthandler(MCHandler *hptr, MCParameter *params, MCPa
 		MCfreescripts = False; // prevent recursion wrap
 
 	MCExecPoint ep(this, t_parentscript_object -> hlist, hptr);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	ep.setparentscript(parentscript);
 	if (MCtracestackptr != NULL && MCtracereturn)
 	{

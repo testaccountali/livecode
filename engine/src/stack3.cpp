@@ -1585,7 +1585,7 @@ void MCStack::menumup(uint2 which, MCStringRef &r_string, uint2 &selline)
 		bool t_has_tags = bptr->getmenuhastags();
 
 		MCExecPoint ep(this, NULL, NULL);
-		MCExecContext ctxt(ep);
+		MCExecContext& ctxt = ep . GetContext();
 		MCAutoStringRef t_label;
 		MCStringRef t_name = nil;
 		focused->getstringprop(ctxt, 0, P_LABEL, true, &t_label);
@@ -1626,7 +1626,7 @@ void MCStack::menukdown(const char *string, KeySym key, MCStringRef &r_string, u
 		{
 			MCAutoStringRef t_string;
 			MCExecPoint ep(this, NULL, NULL);
-			MCExecContext ctxt(ep);
+			MCExecContext& ctxt = ep . GetContext();
 			kfocused->getstringprop(ctxt, 0, P_LABEL, True, &t_string);
 			r_string = MCValueRetain(*t_string);
 		}

@@ -1917,12 +1917,12 @@ Exec_stat MCButton::getprop_legacy(uint4 parid, Properties which, MCExecPoint& e
 
 Exec_stat MCButton::setprop_legacy(uint4 parid, Properties p, MCExecPoint &ep, Boolean effective)
 {
-	Boolean dirty = True;
+	/*Boolean dirty = True;
 	Boolean all = p == P_STYLE || p == P_LABEL_WIDTH || MCaqua && standardbtn();
 	int2 i1;
 	uint2 i = 0;
 	uint4 newid;
-	MCString data = ep.getsvalue();
+	MCString data = ep.getsvalue();*/
 	
 	switch (p)
 	{
@@ -2528,11 +2528,13 @@ Exec_stat MCButton::setprop_legacy(uint4 parid, Properties p, MCExecPoint &ep, B
 		return MCControl::setprop(parid, p, ep, effective);
 #endif /* MCButton::setprop */
 	}
+#ifdef OLD_EXEC__CHECK
 	if (dirty && opened)
 	{
 		// MW-2011-08-18: [[ Layers ]] Invalidate the whole object.
 		layer_redrawall();
 	}
+#endif
 	return ES_NORMAL;
 }
 
@@ -3674,7 +3676,7 @@ void MCButton::setupmenu()
 bool MCButton::selectedchunk(MCStringRef& r_string)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_number;
 	/* UNCHECKED */ getintprop(ctxt, 0, P_NUMBER, False, t_number);
 	
@@ -3686,7 +3688,7 @@ bool MCButton::selectedchunk(MCStringRef& r_string)
 bool MCButton::selectedline(MCStringRef& r_string)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	integer_t t_number;
 	/* UNCHECKED */ getintprop(ctxt, 0, P_NUMBER, False, t_number);
 	

@@ -391,7 +391,7 @@ Exec_stat MCHandler::exec(MCExecPoint &ep, MCParameter *plist)
 	Exec_stat stat = ES_NORMAL;
 	MCStatement *tspr = statements;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if ((MCtrace || MCnbreakpoints) && tspr != NULL)
 	{
 		MCB_trace(ctxt, firstline, 0);

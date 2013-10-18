@@ -121,7 +121,7 @@ Exec_stat MCAnd::eval(MCExecPoint &ep)
 #endif /* MCAnd */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	bool t_result;
 	bool t_left, t_right;
 
@@ -178,7 +178,7 @@ Exec_stat MCOr::eval(MCExecPoint &ep)
 #endif /* MCOr */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	bool t_result;
 	bool t_left, t_right;
 
@@ -223,7 +223,7 @@ Exec_stat MCNot::eval(MCExecPoint &ep)
 #endif /* MCNot */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	bool t_result;
 	bool t_right;
 
@@ -271,7 +271,7 @@ Exec_stat MCAndBits::eval(MCExecPoint &ep)
 #endif /* MCAndBits */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	uinteger_t t_result;
 	uinteger_t t_left, t_right;
 
@@ -313,7 +313,7 @@ Exec_stat MCNotBits::eval(MCExecPoint &ep)
 #endif /* MCNotBits */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	uinteger_t t_result;
 	uinteger_t t_right;
 
@@ -355,7 +355,7 @@ Exec_stat MCOrBits::eval(MCExecPoint &ep)
 #endif /* MCOrBits */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	uinteger_t t_result;
 	uinteger_t t_left, t_right;
 
@@ -404,7 +404,7 @@ Exec_stat MCXorBits::eval(MCExecPoint &ep)
 #endif /* MCXorBits */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	uinteger_t t_result;
 	uinteger_t t_left, t_right;
 
@@ -458,7 +458,7 @@ Exec_stat MCConcat::eval(MCExecPoint &ep)
 #endif /* MCConcat */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_left, t_right;
 	MCAutoStringRef t_result;
 
@@ -507,7 +507,7 @@ Exec_stat MCConcatSpace::eval(MCExecPoint &ep)
 #endif /* MCConcatSpace */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_left, t_right;
 	MCAutoStringRef t_result;
 
@@ -561,7 +561,7 @@ Exec_stat MCItem::eval(MCExecPoint &ep)
 #endif /* MCItem */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_left, t_right;
 	MCAutoStringRef t_result;
 
@@ -616,7 +616,7 @@ Exec_stat MCContains::eval(MCExecPoint &ep)
 #endif /* MCContains */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_left, t_right;
 	bool t_result;
 
@@ -694,7 +694,7 @@ Exec_stat MCBeginsWith::eval(MCExecPoint& ep)
 #endif /* MCBeginsWith */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_left, t_right;
 	bool t_result;
 
@@ -759,7 +759,7 @@ Exec_stat MCEndsWith::eval(MCExecPoint& ep)
 #endif /* MCEndsWith */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_left, t_right;
 	bool t_result;
 
@@ -851,7 +851,7 @@ Exec_stat MCDiv::eval(MCExecPoint &ep)
 #endif /* MCDiv */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoValueRef t_left, t_right;
 	MCAutoValueRef t_result;
 
@@ -963,7 +963,7 @@ Exec_stat MCMinus::eval(MCExecPoint &ep)
 #endif /* MCMinus */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoValueRef t_left, t_right;
 	MCAutoValueRef t_result;
 
@@ -1084,7 +1084,7 @@ Exec_stat MCMod::eval(MCExecPoint &ep)
 #endif /* MCMod */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoValueRef t_left, t_right;
 	MCAutoValueRef t_result;
 
@@ -1203,7 +1203,7 @@ Exec_stat MCWrap::eval(MCExecPoint &ep)
 #endif /* MCWrap */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoValueRef t_left, t_right;
 	MCAutoValueRef t_result;
 
@@ -1320,7 +1320,7 @@ Exec_stat MCOver::eval(MCExecPoint &ep)
 #endif /* MCOver */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoValueRef t_left, t_right;
 	MCAutoValueRef t_result;
 
@@ -1432,7 +1432,7 @@ Exec_stat MCPlus::eval(MCExecPoint &ep)
 #endif /* MCPlus */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoValueRef t_left, t_right;
 	MCAutoValueRef t_result;
 
@@ -1547,7 +1547,7 @@ Exec_stat MCTimes::eval(MCExecPoint &ep)
 #endif /* MCTimes */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoValueRef t_left, t_right;
 	MCAutoValueRef t_result;
 
@@ -1635,7 +1635,7 @@ Exec_stat MCPow::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCPow */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	real64_t t_left, t_right;
 	real64_t t_result;
 
@@ -1701,7 +1701,7 @@ Exec_stat MCEqual::eval(MCExecPoint &ep)
 	if (!eval_comparison_factors(ep, left, right, &t_left, &t_right))
 		return ES_ERROR;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCLogicEvalIsEqualTo(ctxt, *t_left, *t_right, t_result);
@@ -1720,7 +1720,7 @@ Exec_stat MCGreaterThan::eval(MCExecPoint &ep)
 	if (!eval_comparison_factors(ep, left, right, &t_left, &t_right))
 		return ES_ERROR;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCLogicEvalIsGreaterThan(ctxt, *t_left, *t_right, t_result);
@@ -1739,7 +1739,7 @@ Exec_stat MCGreaterThanEqual::eval(MCExecPoint &ep)
 	if (!eval_comparison_factors(ep, left, right, &t_left, &t_right))
 		return ES_ERROR;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCLogicEvalIsGreaterThanOrEqualTo(ctxt, *t_left, *t_right, t_result);
@@ -1758,7 +1758,7 @@ Exec_stat MCLessThan::eval(MCExecPoint &ep)
 	if (!eval_comparison_factors(ep, left, right, &t_left, &t_right))
 		return ES_ERROR;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCLogicEvalIsLessThan(ctxt, *t_left, *t_right, t_result);
@@ -1777,7 +1777,7 @@ Exec_stat MCLessThanEqual::eval(MCExecPoint &ep)
 	if (!eval_comparison_factors(ep, left, right, &t_left, &t_right))
 		return ES_ERROR;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCLogicEvalIsLessThanOrEqualTo(ctxt, *t_left, *t_right, t_result);
@@ -1796,7 +1796,7 @@ Exec_stat MCNotEqual::eval(MCExecPoint &ep)
 	if (!eval_comparison_factors(ep, left, right, &t_left, &t_right))
 		return ES_ERROR;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_result;
 	MCLogicEvalIsNotEqualTo(ctxt, *t_left, *t_right, t_result);
@@ -2197,7 +2197,7 @@ Exec_stat MCIs::eval(MCExecPoint &ep)
 	return ES_NORMAL;
 #endif /* MCIs */
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	bool t_result;
 
 	// Implementation of 'is a <type>'
@@ -2672,7 +2672,7 @@ Exec_stat MCThere::eval(MCExecPoint &ep)
 #endif /* MCThere */
 
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	bool t_result;
 
 	if (object == NULL)

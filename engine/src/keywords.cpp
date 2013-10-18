@@ -415,7 +415,7 @@ Parse_stat MCIf::parse(MCScriptPoint &sp)
 
 Exec_stat MCIf::exec(MCExecPoint &ep)
 {
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	Exec_stat stat;
 	while ((stat = cond->eval(ep)) != ES_NORMAL && (MCtrace || MCnbreakpoints)
 	        && !MCtrylock && !MClockerrors)
@@ -774,7 +774,7 @@ Exec_stat MCRepeat::exec(MCExecPoint &ep)
 	uintptr_t t_iterator;
 	uint4 l;
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	switch (form)
 	{
 	case RF_FOR:
@@ -1471,7 +1471,7 @@ Parse_stat MCSwitch::parse(MCScriptPoint &sp)
 Exec_stat MCSwitch::exec(MCExecPoint &ep)
 {
 	MCExecPoint ep2(ep);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCExecContext ctxt2(ep2);
 	Exec_stat stat;
 	if (cond != NULL)
@@ -1743,7 +1743,7 @@ Parse_stat MCTry::parse(MCScriptPoint &sp)
 
 Exec_stat MCTry::exec(MCExecPoint &ep)
 {
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	Try_state state = TS_TRY;
 	MCStatement *tspr = trystatements;
 	Exec_stat stat;

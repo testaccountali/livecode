@@ -208,7 +208,7 @@ Exec_stat MCAdd::exec(MCExecPoint &ep)
 		/* UNCHECKED */ ep . copyasvalueref(&t_dst);
 	}
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCAutoValueRef t_result;
 	if (MCValueGetTypeCode(*t_src) == kMCValueTypeCodeArray)
@@ -443,7 +443,7 @@ Exec_stat MCDivide::exec(MCExecPoint &ep)
 		/* UNCHECKED */ ep . copyasvalueref(&t_dst);
 	}
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCAutoValueRef t_result;
 	if (MCValueGetTypeCode(*t_src) == kMCValueTypeCodeArray)
@@ -675,7 +675,7 @@ Exec_stat MCMultiply::exec(MCExecPoint &ep)
 		/* UNCHECKED */ ep . copyasvalueref(&t_dst);
 	}
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCAutoValueRef t_result;
 	if (MCValueGetTypeCode(*t_src) == kMCValueTypeCodeArray)
@@ -890,7 +890,7 @@ Exec_stat MCSubtract::exec(MCExecPoint &ep)
 		/* UNCHECKED */ ep . copyasvalueref(&t_dst);
 	}
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	
 	MCAutoValueRef t_result;
 	if (MCValueGetTypeCode(*t_src) == kMCValueTypeCodeArray)
@@ -1115,7 +1115,7 @@ Exec_stat MCArrayOp::exec(MCExecPoint &ep)
     
 	return ES_NORMAL;
 #endif /* MCArrayOp */
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_element_del;
 	MCAutoStringRef t_key_del;
@@ -1378,7 +1378,7 @@ Exec_stat MCSetOp::exec(MCExecPoint &ep)
 	if (!ep . copyasarrayref(&t_src_array))
 		return ES_ERROR;
 
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	if (intersect)
 		MCArraysExecIntersect(ctxt, *t_dst_array, *t_src_array);
 	else

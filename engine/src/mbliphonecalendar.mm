@@ -101,7 +101,7 @@ UIViewController *MCIPhoneGetViewController(void);
 -(void)createEvent: (MCCalendar) p_event_data withResult: (EKEvent*&) r_event
 {
     MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     CFErrorRef t_an_error = NULL;
 	bool t_did_add = true;
 
@@ -185,7 +185,7 @@ UIViewController *MCIPhoneGetViewController(void);
 -(MCCalendar)createEventData: (EKEvent*) p_event
 {
     MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     MCCalendar t_event_data;
     MCString t_temp_string;
     
@@ -641,7 +641,7 @@ bool MCSystemGetCalendarsEvent(MCStringRef& r_result)
 bool MCSystemFindEvent(MCDateTime p_start_date, MCDateTime p_end_date, MCStringRef& r_result)
 {
     MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     bool t_result = false;
 	NSString *t_ns_result = NULL;
     NSDate *t_start_date = NULL;

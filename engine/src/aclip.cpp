@@ -263,9 +263,6 @@ Exec_stat MCAudioClip::getprop_legacy(uint4 parid, Properties which, MCExecPoint
 
 Exec_stat MCAudioClip::setprop_legacy(uint4 parid, Properties p, MCExecPoint &ep, Boolean effective)
 {
-	int2 i1;
-	MCString data = ep.getsvalue();
-
 	switch (p)
 	{
 #ifdef /* MCAudioClip::setprop */ LEGACY_EXEC

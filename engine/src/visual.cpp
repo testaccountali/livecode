@@ -342,7 +342,7 @@ Exec_stat MCVisualEffect::exec(MCExecPoint &ep)
 	
 	MCerrorlock--;
 
-	MCExecContext ctxt(ep);	
+	MCExecContext& ctxt = ep . GetContext();	
 	MCAutoArray<MCInterfaceVisualEffectArgument> t_args_array;
 
 	for(KeyValue *t_parameter = parameters; t_parameter != nil; t_parameter = t_parameter -> next)

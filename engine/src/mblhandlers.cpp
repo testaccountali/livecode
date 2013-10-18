@@ -59,7 +59,7 @@ Exec_stat MCHandleCanComposeTextMessage(void *p_context, MCParameter *p_paramete
 	return ES_NORMAL;
 #endif /* MCHandleCanComposeTextMessage */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_result;
     MCTextMessagingGetCanComposeTextMessage(ctxt, t_result);
@@ -106,7 +106,7 @@ Exec_stat MCHandleComposeTextMessage(void *p_context, MCParameter *p_parameters)
     
     bool t_success;
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	t_success = MCParseParameters(p_parameters, "x", &(&t_recipients));
     if (t_success == false)
@@ -132,7 +132,7 @@ Exec_stat MCHandleComposeTextMessage(void *p_context, MCParameter *p_parameters)
 Exec_stat MCHandleLockIdleTimer(void* p_context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCIdleTimerExecLockIdleTimer(ctxt);
     
@@ -143,7 +143,7 @@ Exec_stat MCHandleLockIdleTimer(void* p_context, MCParameter* p_parameters)
 Exec_stat MCHandleUnlockIdleTimer(void* p_context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCIdleTimerExecUnlockIdleTimer(ctxt);
     
@@ -153,7 +153,7 @@ Exec_stat MCHandleUnlockIdleTimer(void* p_context, MCParameter* p_parameters)
 Exec_stat MCHandleIdleTimerLocked(void* p_context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_result;
     
@@ -181,7 +181,7 @@ Exec_stat MCHandleCanMakePurchase(void* p_context, MCParameter* p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandleCanMakePurchase */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_result;
     
@@ -205,7 +205,7 @@ Exec_stat MCHandleEnablePurchaseUpdates(void* p_context, MCParameter* p_paramete
 	return ES_NORMAL;
 #endif /* MCHandleEnablePurchaseUpdates */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCStoreExecEnablePurchaseUpdates(ctxt);
     
@@ -222,7 +222,7 @@ Exec_stat MCHandleDisablePurchaseUpdates(void* p_context, MCParameter* p_paramet
 	return ES_NORMAL;
 #endif /* MCHandleDisablePurchaseUpdates */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCStoreExecDisablePurchaseUpdates(ctxt);
     
@@ -239,7 +239,7 @@ Exec_stat MCHandleRestorePurchases(void* p_context, MCParameter* p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandleRestorePurchases */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCStoreExecRestorePurchases(ctxt);
     
@@ -259,7 +259,7 @@ Exec_stat MCHandlePurchaseList(void* p_context, MCParameter* p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandlePurchaseList */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_list;
     
@@ -300,7 +300,7 @@ Exec_stat MCHandlePurchaseCreate(void* p_context, MCParameter* p_parameters)
     uint32_t t_id;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (t_success)
         t_success = MCParseParameters(p_parameters, "x", &(&t_product_id));
@@ -347,7 +347,7 @@ Exec_stat MCHandlePurchaseState(void* p_context, MCParameter* p_parameters)
     MCAutoStringRef t_state;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	
 	if (t_success)
 		t_success = MCParseParameters(p_parameters, "u", &t_id);
@@ -397,7 +397,7 @@ Exec_stat MCHandlePurchaseError(void* p_context, MCParameter* p_parameters)
 	uint32_t t_id;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	
 	if (t_success)
 		t_success = MCParseParameters(p_parameters, "u", &t_id);
@@ -457,7 +457,7 @@ Exec_stat MCHandlePurchaseGet(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "ux", &t_id, &(&t_prop_name));
 	
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	
 	if (t_success)
         MCStoreExecGet(ctxt, t_id, &t_prop_name, &t_value);
@@ -516,7 +516,7 @@ Exec_stat MCHandlePurchaseSet(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "uxu", &t_id, &(&t_prop_name), &t_quantity);
 		
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	if (t_success)
         t_success = MCNumberCreateWithInteger(t_quantity, &t_quantity_ref);
@@ -559,7 +559,7 @@ Exec_stat MCHandlePurchaseSendRequest(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "u", &t_id);
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (t_success)
         MCStoreExecSendPurchaseRequest(ctxt, t_id);
@@ -597,7 +597,7 @@ Exec_stat MCHandlePurchaseConfirmDelivery(void *context, MCParameter *p_paramete
 		t_success = MCParseParameters(p_parameters, "u", &t_id);
 	
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	if (t_success)
         MCStoreExecConfirmPurchaseDelivery(ctxt, t_id);
@@ -631,7 +631,7 @@ Exec_stat MCHandleRequestProductDetails(void *context, MCParameter *p_parameters
         t_success = MCParseParameters(p_parameters, "x", &(&t_product));
         
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (t_success)
         MCStoreExecRequestProductDetails(ctxt, *t_product);
@@ -671,7 +671,7 @@ Exec_stat MCHandlePurchaseVerify(void *context, MCParameter *p_parameters)
         t_success = MCParseParameters(p_parameters, "ub", &t_id, &t_verified);
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (t_success)
         MCStoreExecPurchaseVerify(ctxt, t_id, t_verified);
@@ -687,7 +687,7 @@ Exec_stat MCHandlePurchaseVerify(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleDeviceOrientation(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	intenum_t t_orientation;
 	MCOrientationGetDeviceOrientation(ctxt, t_orientation);
@@ -703,7 +703,7 @@ Exec_stat MCHandleDeviceOrientation(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleOrientation(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	intenum_t t_orientation;
 	MCOrientationGetOrientation(ctxt, t_orientation);
@@ -719,7 +719,7 @@ Exec_stat MCHandleOrientation(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleAllowedOrientations(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	intset_t t_orientations;
 	MCOrientationGetAllowedOrientations(ctxt, t_orientations);
@@ -761,7 +761,7 @@ Exec_stat MCHandleAllowedOrientations(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleSetAllowedOrientations(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoStringRef t_orientations;
 	
@@ -815,7 +815,7 @@ Exec_stat MCHandleSetAllowedOrientations(void *context, MCParameter *p_parameter
 Exec_stat MCHandleOrientationLocked(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_locked;
 	MCOrientationGetOrientationLocked(ctxt, t_locked);
@@ -834,7 +834,7 @@ Exec_stat MCHandleOrientationLocked(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleLockOrientation(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCOrientationExecLockOrientation(ctxt);
 
@@ -847,7 +847,7 @@ Exec_stat MCHandleLockOrientation(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleUnlockOrientation(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCOrientationExecUnlockOrientation(ctxt);
 
@@ -902,7 +902,7 @@ Exec_stat MCHandleRevMail(void *context, MCParameter *p_parameters)
 		p_parameters = p_parameters -> getnext();
 	}
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	MCMailExecSendEmail(ctxt, *t_address, *t_cc_address, *t_subject, *t_message_body);
 	
@@ -924,7 +924,7 @@ Exec_stat MCHandleComposeMail(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "|xxxxxa", &(&t_subject), &(&t_to), &(&t_cc), &(&t_bcc), &(&t_body), &(&t_attachments));
 
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (t_success)
 		MCMailExecComposeMail(ctxt, *t_to, *t_cc, *t_bcc, *t_subject, *t_body, *t_attachments);
@@ -947,7 +947,7 @@ Exec_stat MCHandleComposePlainMail(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "|xxxxxa", &(&t_subject), &(&t_to), &(&t_cc), &(&t_bcc), &(&t_body), &(&t_attachments));
 
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (t_success)
 		MCMailExecComposeMail(ctxt, *t_to, *t_cc, *t_bcc, *t_subject, *t_body, *t_attachments);
@@ -970,7 +970,7 @@ Exec_stat MCHandleComposeUnicodeMail(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "|xxxxxa", &(&t_subject), &(&t_to), &(&t_cc), &(&t_bcc), &(&t_body), &(&t_attachments));
 
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (t_success)
 		MCMailExecComposeUnicodeMail(ctxt, *t_to, *t_cc, *t_bcc, *t_subject, *t_body, *t_attachments);
@@ -993,7 +993,7 @@ Exec_stat MCHandleComposeHtmlMail(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "|xxxxxa", &(&t_subject), &(&t_to), &(&t_cc), &(&t_bcc), &(&t_body), &(&t_attachments));
 
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	if (t_success)
         MCMailExecComposeHtmlMail(ctxt, *t_to, *t_cc, *t_bcc, *t_subject, *t_body, *t_attachments);
@@ -1007,7 +1007,7 @@ Exec_stat MCHandleComposeHtmlMail(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleCanSendMail(void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 
 	bool t_can_send;
 
@@ -1070,7 +1070,7 @@ Exec_stat MCHandleStartTrackingSensor(void *p_context, MCParameter *p_parameters
         t_loosely = ep . getsvalue() == MCtruemcstring;
     }
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     if (t_sensor != kMCSensorTypeUnknown)
@@ -1119,7 +1119,7 @@ Exec_stat MCHandleStopTrackingSensor(void *p_context, MCParameter *p_parameters)
         p_parameters = p_parameters->getnext();
     }
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
 
     if (t_sensor != kMCSensorTypeUnknown)
@@ -1149,7 +1149,7 @@ Exec_stat MCHandleAccelerometerEnablement(void *p_context, MCParameter *p_parame
     return t_ctxt.GetStat();
 #endif /* MCHandleAccelerometerEnablement */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	if ((bool)p_context)
@@ -1178,7 +1178,7 @@ Exec_stat MCHandleLocationTrackingState(void *p_context, MCParameter *p_paramete
     return t_ctxt.GetStat();
 #endif /* MCHandleLocationTrackingState */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	if ((bool)p_context)
@@ -1207,7 +1207,7 @@ Exec_stat MCHandleHeadingTrackingState(void *p_context, MCParameter *p_parameter
     return t_ctxt.GetStat();
 #endif /* MCHandleHeadingTrackingState */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	if ((bool)p_context)
@@ -1316,7 +1316,7 @@ Exec_stat MCHandleSensorReading(void *p_context, MCParameter *p_parameters)
         t_detailed = ep . getsvalue() == MCtruemcstring;
     }
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     MCAutoArrayRef t_detailed_reading;
@@ -1397,7 +1397,7 @@ Exec_stat MCHandleCurrentLocation(void *p_context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleCurrentLocation */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     MCAutoArrayRef t_detailed_reading;
@@ -1430,7 +1430,7 @@ Exec_stat MCHandleCurrentHeading(void *p_context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleCurrentHeading */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     MCAutoArrayRef t_detailed_reading;
@@ -1465,7 +1465,7 @@ Exec_stat MCHandleSetHeadingCalibrationTimeout(void *p_context, MCParameter *p_p
     return t_ctxt.GetStat();
 #endif /* MCHandleSetHeadingCalibrationTimeout */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     int t_timeout;
@@ -1497,7 +1497,7 @@ Exec_stat MCHandleHeadingCalibrationTimeout(void *p_context, MCParameter *p_para
     return t_ctxt.GetStat();
 #endif /* MCHandleHeadingCalibrationTimeout */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     int t_timeout;
@@ -1535,7 +1535,7 @@ Exec_stat MCHandleSensorAvailable(void *p_context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleSensorAvailable */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
 
     MCSensorType t_sensor;
@@ -1577,7 +1577,7 @@ Exec_stat MCHandleCanTrackLocation(void *p_context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleCanTrackLocation */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
         
     bool t_available;
@@ -1610,7 +1610,7 @@ Exec_stat MCHandleCanTrackHeading(void *p_context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleCanTrackHeading */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     bool t_available;
@@ -1670,7 +1670,7 @@ Exec_stat MCHandlePickContact(void *context, MCParameter *p_parameters) // ABPeo
 #endif /* MCHandlePickContact */
     int32_t r_result;
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
     MCAddressBookExecPickContact(ctxt);
     
@@ -1710,7 +1710,7 @@ Exec_stat MCHandleShowContact(void *context, MCParameter *p_parameters) // ABPer
         t_contact_id = atoi (ep.getsvalue().getstring());
     }
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
     MCAddressBookExecShowContact(ctxt, t_contact_id);
 
@@ -1733,7 +1733,7 @@ Exec_stat MCHandleCreateContact(void *context, MCParameter *p_parameters) // ABN
 	return t_ctxt.GetStat();
 #endif /* MCHandleCreateContact */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
     MCAddressBookExecCreateContact(ctxt);
 
@@ -1747,7 +1747,7 @@ Exec_stat MCHandleUpdateContact(void *context, MCParameter *p_parameters) // ABU
 {
 #ifdef /* MCHandleUpdateContact */ LEGACY_EXEC
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     // Handle parameters. We are doing that in a dedicated call
 	MCVariableValue *t_contact = nil;
 	char *t_title = nil;
@@ -1760,7 +1760,7 @@ Exec_stat MCHandleUpdateContact(void *context, MCParameter *p_parameters) // ABU
 	return ctxt.GetStat();
 #endif /* MCHandleUpdateContact */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoArrayRef t_contact;
 	MCAutoStringRef t_title;
@@ -1805,7 +1805,7 @@ Exec_stat MCHandleGetContactData(void *context, MCParameter *p_parameters)
         t_contact_id = atoi (ep.getsvalue().getstring());
     }
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
 	MCAutoArrayRef t_contact_data;
 	MCAddressBookGetContactData(ctxt, t_contact_id, &t_contact_data);
@@ -1849,7 +1849,7 @@ Exec_stat MCHandleRemoveContact(void *context, MCParameter *p_parameters)
         t_contact_id = atoi (ep.getsvalue().getstring());
     }
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCAddressBookExecRemoveContact(ctxt, t_contact_id);
 
@@ -1880,7 +1880,7 @@ Exec_stat MCHandleAddContact(void *context, MCParameter *p_parameters)
 	
 	/* UNCHECKED */ MCParseParameters(p_parameters, "a", &(&t_contact));
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     // Call the Exec implementation
     MCAddressBookExecAddContact(ctxt, *t_contact);
     // Set return value
@@ -1919,7 +1919,7 @@ Exec_stat MCHandleFindContact(void *context, MCParameter *p_parameters)
         p_parameters->eval(ep);
         /* UNCHECKED */ ep . copyasstringref(&t_contact_name);
     }
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     // Call the Exec implementation
     MCAddressBookExecFindContact(ctxt, *t_contact_name);
@@ -1960,7 +1960,7 @@ Exec_stat MCHandleAdRegister(void *context, MCParameter *p_parameters)
 	t_success = true;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	MCAutoStringRef t_key;
@@ -2029,7 +2029,7 @@ Exec_stat MCHandleAdCreate(void *context, MCParameter *p_parameters)
 	t_success = true;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	MCAutoStringRef t_ad;
@@ -2084,7 +2084,7 @@ Exec_stat MCHandleAdDelete(void *context, MCParameter *p_parameters)
 	t_success = true;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	MCAutoStringRef t_ad;
@@ -2132,7 +2132,7 @@ Exec_stat MCHandleAdGetVisible(void *context, MCParameter *p_parameters)
 	t_success = true;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCAutoStringRef t_ad;
     
@@ -2188,7 +2188,7 @@ Exec_stat MCHandleAdSetVisible(void *context, MCParameter *p_parameters)
 	t_success = true;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	MCAutoStringRef t_ad;
@@ -2213,7 +2213,7 @@ Exec_stat MCHandleAdGetTopLeft(void *context, MCParameter *p_parameters)
 	t_success = true;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCAutoStringRef t_ad;
     
@@ -2272,7 +2272,7 @@ Exec_stat MCHandleAdSetTopLeft(void *context, MCParameter *p_parameters)
 	t_success = true;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	MCAutoStringRef t_ad;
@@ -2314,7 +2314,7 @@ Exec_stat MCHandleAds(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleAds */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
 
     MCAutoStringRef t_ads;
@@ -2365,7 +2365,7 @@ Exec_stat MCHandleShowEvent(void *context, MCParameter *p_parameters)
     }
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     // Call the Exec implementation
     if (t_success)
@@ -2409,7 +2409,7 @@ Exec_stat MCHandleUpdateEvent(void *context, MCParameter *p_parameters)
     }
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     // Call the Exec implementation
     if (t_success)
@@ -2437,7 +2437,7 @@ Exec_stat MCHandleCreateEvent(void *context, MCParameter *p_parameters)
     MCAutoStringRef t_id;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 
     // Call the Exec implementation
     MCCalendarExecCreateEvent(ctxt);
@@ -2477,7 +2477,7 @@ Exec_stat MCHandleGetEventData(void *context, MCParameter *p_parameters)
         t_success = MCParseParameters(p_parameters, "x", &(&t_id));
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     // Call the Exec implementation
     MCAutoArrayRef t_data;
@@ -2530,7 +2530,7 @@ Exec_stat MCHandleRemoveEvent(void *context, MCParameter *p_parameters)
     }
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     // Call the Exec implementation
 //    MCCalendarExecRemoveEvent(ctxt, t_reocurring, &t_id);
@@ -2556,7 +2556,7 @@ Exec_stat MCHandleAddEvent(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleAddEvent */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_success;
     
@@ -2587,7 +2587,7 @@ Exec_stat MCHandleGetCalendarsEvent(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleGetCalendarsEvent */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     
     // Call the Exec implementation
@@ -2639,7 +2639,7 @@ Exec_stat MCHandleFindEvent(void *context, MCParameter *p_parameters)
     bool t_success = true;
     const char *r_result = NULL;
     MCExecPoint ep(nil, nil, nil);
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
     // Handle parameters.
     if (p_parameters)
     {
@@ -2717,7 +2717,7 @@ Exec_stat MCHandleCreateLocalNotification (void *context, MCParameter *p_paramet
     bool t_play_sound_vibrate = true;
     int32_t t_badge_value = 0;
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     
     if (t_success && p_parameters != nil)
@@ -2755,7 +2755,7 @@ Exec_stat MCHandleGetRegisteredNotifications(void *context, MCParameter *p_param
     return ES_NORMAL;
 #endif /* MCHandleGetRegisteredNotifications */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     
     MCNotificationGetRegisteredNotifications(ctxt);
@@ -2770,7 +2770,7 @@ Exec_stat MCHandleGetNotificationDetails(void *context, MCParameter *p_parameter
 {
 #ifdef /* MCHandleGetNotificationDetails */ LEGACY_EXEC
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_success = true;
     
@@ -2794,7 +2794,7 @@ Exec_stat MCHandleGetNotificationDetails(void *context, MCParameter *p_parameter
     return ES_NORMAL;
 #endif /* MCHandleGetNotificationDetails */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_success = true;
     
@@ -2835,7 +2835,7 @@ Exec_stat MCHandleCancelLocalNotification(void *context, MCParameter *p_paramete
     MCExecPoint ep(nil, nil, nil);
     int32_t t_cancel_this;
     bool t_success;
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     if (p_parameters != nil)
 		t_success = MCParseParameters (p_parameters, "i", &t_cancel_this);
@@ -2862,7 +2862,7 @@ Exec_stat MCHandleCancelAllLocalNotifications (void *context, MCParameter *p_par
     return ES_NORMAL;
 #endif /* MCHandleCancelAllLocalNotifications */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     
     MCNotificationExecCancelAllLocalNotifications(ctxt);
@@ -2884,7 +2884,7 @@ Exec_stat MCHandleGetNotificationBadgeValue (void *context, MCParameter *p_param
     return ES_NORMAL;
 #endif /* MCHandleGetNotificationBadgeValue */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     MCNotificationGetNotificationBadgeValue (ctxt);
     
@@ -2912,7 +2912,7 @@ Exec_stat MCHandleSetNotificationBadgeValue (void *context, MCParameter *p_param
     MCExecPoint ep(nil, nil, nil);
     uint32_t t_badge_value;
     bool t_success = true;
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     
     if (t_success && p_parameters != nil)
@@ -3040,7 +3040,7 @@ Exec_stat MCHandleStartBusyIndicator(void *p_context, MCParameter *p_parameters)
     }
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     MCBusyIndicatorExecStartBusyIndicator(ctxt, kMCBusyIndicatorSquare, *t_label, t_opacity);
@@ -3064,7 +3064,7 @@ Exec_stat MCHandleStopBusyIndicator(void *p_context, MCParameter *p_parameters)
 #endif /* MCHandleStopBusyIndicator */
     MCExecPoint ep(nil, nil, nil);
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	MCBusyIndicatorExecStopBusyIndicator(ctxt);
@@ -3221,7 +3221,7 @@ Exec_stat MCHandleStartActivityIndicator(void *p_context, MCParameter *p_paramet
     }
         
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     if (t_success)
@@ -3248,7 +3248,7 @@ Exec_stat MCHandleStopActivityIndicator(void *p_context, MCParameter *p_paramete
 
     MCExecPoint ep(nil, nil, nil);
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     MCBusyIndicatorExecStopActivityIndicator(ctxt);
@@ -3386,7 +3386,7 @@ Exec_stat MCHandlePlaySoundOnChannel(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandlePlaySoundOnChannel */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3435,7 +3435,7 @@ Exec_stat MCHandlePausePlayingOnChannel(void *context, MCParameter *p_parameters
     return t_ctxt.GetStat();
 #endif /* MCHandlePausePlayingOnChannel */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3478,7 +3478,7 @@ Exec_stat MCHandleResumePlayingOnChannel(void *context, MCParameter *p_parameter
     return t_ctxt.GetStat();
 #endif /* MCHandleResumePlayingOnChannel */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3520,7 +3520,7 @@ Exec_stat MCHandleStopPlayingOnChannel(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleStopPlayingOnChannel */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3562,7 +3562,7 @@ Exec_stat MCHandleDeleteSoundChannel(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleDeleteSoundChannel */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3605,7 +3605,7 @@ Exec_stat MCHandleSetSoundChannelVolume(void *context, MCParameter *p_parameters
     return t_ctxt.GetStat();
 #endif /* MCHandleSetSoundChannelVolume */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3653,7 +3653,7 @@ Exec_stat MCHandleSoundChannelVolume(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleSoundChannelVolume */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3713,7 +3713,7 @@ Exec_stat MCHandleSoundChannelStatus(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleSoundChannelStatus */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3771,7 +3771,7 @@ Exec_stat MCHandleSoundOnChannel(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleSoundOnChannel */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3829,7 +3829,7 @@ Exec_stat MCHandleNextSoundOnChannel(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleNextSoundOnChannel */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3882,7 +3882,7 @@ Exec_stat MCHandleSoundChannels(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleSoundChannels */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
     bool t_success;
@@ -3947,7 +3947,7 @@ Exec_stat MCHandleSetAudioCategory(void *context, MCParameter *p_parameters)
     return t_ctxt.GetStat();
 #endif /* MCHandleSetAudioCategory */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
     
 	bool t_success;
@@ -3995,7 +3995,7 @@ Exec_stat MCHandleGetDeviceToken (void *context, MCParameter *p_parameters)
     return ES_NORMAL;
 #endif /* MCHandleGetDeviceToken */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_token;
     
@@ -4022,7 +4022,7 @@ Exec_stat MCHandleGetLaunchUrl (void *context, MCParameter *p_parameters)
     return ES_NORMAL;
 #endif /* MCHandleGetLaunchUrl */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_url;
     
@@ -4056,7 +4056,7 @@ Exec_stat MCHandleBeep(void *p_context, MCParameter *p_parameters)
     int32_t* t_number_of_times_ptr = nil;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (!MCParseParameters(p_parameters, "i", &t_number_of_times))
         t_number_of_times_ptr = &t_number_of_times;
@@ -4087,7 +4087,7 @@ Exec_stat MCHandleVibrate(void *p_context, MCParameter *p_parameters)
     int32_t* t_number_of_times_ptr = nil;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     if (MCParseParameters(p_parameters, "i", &t_number_of_times))
         t_number_of_times_ptr = &t_number_of_times;
@@ -4103,7 +4103,7 @@ Exec_stat MCHandleVibrate(void *p_context, MCParameter *p_parameters)
 Exec_stat MCHandleDeviceResolution(void *context, MCParameter *p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_resolution;
     MCMiscGetDeviceResolution(ctxt, &t_resolution);
@@ -4147,7 +4147,7 @@ Exec_stat MCHandleUseDeviceResolution(void *context, MCParameter *p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandleUseDeviceResolution */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_use_device_res;
     bool t_use_control_device_res;
@@ -4167,7 +4167,7 @@ Exec_stat MCHandleUseDeviceResolution(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleDeviceScale(void *context, MCParameter *p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     real64_t t_resolution;
     
@@ -4192,7 +4192,7 @@ Exec_stat MCHandlePixelDensity(void* context, MCParameter* p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandlePixelDensity */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     real64_t t_density;
     
@@ -4241,7 +4241,7 @@ Exec_stat MCHandleSetStatusBarStyle(void *context, MCParameter *p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandleSetStatusBarStyle */
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	
     MCAutoStringRef t_status_bar_style_string;
     MCMiscStatusBarStyle t_status_bar_style;
@@ -4264,7 +4264,7 @@ Exec_stat MCHandleSetStatusBarStyle(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleShowStatusBar(void* context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     bool t_success = true;
         
     if(t_success)
@@ -4279,7 +4279,7 @@ Exec_stat MCHandleShowStatusBar(void* context, MCParameter* p_parameters)
 Exec_stat MCHandleHideStatusBar(void* context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     bool t_success = true;
     
     if(t_success)
@@ -4316,7 +4316,7 @@ static MCMiscKeyboardType MCMiscKeyboardTypeFromString(MCStringRef p_string)
 Exec_stat MCHandleSetKeyboardType (void *context, MCParameter *p_parameters)
 {
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_success = true;
     
@@ -4397,7 +4397,7 @@ Exec_stat MCHandleSetKeyboardReturnKey (void *context, MCParameter *p_parameters
 	return ES_NORMAL;
 #endif /* MCHandleSetKeyboardReturnKey */
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_keyboard_return_key_string;
     MCMiscKeyboardReturnKey t_keyboard_return_key;
@@ -4420,7 +4420,7 @@ Exec_stat MCHandleSetKeyboardReturnKey (void *context, MCParameter *p_parameters
 Exec_stat MCHandlePreferredLanguages(void *context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     MCAutoStringRef t_preferred_languages;
     
     MCMiscGetPreferredLanguages(ctxt, &t_preferred_languages);
@@ -4438,7 +4438,7 @@ Exec_stat MCHandlePreferredLanguages(void *context, MCParameter* p_parameters)
 Exec_stat MCHandleCurrentLocale(void *context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_current_locale;
     
@@ -4457,7 +4457,7 @@ Exec_stat MCHandleCurrentLocale(void *context, MCParameter* p_parameters)
 Exec_stat MCHandleClearTouches(void* context, MCParameter* p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCMiscExecClearTouches(ctxt);
     
@@ -4470,7 +4470,7 @@ Exec_stat MCHandleClearTouches(void* context, MCParameter* p_parameters)
 Exec_stat MCHandleSystemIdentifier(void *context, MCParameter *p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_identifier;
     
@@ -4489,7 +4489,7 @@ Exec_stat MCHandleSystemIdentifier(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleApplicationIdentifier(void *context, MCParameter *p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef r_identifier;
     
@@ -4519,7 +4519,7 @@ Exec_stat MCHandleSetReachabilityTarget(void *context, MCParameter *p_parameters
 	return t_success ? ES_NORMAL : ES_ERROR;
 #endif /* MCHandleSetReachabilityTarget */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	bool t_success;
 	t_success = true;
@@ -4538,7 +4538,7 @@ Exec_stat MCHandleSetReachabilityTarget(void *context, MCParameter *p_parameters
 Exec_stat MCHandleReachabilityTarget(void *context, MCParameter *p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_hostname;
     
@@ -4566,7 +4566,7 @@ Exec_stat MCHandleExportImageToAlbum(void *context, MCParameter *p_parameters)
 	MCLog("MCHandleExportImageToAlbum() called", nil);
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     t_success = MCParseParameters(p_parameters, "x", &(&t_raw_data));
     
@@ -4607,7 +4607,7 @@ Exec_stat MCHandleSetRedrawInterval(void *context, MCParameter *p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandleSetRedrawInterval */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	bool t_success;
 	t_success = true;
@@ -4641,7 +4641,7 @@ Exec_stat MCHandleSetAnimateAutorotation(void *context, MCParameter *p_parameter
 	return ES_NORMAL;
 #endif /* MCHandleSetAnimateAutorotation */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	bool t_success;
 	t_success = true;
@@ -4689,7 +4689,7 @@ Exec_stat MCHandleFileSetDoNotBackup(void *context, MCParameter *p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandleFileSetDoNotBackup */
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	
     MCAutoStringRef t_path;
     
@@ -4725,7 +4725,7 @@ Exec_stat MCHandleFileGetDoNotBackup(void *context, MCParameter *p_parameters)
     return ES_NORMAL;
 #endif /* MCHandleFileGetDoNotBackup */
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCAutoStringRef t_path;
     bool t_no_backup;
@@ -4787,7 +4787,7 @@ Exec_stat MCHandleFileSetDataProtection(void *context, MCParameter *p_parameters
     return ES_NORMAL;
 #endif /* MCHandleFileSetDataProtection */
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_filename;
     MCAutoStringRef t_protection_string;
@@ -4836,7 +4836,7 @@ Exec_stat MCHandleFileGetDataProtection(void *context, MCParameter *p_parameters
     return ES_NORMAL;
 #endif /* MCHandleFileGetDataProtection */
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_path;
     MCAutoStringRef t_protection_string;
@@ -4859,7 +4859,7 @@ Exec_stat MCHandleLibUrlDownloadToFile(void *context, MCParameter *p_parameters)
 	MCAutoStringRef t_url, t_filename;
 	
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	
     bool t_success;
     
@@ -4901,7 +4901,7 @@ Exec_stat MCHandleBuildInfo(void *context, MCParameter *p_parameters)
 	return ES_NORMAL;
 #endif /* MCHandleBuildInfo */
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCAutoStringRef t_value, t_key;
     bool t_success;
@@ -5106,7 +5106,7 @@ Exec_stat MCHandleIPhonePickMedia(void *context, MCParameter *p_parameters)
 			t_media_types += MCMediaTypeFromString(MCSTR("movies, tv, videoPodcasts, musicVideos, videoITunesU"));;
 #endif
 	}
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	// Call MCIPhonePickMedia to process the media pick selection.
     MCPickExecPickMedia(ctxt, (intset_t)t_media_types, t_allow_multipe_items);
@@ -5193,7 +5193,7 @@ Exec_stat MCHandlePickMedia(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "s", &t_option_list);
 	}
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCPickExecPickMedia(ctxt, (intset_t)t_media_type, false);
     
@@ -5412,7 +5412,7 @@ Exec_stat MCHandlePick(void *context, MCParameter *p_parameters)
         t_success = MCParseParameters(p_parameters, "x", &t_string_param);
     }
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     
 	// call the Exec method to process the pick wheel
@@ -5619,7 +5619,7 @@ Exec_stat MCHandlePickDate(void *context, MCParameter *p_parameters)
         MCCStringFree(t_button);
     }
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
      
 	if (t_success)
     {
@@ -5795,7 +5795,7 @@ Exec_stat MCHandlePickTime(void *context, MCParameter *p_parameters)
             t_button_type = kMCPickButtonDone;           
     }
 
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
     
 	if (t_success)
@@ -5959,7 +5959,7 @@ Exec_stat MCHandlePickDateAndTime(void *context, MCParameter *p_parameters)
             t_button_type = kMCPickButtonDone;
     }
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     ctxt.SetTheResultToEmpty();
        
 	if (t_success)
@@ -6024,7 +6024,7 @@ Exec_stat MCHandleSpecificCameraFeatures(void *p_context, MCParameter *p_paramet
 	else
 		return ES_NORMAL;
 	
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     intset_t t_result;
     
     MCPickGetSpecificCameraFeatures(ctxt, (intenum_t)t_source, t_result);
@@ -6054,7 +6054,7 @@ Exec_stat MCHandleCameraFeatures(void *context, MCParameter *p_parameters)
     MCExecPoint ep(nil, nil, nil);
 	ep.clear();
     
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     intset_t t_features;
     
@@ -6134,7 +6134,7 @@ Exec_stat MCHandlePickPhoto(void *p_context, MCParameter *p_parameters)
 	
 	/////
 	
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	ctxt . SetTheResultToEmpty();
 	
 	if (t_width != 0 && t_height != 0)
@@ -6164,7 +6164,7 @@ Exec_stat MCHandleControlCreate(void *context, MCParameter *p_parameters)
 		t_success = MCParseParameters(p_parameters, "x", &(&t_control_name));
 
     MCExecPoint ep(nil,nil,nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     MCNativeControlExecCreateControl(ctxt, *t_type_name, *t_control_name);
     
@@ -6177,7 +6177,7 @@ Exec_stat MCHandleControlCreate(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleControlDelete(void *context, MCParameter *p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
 	MCAutoStringRef t_control_name;
 	if (MCParseParameters(p_parameters, "x", &(&t_control_name)))
@@ -6207,7 +6207,7 @@ Exec_stat MCHandleControlSet(void *context, MCParameter *p_parameters)
 		MCNativeControl::LookupProperty(t_prop_name, t_property);
 	
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	if (t_success && p_parameters != nil)
 		t_success = p_parameters -> eval(ep);
 	
@@ -6224,7 +6224,7 @@ Exec_stat MCHandleControlSet(void *context, MCParameter *p_parameters)
     MCAutoStringRef t_property;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_success;
 	t_success = true;
@@ -6266,7 +6266,7 @@ Exec_stat MCHandleControlGet(void *context, MCParameter *p_parameters)
 		MCNativeControl::LookupProperty(t_prop_name, t_property);
 	
 	MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
 	if (t_success)
 		t_control -> Get(ctxt, t_property);
 	
@@ -6344,7 +6344,7 @@ Exec_stat MCHandleControlDo(void *context, MCParameter *p_parameters)
     MCAutoStringRef t_property;
     
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     
     bool t_success;
 	t_success = true;
@@ -6371,7 +6371,7 @@ Exec_stat MCHandleControlDo(void *context, MCParameter *p_parameters)
 Exec_stat MCHandleControlTarget(void *context, MCParameter *p_parameters)
 {
     MCExecPoint ep(nil, nil, nil);
-    MCExecContext ctxt(ep);
+    MCExecContext& ctxt = ep . GetContext();
     MCNativeControlIdentifier t_identifier;
     MCNativeControlGetTarget(ctxt, t_identifier);
     MCAutoStringRef t_string;
@@ -6399,7 +6399,7 @@ Exec_stat MCHandleControlList(void *context, MCParameter *p_parameters)
 	MCExecPoint ep(nil, nil, nil);
 	MCNativeControl::List(list_native_controls, &ep);
     
-	MCExecContext ctxt(ep);
+	MCExecContext& ctxt = ep . GetContext();
 	MCAutoStringRef t_value;
 	/* UNCHECKED */ ep . copyasstringref(&t_value);
     ctxt . SetTheResultToValue(*t_value);

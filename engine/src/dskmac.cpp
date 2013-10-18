@@ -478,7 +478,7 @@ static pascal OSErr DoSpecial(const AppleEvent *ae, AppleEvent *reply, long refC
 				}
 				else
 				{
-					MCExecContext ctxt(ep);
+					MCExecContext& ctxt = ep . GetContext();
 					MCAutoValueRef t_val;
 					MCAutoStringRef t_string;
 					MCdefaultstackptr->getcard()->eval(ctxt, *t_sptr, &t_val);
