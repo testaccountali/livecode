@@ -769,32 +769,9 @@ void MCExecStoreProperty(MCExecContext& ctxt, const MCPropertyInfo *prop, void *
 class MCExecContext
 {
 public:
-	MCExecContext(MCExecPoint& ep)
-		: m_ep(ep), m_stat(ES_NORMAL)
-	{
-	}
-	
-	MCExecContext(MCExecPoint& ep, MCVarref *p_it)
-		: m_ep(ep), m_stat(ES_NORMAL), m_it(p_it)
-	{
-	}
-	
-	MCExecContext(MCExecContext& p_ctxt)
-		: m_ep(p_ctxt.GetEP()), m_stat(ES_NORMAL), m_it(p_ctxt . m_it)
-	{
-	}
-
-	//////////
-
-	MCExecPoint& GetEP(void)
-	{
-		return m_ep;
-	}
-	
-	Exec_stat GetExecStat(void)
-	{
-		return m_stat;
-	}
+	MCExecContext(void);
+	MCExecContext(MCVarref *it);
+	MCExecContext(MCExecContext& other);
 
 	///////////
 
@@ -822,124 +799,126 @@ public:
 
 	bool GetCaseSensitive(void) const
 	{
-		return m_ep . getcasesensitive() == True;
+		return m_case_sensitive;
 	}
 
 	bool GetConvertOctals(void) const
 	{
-		return m_ep . getconvertoctals() == True;
+		return m_convert_octals;
 	}
 
 	bool GetWholeMatches(void) const
 	{
-		return m_ep . getwholematches() == True;
+		return m_whole_matches;
 	}
 
 	bool GetUseUnicode(void) const
 	{
-		return m_ep . getuseunicode() == True;
+		return m_use_unicode;
 	}
 
 	bool GetUseSystemDate(void) const
 	{
-		return m_ep . getusesystemdate() == True;
+		return m_use_system_date;
 	}
 
 	char_t GetLineDelimiter(void) const
 	{
-		return m_ep . getlinedel();
+		return m_line_delimiter;
 	}
 
 	char_t GetItemDelimiter(void) const
 	{
-		return m_ep . getitemdel();
+		return m_item_delimiter;
 	}
 
 	char_t GetColumnDelimiter(void) const
 	{
-		return m_ep . getcolumndel();
+		return m_column_delimiter;
 	}
 
 	char_t GetRowDelimiter(void) const
 	{
-		return m_ep . getrowdel();
+		return m_row_delimiter;
 	}
 
 	uint2 GetCutOff(void) const
 	{
-		return m_ep . getcutoff();
+		return m_cutoff;
 	}
 
 	uinteger_t GetNumberFormatWidth() const
 	{
-		return m_ep.getnffw();
+		return m_nffw;
 	}
 	
 	uinteger_t GetNumberFormatTrailing() const
 	{
-		return m_ep.getnftrailing();	
+		return m_nftrailing;	
 	}
 	
 	uinteger_t GetNumberFormatForce() const
 	{
-		return m_ep.getnfforce();
+		return m_nfforce;
 	}
 	
 	//////////
 
 	void SetNumberFormat(uint2 p_fw, uint2 p_trailing, uint2 p_force)
     {
-        m_ep . setnumberformat(p_fw, p_trailing, p_force);
+		m_nffw = p_fw;
+		m_nftrailing = p_trailing;
+		m_nfforce = p_force;
     }
 
 	void SetCaseSensitive(bool p_value)
 	{
-		m_ep . setcasesensitive(p_value);
+		m_case_sensitive = p_value;
 	}
 
 	void SetConvertOctals(bool p_value)
 	{
-		m_ep . setconvertoctals(p_value);
+		m_convert_octals = p_value;
 	}
 	
 	void SetWholeMatches(bool p_value)
 	{
-		m_ep . setwholematches(p_value);
+		m_whole_matches = p_value;
 	}
 	
 	void SetUseUnicode(bool p_value)
 	{
-		m_ep . setuseunicode(p_value);
+		m_use_unicode = p_value;
 	}
 
 	void SetUseSystemDate(bool p_value)
 	{
-		m_ep . setusesystemdate(p_value);
+		m_use_system_date = p_value;
 	}
 
 	void SetCutOff(uint2 p_value)
 	{
-		m_ep . setcutoff(p_value);
+		m_cutoff = p_value;
 	}
 
 	void SetLineDelimiter(char_t p_value)
 	{
-		m_ep . setlinedel(p_value);
+		m_line_delimiter = p_value;
 	}
 
 	void SetItemDelimiter(char_t p_value)
 	{
-		m_ep . setitemdel(p_value);
+		m_item_delimiter = p_value;
 	}
 
 	void SetColumnDelimiter(char_t p_value)
 	{
-		m_ep . setcolumndel(p_value);
+		m_column_delimiter = p_value;
 	}
 
 	void SetRowDelimiter(char_t p_value)
 	{
-        m_ep . setrowdel(p_value);
+		m_row_delimiter = p_value;
     }
 
     //////////
@@ -1043,42 +1022,42 @@ public:
 
     MCHandler *GetHandler(void)
     {
-        return m_ep . gethandler();
+		return m_handler;
     }
 	
 	void SetHandler(MCHandler *p_handler)
 	{
-		m_ep.sethandler(p_handler);
+		m_handler = p_handler;
 	}
 	
 	MCHandlerlist *GetHandlerList()
 	{
-		return m_ep.gethlist();
+		return m_handler_list;
 	}
 	
 	void SetHandlerList(MCHandlerlist *p_list)
 	{
-		m_ep.sethlist(p_list);
+		m_handler_list = p_list;
 	}
     
 	MCObject *GetObject(void)
 	{
-		return m_ep . getobj();
+		return m_object;
 	}
 
 	void SetObject(MCObject *p_object)
 	{
-		m_ep.setobj(p_object);
+		m_object = p_object;
 	}
 
-	void SetParentScript(MCParentScriptUse *p_parentscript)
+	void SetParentScript(MCParentScriptUse *p_parent_script)
 	{
-		m_ep.setparentscript(p_parentscript);
+		m_parent_script = p_parent_script;
 	}
 
     MCParentScriptUse *GetParentScript(void)
 	{
-		return m_ep.getparentscript();
+		return m_parent_script;
 	}
     
     // MM-2011-02-16: Added ability to get handle of current object
@@ -1091,7 +1070,26 @@ public:
     void SetTheResultToCString(const char *p_string);
     
 private:
-	MCExecPoint& m_ep;
+	MCObject *m_object;
+	MCParentScriptUse *m_parent_script;
+	MCHandlerlist *m_handler_list;
+	MCHandler *m_handler;
+	uint16_t m_line;
+	
+	uint16_t m_nffw, m_nftrailing, m_nfforce;
+	uint16_t m_cutoff;
+	
+	bool m_convert_octals : 1;
+	bool m_case_sensitive : 1;
+	bool m_whole_matches : 1;
+	bool m_use_system_date : 1;
+	bool m_use_unicode : 1;
+	
+	char m_item_delimiter;
+	char m_column_delimiter;
+	char m_line_delimiter;
+	char m_row_delimiter;
+	
 	Exec_stat m_stat;
 	MCVarref *m_it;
 };

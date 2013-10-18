@@ -34,6 +34,43 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 
 ////////////////////////////////////////////////////////////////////////////////
 
+MCExecContext::MCExecContext(void)
+{
+	MCMemoryClear(this, sizeof(MCExecContext));
+	m_item_delimiter = ',';
+	m_column_delimiter = '\t';
+	m_line_delimiter = '\n';
+	m_row_delimiter = '\n';
+	m_nffw = 8;
+	m_nftrailing = 6;
+	m_cutoff = 35;
+	
+	m_stat = ES_NORMAL;
+	m_it = nil;
+}
+
+MCExecContext::MCExecContext(MCVarref *p_it)
+{
+	MCMemoryClear(this, sizeof(MCExecContext));
+	m_item_delimiter = ',';
+	m_column_delimiter = '\t';
+	m_line_delimiter = '\n';
+	m_row_delimiter = '\n';
+	m_nffw = 8;
+	m_nftrailing = 6;
+	m_cutoff = 35;
+	
+	m_stat = ES_NORMAL;
+	m_it = p_it;
+}
+
+MCExecContext::MCExecContext(MCExecContext& p_other_ctxt)
+{
+	MCMemoryCopy(this, &p_other_ctxt, sizeof(MCExecContext));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 bool MCExecContext::ForceToString(MCValueRef p_value, MCStringRef& r_string)
 {
 	return m_ep . convertvaluereftostring(p_value, r_string);
