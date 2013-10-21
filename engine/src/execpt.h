@@ -115,9 +115,11 @@ public:
 	
 	//////////
 	
-	void concatcstring(const char *str, Exec_context sep, Boolean first);
+	void concatcstring(const char *str, Exec_concat sep, Boolean first);
 	void concatmcstring(const MCString& str, Exec_concat sep, Boolean first);
-	void concatstringref(MCStringRef str, Exec_context sep, Boolean first);
+	void concatstringref(MCStringRef str, Exec_concat sep, Boolean first);
+	void concatnameref(MCNameRef name, Exec_concat sep, Boolean first);
+	void concatuint(uint4 num, Exec_concat sep, Boolean first);
 	
 	//////////
 	
