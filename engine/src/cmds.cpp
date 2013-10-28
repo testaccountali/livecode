@@ -1475,69 +1475,7 @@ Exec_stat MCPut::exec(MCExecPoint &ep)
 
 	if (dest != nil)
 	{
-		if (dest -> isvarchunk())
-		{
-			MCVariableChunkPtr t_var_chunk;
-			if (dest -> evalvarchunk(ep, false, true, t_var_chunk) != ES_NORMAL)
-				return ES_ERROR;
-			
-			MCEngineExecPutIntoVariable(ctxt, *t_value, prep, t_var_chunk);
-		}
-		else if (dest -> isurlchunk())
-		{
-			MCAutoStringRef t_string;
-			if (!ctxt . ConvertToString(*t_value, &t_string))
-			{
-				MCeerror -> add(EE_CHUNK_CANTSETDEST, line, pos);
-				return ES_ERROR;
-			}
-			
-			MCUrlChunkPtr t_url_chunk;
-			t_url_chunk . url = nil;
-			if (dest -> evalurlchunk(ep, false, true, t_url_chunk) != ES_NORMAL)
-				return ES_ERROR;
-			
-			MCNetworkExecPutIntoUrl(ctxt, *t_string, prep, t_url_chunk);
-			
-			MCValueRelease(t_url_chunk . url);
-		}
-		else
-		{
-            MCObjectChunkPtr t_obj_chunk;
-			if (dest -> evalobjectchunk(ep, false, true, t_obj_chunk) != ES_NORMAL)
-				return ES_ERROR;
-            
-            if (is_unicode)
-            {
-                if (t_obj_chunk . object -> gettype() != CT_FIELD)
-                {
-                    MCeerror -> add(EE_CHUNK_CANTSETUNICODEDEST, line, pos);
-                    return ES_ERROR;
-                }
-                
-                MCAutoDataRef t_data;
-                if (!ctxt . ConvertToData(*t_value, &t_data))
-                {
-                    MCeerror -> add(EE_CHUNK_CANTSETUNICODEDEST, line, pos);
-                    return ES_ERROR;
-                }
-                MCInterfaceExecPutUnicodeIntoField(ctxt, *t_data, prep, t_obj_chunk);
-            }
-            else
-            {
-                MCAutoStringRef t_string;
-                if (!ctxt . ConvertToString(*t_value, &t_string))
-                {
-                    MCeerror -> add(EE_CHUNK_CANTSETDEST, line, pos);
-                    return ES_ERROR;
-                }
-			            
-                if (t_obj_chunk . object -> gettype() == CT_FIELD)
-                    MCInterfaceExecPutIntoField(ctxt, *t_string, prep, t_obj_chunk);
-                else
-                    MCInterfaceExecPutIntoObject(ctxt, *t_string, prep, t_obj_chunk);
-			}
-		}
+        dest -> set(ep, prep, *t_value, is_unicode);
 	}
 	else
 	{

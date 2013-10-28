@@ -61,9 +61,6 @@ typedef struct _regexp
 }
 regexp;
 
-MCStringRef MCregexpatterns[PATTERN_CACHE_SIZE];
-regexp *MCregexcache[PATTERN_CACHE_SIZE];
-
 // JS-2013-07-01: [[ EnhancedFilter ]] Updated to manage case and allow case-insensitive matching.
 // MW-2013-07-01: [[ EnhancedFilter ]] Removed 'usecache' parameter as there's no reason not to use the cache.
 regexp *MCR_compile(MCStringRef exp, bool casesensitive);

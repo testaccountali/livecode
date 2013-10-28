@@ -22,6 +22,7 @@
 		4D7FA7A81594E09500EEF440 /* foundation-unicodechars.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D7FA79B1594E09500EEF440 /* foundation-unicodechars.cpp */; };
 		4D7FA7A91594E09500EEF440 /* foundation-value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D7FA79C1594E09500EEF440 /* foundation-value.cpp */; };
 		4DB3EBE416A5C00800E90D30 /* foundation-string-cf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3EBE316A5C00800E90D30 /* foundation-string-cf.cpp */; };
+		76EF31A8181E7E0A00FAC195 /* foundation-data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D17A9C517C22DD30024CCA8 /* foundation-data.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -205,6 +206,7 @@
 				4D7FA7A91594E09500EEF440 /* foundation-value.cpp in Sources */,
 				4DB3EBE416A5C00800E90D30 /* foundation-string-cf.cpp in Sources */,
 				4D5837A31806A024006DE6A2 /* foundation-objc.mm in Sources */,
+				76EF31A8181E7E0A00FAC195 /* foundation-data.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

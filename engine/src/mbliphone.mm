@@ -1092,7 +1092,7 @@ MCSystemInterface *MCMobileCreateIPhoneSystem(void)
 //////////////////
 
 // MW-2013-05-21: [[ RandomBytes ]] System function for random bytes on iOS.
-bool MCS_random_bytes(size_t p_count, void* p_buffer)
+bool MCS_random_bytes(size_t p_count, MCDataRef& r_buffer)
 {
 	return SecRandomCopyBytes(kSecRandomDefault, p_count, (uint8_t *)p_buffer) != 0;
 }

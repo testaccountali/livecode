@@ -16,7 +16,6 @@
 
 #include "prefix.h"
 
-#include "core.h"
 #include "globdefs.h"
 #include "filedefs.h"
 #include "objdefs.h"
@@ -28,7 +27,7 @@
 
 // MW-2013-05-21: [[ RandomBytes ]] Implementation of random byte generation for
 //   Mac (Desktop and Server).
-bool MCS_random_bytes(size_t p_count, void *p_buffer)
+bool MCS_random_bytes(size_t p_count, MCDataRef& r_buffer)
 {
 	// On Mac (both Server and Desktop) OpenSSL is always available so we will
 	// never get here.

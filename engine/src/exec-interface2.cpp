@@ -3293,7 +3293,6 @@ void MCInterfaceMarkObject(MCExecContext& ctxt, MCObjectPtr p_object, Boolean wh
     	return;
     }
     r_mark . text = nil;
-    ctxt . LegacyThrow(EE_CHUNK_BADCONTAINER);
 }
 
 void MCInterfaceMarkContainer(MCExecContext& ctxt, MCObjectPtr p_container, MCMarkedText& r_mark)

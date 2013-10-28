@@ -16,7 +16,6 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 
 #include "osxprefix.h"
 
-#include "core.h"
 #include "globdefs.h"
 #include "filedefs.h"
 #include "objdefs.h"
@@ -125,11 +124,11 @@ bool MCMacOSXTransferData::Publish(MCTransferType p_type, MCDataRef p_data)
 	break;
 
 	case TRANSFER_TYPE_IMAGE:
-		if (t_success && MCFormatImageIsPNG(p_data))
+		if (t_success && MCImageDataIsPNG(p_data))
 			t_success = Publish(flavorTypePNG, p_data, NULL);
-		if (t_success && MCFormatImageIsGIF(p_data))
+		if (t_success && MCImageDataIsGIF(p_data))
 			t_success = Publish(flavorTypeGIF, p_data, NULL);
-		if (t_success && MCFormatImageIsJPEG(p_data))
+		if (t_success && MCImageDataIsJPEG(p_data))
 			t_success = Publish(flavorTypeJPEG, p_data, NULL);
 		if (t_success)
 			t_success = Publish(kScrapFlavorTypePicture, p_data, MCConvertImageToMacPicture);
@@ -347,10 +346,10 @@ bool MCMacOSXPasteboard::Fetch(MCTransferType p_type, MCDataRef& r_data)
 	case flavorTypeHtml:
 	{
 		MCAutoDataRef t_text_data;
-		if (FetchFlavor(flavorTypeHtml, t_text_data))
+		if (FetchFlavor(flavorTypeHtml, &t_text_data))
 		{
             // SN-2013-07-26: [[ Bug 10893 ]] Convert HTML to RTF using Apple's internal class
-			MCConvertMacHTMLToStyledText(t_text_data, &t_out_data);
+			MCConvertMacHTMLToStyledText(*t_text_data, &t_out_data);
 		}
 	}
 	break;
@@ -1076,5 +1075,6 @@ bool MCConvertMacHTMLToStyledText(MCDataRef p_input, MCDataRef& r_output)
 	MCStyledText t_styled_text;
 	t_styled_text . setparent(MCdefaultstackptr);
 	t_styled_text . setparagraphs(t_paragraphs);
-	return MCObject::pickle(&t_styled_text, 0);
+	/* UNCHECKED */ MCObject::pickle(&t_styled_text, 0, r_output);
+    return true;
 }

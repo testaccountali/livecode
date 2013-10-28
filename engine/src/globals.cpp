@@ -377,7 +377,10 @@ Boolean MCantialiasedtextworkaround = False;
 
 // MW-2012-03-08: [[ StackFile5500 ]] Make stackfile version 5.5 the default.
 uint4 MCstackfileversion = 5500;
-
+uint2 MClook;
+MCStringRef MCttbgcolor;
+MCStringRef MCttfont;
+uint2 MCttsize;
 uint2 MCtrylock;
 uint2 MCerrorlock;
 Boolean MCwatchcursor;
@@ -739,11 +742,12 @@ void X_clear_globals(void)
     MCttfont = MCSTR("Lucida Grande");
     MCttsize = 11;
 #else
-    MClook = LF_MOTIF;
-    MCttbgcolor = MCSTR("255,255,207");
-    MCttfont = MCSTR("Helvetica");
-    MCttsize = 12;
+    uint2 MClook = LF_MOTIF;
+    MCStringRef MCttbgcolor = MCSTR("255,255,207");
+    MCStringRef MCttfont = MCSTR("Helvetica");
+    uint2 MCttsize = 12;
 #endif
+    MCttsize = 12;
 	MCtrylock = 0;
 	MCerrorlock = 0;
 	MCwatchcursor = False;

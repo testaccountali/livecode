@@ -3939,11 +3939,11 @@ Exec_stat MCChunk::set_legacy(MCExecPoint &ep, Preposition_type ptype)
 }
 #endif
 
-Exec_stat MCChunk::set(MCExecPoint& ep, Preposition_type p_type, MCValueRef p_value)
+Exec_stat MCChunk::set(MCExecPoint& ep, Preposition_type p_type, MCValueRef p_value, bool p_unicode)
 {
     MCExecContext ctxt(ep);
     
-    if (isvarchunk())
+    if (destvar != nil)
     {
         MCVariableChunkPtr t_var_chunk;
         if (evalvarchunk(ep, false, true, t_var_chunk) != ES_NORMAL)
@@ -3971,21 +3971,40 @@ Exec_stat MCChunk::set(MCExecPoint& ep, Preposition_type p_type, MCValueRef p_va
     }
     else
     {
-        MCAutoStringRef t_string;
-        if (!ctxt . ConvertToString(p_value, &t_string))
-        {
-            MCeerror -> add(EE_CHUNK_CANTSETDEST, line, pos);
-            return ES_ERROR;
-        }
-        
         MCObjectChunkPtr t_obj_chunk;
         if (evalobjectchunk(ep, false, true, t_obj_chunk) != ES_NORMAL)
             return ES_ERROR;
         
-        if (t_obj_chunk . object -> gettype() == CT_FIELD)
-            MCInterfaceExecPutIntoField(ctxt, *t_string, p_type, t_obj_chunk);
+        if (p_unicode)
+        {
+            if (t_obj_chunk . object -> gettype() != CT_FIELD)
+            {
+                MCeerror -> add(EE_CHUNK_CANTSETUNICODEDEST, line, pos);
+                return ES_ERROR;
+            }
+            
+            MCAutoDataRef t_data;
+            if (!ctxt . ConvertToData(p_value, &t_data))
+            {
+                MCeerror -> add(EE_CHUNK_CANTSETUNICODEDEST, line, pos);
+                return ES_ERROR;
+            }
+            MCInterfaceExecPutUnicodeIntoField(ctxt, *t_data, p_type, t_obj_chunk);
+        }
         else
-            MCInterfaceExecPutIntoObject(ctxt, *t_string, p_type, t_obj_chunk);
+        {
+            MCAutoStringRef t_string;
+            if (!ctxt . ConvertToString(p_value, &t_string))
+            {
+                MCeerror -> add(EE_CHUNK_CANTSETDEST, line, pos);
+                return ES_ERROR;
+            }
+            
+            if (t_obj_chunk . object -> gettype() == CT_FIELD)
+                MCInterfaceExecPutIntoField(ctxt, *t_string, p_type, t_obj_chunk);
+            else
+                MCInterfaceExecPutIntoObject(ctxt, *t_string, p_type, t_obj_chunk);
+        }
     }
     
     if (!ctxt . HasError())

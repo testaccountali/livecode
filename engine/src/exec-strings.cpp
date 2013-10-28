@@ -220,6 +220,7 @@ void MCStringsEvalLength(MCExecContext& ctxt, MCStringRef p_string, integer_t& r
 
 index_t MCregexfrontier = 0;
 
+/*
 bool MCStringsGetCachedPattern(MCStringRef p_pattern, regexp*& r_compiled)
 {
     for (uinteger_t i = 0; i < PATTERN_CACHE_SIZE; i++)
@@ -246,6 +247,7 @@ bool MCStringsCachePattern(MCStringRef p_pattern, regexp* p_compiled)
     
     return true;
 }
+*/
 
 bool MCStringsCompilePattern(MCStringRef p_pattern, regexp*& r_compiled, bool casesensitive)
 {
@@ -258,19 +260,19 @@ bool MCStringsCompilePattern(MCStringRef p_pattern, regexp*& r_compiled, bool ca
 void MCStringsEvalMatchText(MCExecContext& ctxt, MCStringRef p_string, MCStringRef p_pattern, MCStringRef* r_results, uindex_t p_result_count, bool& r_match)
 {
     regexp* t_compiled = nil;
-    if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
-    {
+//    if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
+//    {
         if (!MCStringsCompilePattern(p_pattern, t_compiled, true /* casesensitive */))
         {
             ctxt.LegacyThrow(EE_MATCH_BADPATTERN);
             return;
         }
-        if (!MCStringsCachePattern(p_pattern, t_compiled))
-        {
-            ctxt.Throw();
-            return;
-        }
-    }
+//        if (!MCStringsCachePattern(p_pattern, t_compiled))
+//        {
+//            ctxt.Throw();
+//            return;
+//        }
+//    }
     
     bool t_success = true;
     r_match = 0 != MCR_exec(t_compiled, p_string);
@@ -304,19 +306,19 @@ void MCStringsEvalMatchText(MCExecContext& ctxt, MCStringRef p_string, MCStringR
 void MCStringsEvalMatchChunk(MCExecContext& ctxt, MCStringRef p_string, MCStringRef p_pattern, MCStringRef* r_results, uindex_t p_result_count, bool& r_match)
 {
     regexp* t_compiled = nil;
-    if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
-    {
+//    if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
+//    {
         if (!MCStringsCompilePattern(p_pattern, t_compiled, true /* casesensitive */))
         {
             ctxt.LegacyThrow(EE_MATCH_BADPATTERN);
             return;
         }
-        if (!MCStringsCachePattern(p_pattern, t_compiled))
-        {
-            ctxt.Throw();
-            return;
-        }
-    }
+//        if (!MCStringsCachePattern(p_pattern, t_compiled))
+//        {
+//            ctxt.Throw();
+//            return;
+//        }
+//    }
     
     bool t_success = true;
     r_match = 0 != MCR_exec(t_compiled, p_string);
@@ -358,19 +360,19 @@ void MCStringsEvalMatchChunk(MCExecContext& ctxt, MCStringRef p_string, MCString
 void MCStringsEvalReplaceText(MCExecContext& ctxt, MCStringRef p_string, MCStringRef p_pattern, MCStringRef p_replacement, MCStringRef& r_result)
 {
     regexp* t_compiled = nil;
-    if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
-    {
+//    if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
+//    {
         if (!MCStringsCompilePattern(p_pattern, t_compiled, true /* casesensitive */))
         {
             ctxt.LegacyThrow(EE_REPLACETEXT_BADPATTERN);
             return;
         }
-        if (!MCStringsCachePattern(p_pattern, t_compiled))
-        {
-            ctxt.Throw();
-            return;
-        }
-    }
+//        if (!MCStringsCachePattern(p_pattern, t_compiled))
+//        {
+//            ctxt.Throw();
+//            return;
+//        }
+//    }
     
     bool t_success = true;
     

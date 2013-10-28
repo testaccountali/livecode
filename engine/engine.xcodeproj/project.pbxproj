@@ -324,7 +324,6 @@
 		4D5885790B80DEAC00200116 /* sv.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4D5885650B80DEAC00200116 /* sv.lproj */; };
 		4D58857A0B80DEAC00200116 /* zh_CN.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4D5885670B80DEAC00200116 /* zh_CN.lproj */; };
 		4D58857B0B80DEAC00200116 /* zh_TW.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 4D5885690B80DEAC00200116 /* zh_TW.lproj */; };
-		4D58857C0B80DEBE00200116 /* LiveCode.rsrc in Resources */ = {isa = PBXBuildFile; fileRef = 4D5885620B80DEAC00200116 /* LiveCode.rsrc */; };
 		4D592DEB14EED23600EADBB6 /* fonttable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D592DEA14EED23600EADBB6 /* fonttable.cpp */; };
 		4D606EB01670C781004A71AA /* exec-debugging.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D606EAF1670C781004A71AA /* exec-debugging.cpp */; };
 		4D657F9917143B720086071B /* libpcre.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6C7999171348CD000BCF78 /* libpcre.a */; };
@@ -556,6 +555,21 @@
 		766E329B180EE4EE00CF7FCF /* imagelist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 766E3295180EE4E000CF7FCF /* imagelist.cpp */; };
 		76D47DE918030E50006F9102 /* exec-interface-field-chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76D47DE81802FD03006F9102 /* exec-interface-field-chunk.cpp */; };
 		76D47DEA18030E52006F9102 /* exec-interface-field-chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76D47DE81802FD03006F9102 /* exec-interface-field-chunk.cpp */; };
+		76EF3163181E6BD900FAC195 /* libgraphics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 766E32A1180EE5BC00CF7FCF /* libgraphics.a */; };
+		76EF3164181E6BEE00FAC195 /* libgraphics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 766E32A1180EE5BC00CF7FCF /* libgraphics.a */; };
+		76EF3165181E6BF700FAC195 /* libgraphics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 766E32A1180EE5BC00CF7FCF /* libgraphics.a */; };
+		76EF3192181E74E600FAC195 /* libskia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF3191181E74E600FAC195 /* libskia.a */; };
+		76EF3193181E74EF00FAC195 /* libskia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF3191181E74E600FAC195 /* libskia.a */; };
+		76EF3194181E74F600FAC195 /* libskia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF3191181E74E600FAC195 /* libskia.a */; };
+		76EF3195181E74FB00FAC195 /* libskia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF3191181E74E600FAC195 /* libskia.a */; };
+		76EF3197181E762C00FAC195 /* LiveCode-Community.rsrc in Resources */ = {isa = PBXBuildFile; fileRef = 76EF3196181E762C00FAC195 /* LiveCode-Community.rsrc */; };
+		76EF31A0181E7A1400FAC195 /* stackview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EF319F181E79FF00FAC195 /* stackview.cpp */; };
+		76EF31A1181E7A1400FAC195 /* stackview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EF319F181E79FF00FAC195 /* stackview.cpp */; };
+		76EF31A2181E7AA000FAC195 /* osxtransfer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 76F71741181135FE007301F6 /* osxtransfer.mm */; };
+		76EF31A4181E7CDB00FAC195 /* osxcisupport.mm in Sources */ = {isa = PBXBuildFile; fileRef = 76EF31A3181E7CCE00FAC195 /* osxcisupport.mm */; };
+		76EF31A6181E7D8700FAC195 /* cgimageutil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EF31A5181E7D8000FAC195 /* cgimageutil.cpp */; };
+		76EF31A7181E7DEF00FAC195 /* surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D4F9DFA13CDE63000B9B15D /* surface.cpp */; };
+		76EF31AA181E803C00FAC195 /* sysosxrandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76EF31A9181E801800FAC195 /* sysosxrandom.cpp */; };
 		76F717611811A2DE007301F6 /* libgraphics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 766E32A1180EE5BC00CF7FCF /* libgraphics.a */; };
 		76FA930A17FC7301003DB770 /* exec-strings-chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76FA930917FC72FB003DB770 /* exec-strings-chunk.cpp */; };
 		76FA930B17FC7301003DB770 /* exec-strings-chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76FA930917FC72FB003DB770 /* exec-strings-chunk.cpp */; };
@@ -821,6 +835,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = libgraphics;
+		};
+		76EF3184181E708A00FAC195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 766E329C180EE5BB00CF7FCF /* libgraphics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = libgraphics;
+		};
+		76EF3190181E74E600FAC195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E8AF4890174D5563000B2F9E /* libskia.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = libskia;
 		};
 		BE3F705D175CD3E700DBFB07 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1524,6 +1552,11 @@
 		768D66A31762087500F203A3 /* mbliphonestore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = mbliphonestore.mm; path = src/mbliphonestore.mm; sourceTree = "<group>"; };
 		768D66A41762087500F203A3 /* mbliphonetextmessaging.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = mbliphonetextmessaging.mm; path = src/mbliphonetextmessaging.mm; sourceTree = "<group>"; };
 		76D47DE81802FD03006F9102 /* exec-interface-field-chunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "exec-interface-field-chunk.cpp"; path = "src/exec-interface-field-chunk.cpp"; sourceTree = "<group>"; };
+		76EF3196181E762C00FAC195 /* LiveCode-Community.rsrc */ = {isa = PBXFileReference; lastKnownFileType = archive.rsrc; name = "LiveCode-Community.rsrc"; path = "rsrc/LiveCode-Community.rsrc"; sourceTree = "<group>"; };
+		76EF319F181E79FF00FAC195 /* stackview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stackview.cpp; path = src/stackview.cpp; sourceTree = "<group>"; };
+		76EF31A3181E7CCE00FAC195 /* osxcisupport.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = osxcisupport.mm; path = src/osxcisupport.mm; sourceTree = "<group>"; };
+		76EF31A5181E7D8000FAC195 /* cgimageutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cgimageutil.cpp; path = src/cgimageutil.cpp; sourceTree = "<group>"; };
+		76EF31A9181E801800FAC195 /* sysosxrandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sysosxrandom.cpp; path = src/sysosxrandom.cpp; sourceTree = "<group>"; };
 		76F71741181135FE007301F6 /* osxtransfer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = osxtransfer.mm; path = src/osxtransfer.mm; sourceTree = "<group>"; };
 		76FA930917FC72FB003DB770 /* exec-strings-chunk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "exec-strings-chunk.cpp"; path = "src/exec-strings-chunk.cpp"; sourceTree = "<group>"; };
 		A04643DB0BAAA63A0030A830 /* w32ans.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = w32ans.cpp; path = src/w32ans.cpp; sourceTree = "<group>"; };
@@ -1575,6 +1608,7 @@
 		E8A7EEFA16FC982F00C39491 /* stacksecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stacksecurity.h; path = src/stacksecurity.h; sourceTree = "<group>"; };
 		E8A7EF0016FC98A200C39491 /* stacksecurity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stacksecurity.cpp; path = src/stacksecurity.cpp; sourceTree = "<group>"; };
 		E8AE103215D90DE700A517E8 /* exec-scripting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "exec-scripting.cpp"; path = "src/exec-scripting.cpp"; sourceTree = "<group>"; };
+		E8AF4890174D5563000B2F9E /* libskia.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libskia.xcodeproj; path = ../thirdparty/libskia/libskia.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E8DDE5DE16C2B1A7007367E4 /* image_rep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = image_rep.cpp; path = src/image_rep.cpp; sourceTree = "<group>"; };
 		E8EBC31D13E04C29003F6AA3 /* srvmultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = srvmultipart.h; path = src/srvmultipart.h; sourceTree = "<group>"; };
 		E8EBC31E13E04C29003F6AA3 /* srvmultipart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = srvmultipart.cpp; path = src/srvmultipart.cpp; sourceTree = "<group>"; };
@@ -1613,6 +1647,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EF3192181E74E600FAC195 /* libskia.a in Frameworks */,
+				76EF3165181E6BF700FAC195 /* libgraphics.a in Frameworks */,
 				4D56632017D9CD1E00C4A0B1 /* libfoundation.a in Frameworks */,
 				4D2A57C41198634300135143 /* libkernel.a in Frameworks */,
 				4D1F9C53171C662D0091C6CB /* libsecurity-community.a in Frameworks */,
@@ -1639,16 +1675,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EF3195181E74FB00FAC195 /* libskia.a in Frameworks */,
 				76F717611811A2DE007301F6 /* libgraphics.a in Frameworks */,
 				4D7FA7BF1594E10500EEF440 /* libfoundation.a in Frameworks */,
 				4DEE2C7A0FDE52770009423C /* libkernel.a in Frameworks */,
 				4D221ACB171D59ED00E7E557 /* libkernel-development.a in Frameworks */,
 				4D1F9C4E171C65CE0091C6CB /* libsecurity-community.a in Frameworks */,
 				4D657F9D17143B800086071B /* libz.a in Frameworks */,
-				4D657F9C17143B7A0086071B /* libpng.a in Frameworks */,
-				4D657F9B17143B770086071B /* libjpeg.a in Frameworks */,
 				4D657F9A17143B750086071B /* libgif.a in Frameworks */,
 				4D657F9917143B720086071B /* libpcre.a in Frameworks */,
+				4D657F9C17143B7A0086071B /* libpng.a in Frameworks */,
+				4D657F9B17143B770086071B /* libjpeg.a in Frameworks */,
 				4DB385731714422E00D3F102 /* Carbon.framework in Frameworks */,
 				4DDC26C9122692B10071CB31 /* Quartz.framework in Frameworks */,
 				4D5880860B80BDF000200116 /* QuickTime.framework in Frameworks */,
@@ -1667,6 +1704,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EF3194181E74F600FAC195 /* libskia.a in Frameworks */,
+				76EF3163181E6BD900FAC195 /* libgraphics.a in Frameworks */,
 				4D6C28B61647DC4F007C96B7 /* libfoundation.a in Frameworks */,
 				4DEE2CA20FDE53620009423C /* libkernel.a in Frameworks */,
 				4D221B00171D5F5F00E7E557 /* libkernel-standalone.a in Frameworks */,
@@ -1701,6 +1740,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EF3193181E74EF00FAC195 /* libskia.a in Frameworks */,
+				76EF3164181E6BEE00FAC195 /* libgraphics.a in Frameworks */,
 				4D02A3C517A6CB9B009D8AF4 /* libfoundation.a in Frameworks */,
 				4D1F9DC1171C68760091C6CB /* libkernel-server.a in Frameworks */,
 				4D1F9C5A171C66D70091C6CB /* libsecurity-community.a in Frameworks */,
@@ -1739,6 +1780,7 @@
 		4D587D920B80944100200116 = {
 			isa = PBXGroup;
 			children = (
+				76EF3196181E762C00FAC195 /* LiveCode-Community.rsrc */,
 				4D587DA90B80948B00200116 /* Configurations */,
 				4D5880AA0B80BDFE00200116 /* Frameworks */,
 				4D587DA30B80945B00200116 /* Products */,
@@ -1807,6 +1849,7 @@
 		4D587FAE0B809C0C00200116 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				E8AF4890174D5563000B2F9E /* libskia.xcodeproj */,
 				766E329C180EE5BB00CF7FCF /* libgraphics.xcodeproj */,
 				4D7FA7B61594E0FA00EEF440 /* libfoundation.xcodeproj */,
 				4DB903690DAB898B0014A170 /* libexternal.xcodeproj */,
@@ -1937,6 +1980,8 @@
 		4D6F92ED12AA5C7800026A72 /* Desktop - Mac */ = {
 			isa = PBXGroup;
 			children = (
+				76EF31A5181E7D8000FAC195 /* cgimageutil.cpp */,
+				76EF31A3181E7CCE00FAC195 /* osxcisupport.mm */,
 				76F71741181135FE007301F6 /* osxtransfer.mm */,
 				4D5880190B80A4F800200116 /* osxans.mm */,
 				4CAA94CF15EF6E64007CD4C5 /* osxansold.cpp */,
@@ -2425,6 +2470,7 @@
 		4DFD486413BA28BF008DB91F /* System */ = {
 			isa = PBXGroup;
 			children = (
+				76EF31A9181E801800FAC195 /* sysosxrandom.cpp */,
 				4DDB66521413990400E5C84C /* sysregion.cpp */,
 				4DDB66531413990400E5C84C /* sysunxdate.cpp */,
 				4DDB66541413990400E5C84C /* sysw32network.cpp */,
@@ -2446,6 +2492,14 @@
 			isa = PBXGroup;
 			children = (
 				766E32A1180EE5BC00CF7FCF /* libgraphics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76EF3175181E6ED600FAC195 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76EF3191181E74E600FAC195 /* libskia.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2706,6 +2760,7 @@
 				4D587E410B8096FD00200116 /* stacke.cpp */,
 				4D587E6A0B8096FD00200116 /* stacklst.cpp */,
 				4D587E030B8096E600200116 /* stacklst.h */,
+				76EF319F181E79FF00FAC195 /* stackview.cpp */,
 				4D61BD9C0CCF74C800D74FDB /* styledtext.cpp */,
 				4D61BDAC0CCF74EF00D74FDB /* styledtext.h */,
 				4D3772671507869A000B0EB0 /* textbuffer.h */,
@@ -2963,6 +3018,7 @@
 				4D8D3561171D4B72009D9D25 /* PBXTargetDependency */,
 				4D8D3563171D4B72009D9D25 /* PBXTargetDependency */,
 				4DEE2BD30FDE4A1E0009423C /* PBXTargetDependency */,
+				76EF3185181E708A00FAC195 /* PBXTargetDependency */,
 				BE3F7060175CD40000DBFB07 /* PBXTargetDependency */,
 			);
 			name = kernel;
@@ -3038,6 +3094,10 @@
 				{
 					ProductGroup = 4D6C797D171348A6000BCF78 /* Products */;
 					ProjectRef = 4D587FC50B809C2E00200116 /* libpng.xcodeproj */;
+				},
+				{
+					ProductGroup = 76EF3175181E6ED600FAC195 /* Products */;
+					ProjectRef = E8AF4890174D5563000B2F9E /* libskia.xcodeproj */;
 				},
 				{
 					ProductGroup = 4D6C797517134897000BCF78 /* Products */;
@@ -3117,6 +3177,13 @@
 			remoteRef = 766E32A0180EE5BC00CF7FCF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		76EF3191181E74E600FAC195 /* libskia.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libskia.a;
+			remoteRef = 76EF3190181E74E600FAC195 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -3147,7 +3214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D58857C0B80DEBE00200116 /* LiveCode.rsrc in Resources */,
+				76EF3197181E762C00FAC195 /* LiveCode-Community.rsrc in Resources */,
 				4D58856B0B80DEAC00200116 /* da.lproj in Resources */,
 				4D58856C0B80DEAC00200116 /* French.lproj in Resources */,
 				4D58856D0B80DEAC00200116 /* Japanese.lproj in Resources */,
@@ -3486,6 +3553,7 @@
 				4D1F9DB4171C682E0091C6CB /* stacksecurity.cpp in Sources */,
 				766E329A180EE4EE00CF7FCF /* graphicscontext.cpp in Sources */,
 				766E329B180EE4EE00CF7FCF /* imagelist.cpp in Sources */,
+				76EF31A1181E7A1400FAC195 /* stackview.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3765,6 +3833,12 @@
 				76D47DE918030E50006F9102 /* exec-interface-field-chunk.cpp in Sources */,
 				766E3298180EE4ED00CF7FCF /* graphicscontext.cpp in Sources */,
 				766E3299180EE4ED00CF7FCF /* imagelist.cpp in Sources */,
+				76EF31A0181E7A1400FAC195 /* stackview.cpp in Sources */,
+				76EF31A2181E7AA000FAC195 /* osxtransfer.mm in Sources */,
+				76EF31A4181E7CDB00FAC195 /* osxcisupport.mm in Sources */,
+				76EF31A6181E7D8700FAC195 /* cgimageutil.cpp in Sources */,
+				76EF31A7181E7DEF00FAC195 /* surface.cpp in Sources */,
+				76EF31AA181E803C00FAC195 /* sysosxrandom.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3950,6 +4024,11 @@
 			isa = PBXTargetDependency;
 			name = external;
 			targetProxy = 4DEE2BD20FDE4A1E0009423C /* PBXContainerItemProxy */;
+		};
+		76EF3185181E708A00FAC195 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libgraphics;
+			targetProxy = 76EF3184181E708A00FAC195 /* PBXContainerItemProxy */;
 		};
 		BE3F705E175CD3E700DBFB07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

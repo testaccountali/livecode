@@ -62,13 +62,6 @@ static volatile int *s_mainthread_errno;
 static int *s_mainthread_errno;
 #endif
 
-// MW-2013-10-08: [[ Bug 11259 ]] We use our own tables on linux since
-//   we use a fixed locale which isn't available on all systems.
-#if !defined(_LINUX_SERVER) && !defined(_LINUX_DESKTOP)
-uint1 *MClowercasingtable = NULL;
-uint1 *MCuppercasingtable = NULL;
-#endif
-
 ////////////////////////////////////////////////////////////////////////////////
 
 extern MCSystemInterface *MCDesktopCreateMacSystem(void);

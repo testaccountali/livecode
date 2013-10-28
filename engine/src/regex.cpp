@@ -309,6 +309,8 @@ void MCR_copyerror(MCStringRef &r_error)
         r_error = MCValueRetain(regexperror);
 }
 
+regexp *MCregexcache[PATTERN_CACHE_SIZE];
+
 // JS-2013-07-01: [[ EnhancedFilter ]] Updated to support case-sensitivity and caching.
 // MW-2013-07-01: [[ EnhancedFilter ]] Tweak to take 'const char *' and copy pattern as required.
 // MW-2013-07-01: [[ EnhancedFilter ]] Removed 'usecache' parameter as there's

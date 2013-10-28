@@ -102,7 +102,7 @@ public:
 	Exec_stat set(MCExecPoint &, Preposition_type ptype);
 
 #endif
-    Exec_stat set(MCExecPoint& ep, Preposition_type p_type, MCValueRef p_text);
+    Exec_stat set(MCExecPoint& ep, Preposition_type p_type, MCValueRef p_text, bool p_unicode = false);
 #ifdef LEGACY_EXEC 
 	Exec_stat gets(MCExecPoint &);
 	Exec_stat set_legacy(MCExecPoint &, Preposition_type ptype);

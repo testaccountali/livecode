@@ -608,6 +608,8 @@ inline compare_t MCCompare(uintptr_t a, uintptr_t b) { return a < b ? -1 : (a > 
 
 inline bool MCIsPowerOfTwo(uint32_t x) { return (x & (x - 1)) == 0; }
 
+inline float MCClamp(float value, float min, float max) {return MCMax(min, MCMin(max, value));}
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 //  BYTE ORDER FUNCTIONS
