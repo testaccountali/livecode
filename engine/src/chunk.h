@@ -140,12 +140,12 @@ public:
 
 	// Returns true if this chunk is of text type and stops at line
 	bool islinechunk(void) const;
+	
+	// Returns true if this chunk is a var, or indexed var
+	bool isvarchunk(void) const;
 
 	// Returns true if this chunk is a substring of a variable.
 	bool issubstringchunk(void) const;
-	
-	// Returns true if this chunk is of a variable.
-	bool isvarchunk(void) const;
 	
 	// Returns true if this chunk is of a url
 	bool isurlchunk(void) const;

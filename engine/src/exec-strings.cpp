@@ -218,8 +218,6 @@ void MCStringsEvalLength(MCExecContext& ctxt, MCStringRef p_string, integer_t& r
 
 #include "regex.h"
 
-MCStringRef MCregexpatterns[PATTERN_CACHE_SIZE];
-regexp *MCregexcache[PATTERN_CACHE_SIZE];
 index_t MCregexfrontier = 0;
 
 bool MCStringsGetCachedPattern(MCStringRef p_pattern, regexp*& r_compiled)
@@ -249,9 +247,9 @@ bool MCStringsCachePattern(MCStringRef p_pattern, regexp* p_compiled)
     return true;
 }
 
-bool MCStringsCompilePattern(MCStringRef p_pattern, regexp*& r_compiled)
+bool MCStringsCompilePattern(MCStringRef p_pattern, regexp*& r_compiled, bool casesensitive)
 {
-    r_compiled = MCR_compile(p_pattern);
+    r_compiled = MCR_compile(p_pattern, casesensitive);
     return r_compiled != nil;    
 }
 
@@ -262,7 +260,7 @@ void MCStringsEvalMatchText(MCExecContext& ctxt, MCStringRef p_string, MCStringR
     regexp* t_compiled = nil;
     if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
     {
-        if (!MCStringsCompilePattern(p_pattern, t_compiled))
+        if (!MCStringsCompilePattern(p_pattern, t_compiled, true /* casesensitive */))
         {
             ctxt.LegacyThrow(EE_MATCH_BADPATTERN);
             return;
@@ -275,7 +273,7 @@ void MCStringsEvalMatchText(MCExecContext& ctxt, MCStringRef p_string, MCStringR
     }
     
     bool t_success = true;
-    r_match = 0 != MCR_exec(t_compiled, p_string, MCStringGetLength(p_string));
+    r_match = 0 != MCR_exec(t_compiled, p_string);
     uindex_t t_match_index = 1;
     
     for (uindex_t i = 0; t_success && i < p_result_count; i++)
@@ -308,7 +306,7 @@ void MCStringsEvalMatchChunk(MCExecContext& ctxt, MCStringRef p_string, MCString
     regexp* t_compiled = nil;
     if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
     {
-        if (!MCStringsCompilePattern(p_pattern, t_compiled))
+        if (!MCStringsCompilePattern(p_pattern, t_compiled, true /* casesensitive */))
         {
             ctxt.LegacyThrow(EE_MATCH_BADPATTERN);
             return;
@@ -321,7 +319,7 @@ void MCStringsEvalMatchChunk(MCExecContext& ctxt, MCStringRef p_string, MCString
     }
     
     bool t_success = true;
-    r_match = 0 != MCR_exec(t_compiled, p_string, MCStringGetLength(p_string));
+    r_match = 0 != MCR_exec(t_compiled, p_string);
     uindex_t t_match_index = 1;
     
     for (uindex_t i = 0; t_success && i + 1 < p_result_count; i += 2)
@@ -362,7 +360,7 @@ void MCStringsEvalReplaceText(MCExecContext& ctxt, MCStringRef p_string, MCStrin
     regexp* t_compiled = nil;
     if (!MCStringsGetCachedPattern(p_pattern, t_compiled))
     {
-        if (!MCStringsCompilePattern(p_pattern, t_compiled))
+        if (!MCStringsCompilePattern(p_pattern, t_compiled, true /* casesensitive */))
         {
             ctxt.LegacyThrow(EE_REPLACETEXT_BADPATTERN);
             return;
@@ -384,7 +382,7 @@ void MCStringsEvalReplaceText(MCExecContext& ctxt, MCStringRef p_string, MCStrin
 	MCStringRef t_substring;
 	t_substring = nil;
     
-    while (t_success && t_source_offset < t_source_length && MCStringCopySubstring(p_string, MCRangeMake(t_source_offset, MCStringGetLength(p_string) - (t_source_offset)), t_substring) && MCR_exec(t_compiled, t_substring, t_source_length - t_source_offset))
+    while (t_success && t_source_offset < t_source_length && MCStringCopySubstring(p_string, MCRangeMake(t_source_offset, MCStringGetLength(p_string) - (t_source_offset)), t_substring) && MCR_exec(t_compiled, t_substring))
     {
         uindex_t t_start = t_compiled->matchinfo[0].rm_so;
         uindex_t t_end = t_compiled->matchinfo[0].rm_eo;

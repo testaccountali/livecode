@@ -1,6 +1,8 @@
 #ifndef __MC_GRAPHICS__
 #define __MC_GRAPHICS__
 
+#include "foundation.h"
+
 ////////////////////////////////////////////////////////////////////////////////
 
 typedef struct __MCGContext *MCGContextRef;
