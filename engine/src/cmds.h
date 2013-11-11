@@ -1156,7 +1156,7 @@ public:
 	}
 	virtual ~MCMM();
 	virtual Parse_stat parse(MCScriptPoint &);
-    virtual void exec_ctxt(MCExecContext &ctxt);
+	virtual Exec_stat exec(MCExecPoint &);
 	virtual void compile(MCSyntaxFactoryRef);
 };
 
