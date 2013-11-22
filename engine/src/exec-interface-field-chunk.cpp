@@ -736,7 +736,7 @@ void MCField::GetEffectiveTextSizeOfCharChunk(MCExecContext& ctxt, uint32_t p_pa
 {
     uinteger_t t_default;
     GetEffectiveTextSize(ctxt, t_default);
-    GetCharPropOfCharChunk< PodFieldPropType<uinteger_t> >(ctxt, this, p_part_id, si, ei, &MCBlock::GetEffectiveTextSize, true, t_default, r_mixed, r_value);
+    GetCharPropOfCharChunk< OptionalFieldPropType< PodFieldPropType<uinteger_t> > >(ctxt, this, p_part_id, si, ei, &MCBlock::GetTextSize, true, t_default, r_mixed, r_value);
 }
 
 void MCField::SetTextSizeOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, int32_t si, int32_t ei, uinteger_t* p_value)
@@ -1662,7 +1662,7 @@ void MCField::GetForeColorOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, i
 void MCField::GetEffectiveForeColorOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, int32_t si, int32_t ei, bool& r_mixed, MCInterfaceNamedColor& r_color)
 {
     MCInterfaceNamedColor t_default;
-    GetForeColor(ctxt, t_default);
+    GetEffectiveForeColor(ctxt, t_default);
     GetCharPropOfCharChunk< PodFieldPropType<MCInterfaceNamedColor> >(ctxt, this, p_part_id, si, ei, &MCBlock::GetForeColor, true, t_default, r_mixed, r_color);
     MCInterfaceNamedColorFree(ctxt, t_default);
 }
@@ -1681,7 +1681,7 @@ void MCField::GetBackColorOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, i
 void MCField::GetEffectiveBackColorOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, int32_t si, int32_t ei, bool& r_mixed, MCInterfaceNamedColor& r_color)
 {
     MCInterfaceNamedColor t_default;
-    GetForeColor(ctxt, t_default);
+    GetEffectiveForeColor(ctxt, t_default);
     GetCharPropOfCharChunk< PodFieldPropType<MCInterfaceNamedColor> >(ctxt, this, p_part_id, si, ei, &MCBlock::GetBackColor, true, t_default, r_mixed, r_color);
     MCInterfaceNamedColorFree(ctxt, t_default);
 }
@@ -1703,7 +1703,7 @@ void MCField::GetTextFontOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, in
 void MCField::GetEffectiveTextFontOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, int32_t si, int32_t ei, bool& r_mixed, MCStringRef& r_value)
 {
     MCAutoStringRef t_default;
-    GetTextFont(ctxt, &t_default);
+    GetEffectiveTextFont(ctxt, &t_default);
     GetCharPropOfCharChunk< PodFieldPropType<MCStringRef> >(ctxt, this, p_part_id, si, ei, &MCBlock::GetTextFont, true, *t_default, r_mixed, r_value);
 }
 
@@ -1721,7 +1721,7 @@ void MCField::GetTextStyleOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, i
 void MCField::GetEffectiveTextStyleOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, int32_t si, int32_t ei, bool& r_mixed, MCInterfaceTextStyle& r_value)
 {
     MCInterfaceTextStyle t_default;
-    GetTextStyle(ctxt, t_default);
+    GetEffectiveTextStyle(ctxt, t_default);
     GetCharPropOfCharChunk< PodFieldPropType<MCInterfaceTextStyle> >(ctxt, this, p_part_id, si, ei, &MCBlock::GetTextStyle, true, t_default, r_mixed, r_value);
 }
 
@@ -1737,8 +1737,8 @@ void MCField::GetTextShiftOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, i
 
 void MCField::GetEffectiveTextShiftOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, int32_t si, int32_t ei, bool& r_mixed, integer_t& r_value)
 {
-    // TODO no shift value defined for the field
-    GetCharPropOfCharChunk< PodFieldPropType<integer_t> >(ctxt, this, p_part_id, si, ei, &MCBlock::GetEffectiveTextShift, false, 0, r_mixed, r_value);
+	// Default text-shift is 0.
+    GetCharPropOfCharChunk< PodFieldPropType<integer_t> >(ctxt, this, p_part_id, si, ei, &MCBlock::GetTextShift, true, 0, r_mixed, r_value);
 }
 
 void MCField::SetTextShiftOfCharChunk(MCExecContext& ctxt, uint32_t p_part_id, int32_t si, int32_t ei, integer_t* p_value)
@@ -2494,8 +2494,11 @@ void MCBlock::SetTextSize(MCExecContext& ctxt, uinteger_t* p_size)
 
 void MCBlock::GetTextStyle(MCExecContext& ctxt, MCInterfaceTextStyle& r_style)
 {
-    if (!gettextstyle(r_style . style))
-        ctxt . Throw();
+	// If gettextstyle() returns true, then the value is set.
+    if (gettextstyle(r_style . style))
+		return;
+	
+	r_style . style = 0;
 }
 
 void MCBlock::SetTextStyle(MCExecContext& ctxt, const MCInterfaceTextStyle& p_style)
@@ -2540,11 +2543,14 @@ void MCBlock::SetTextShift(MCExecContext& ctxt, integer_t* p_shift)
 
 void MCBlock::GetForeColor(MCExecContext& ctxt, MCInterfaceNamedColor &r_color)
 {
+	// If getcolor() returns true, the color is set. Otherwise it is not
+	// (an unset InterfaceNamedColor is specified as the name being empty
+	//  rather than nil!).
     const MCColor *t_color_ptr;
     if (getcolor(t_color_ptr))
         get_interface_color(*t_color_ptr, nil, r_color);
     else
-        ctxt . Throw();
+		r_color . name = MCValueRetain(kMCEmptyString);
 }
 
 void MCBlock::GetEffectiveForeColor(MCExecContext& ctxt, MCInterfaceNamedColor &r_color)
@@ -2552,6 +2558,8 @@ void MCBlock::GetEffectiveForeColor(MCExecContext& ctxt, MCInterfaceNamedColor &
     const MCColor *t_color_ptr;
     if (getcolor(t_color_ptr))
         get_interface_color(*t_color_ptr, nil, r_color);
+    else
+		r_color . name = MCValueRetain(kMCEmptyString);
 }
 
 void MCBlock::SetForeColor(MCExecContext& ctxt, const MCInterfaceNamedColor& p_color)
