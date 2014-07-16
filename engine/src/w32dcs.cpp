@@ -579,17 +579,29 @@ void MCScreenDC::setname(Window w, MCStringRef newname)
 	if (w == NULL)
 		return;
 
-	if (IsWindowUnicode((HWND)w -> handle . window))
+    HWND hWnd = (HWND)w->handle.window;
+	if (IsWindowUnicode(hWnd))
 	{
-		MCAutoStringRefAsWString t_newname_w;
+		// Set the window RTL-ness based on the window title
+        uint8_t t_rtl;
+        LONG lExStyles;
+        t_rtl = MCBidiFirstStrongIsolate(newname, 0);
+        lExStyles = GetWindowLong(hWnd, GWL_EXSTYLE);
+        if (t_rtl)
+            lExStyles |= WS_EX_LAYOUTRTL;
+        else
+            lExStyles &= ~WS_EX_LAYOUTRTL;
+        SetWindowLong(hWnd, GWL_EXSTYLE, lExStyles);
+        
+        MCAutoStringRefAsWString t_newname_w;
 		/* UNCHECKED */ t_newname_w . Lock(newname);
-		SetWindowTextW((HWND)w -> handle . window, *t_newname_w);
+		SetWindowTextW(hWnd, *t_newname_w);
 	}
 	else
 	{
 		MCAutoStringRefAsCString t_newname_a;
 		/* UNCHECKED */ t_newname_a . Lock(newname);
-		SetWindowTextA((HWND)w->handle.window, *t_newname_a);
+		SetWindowTextA(hWnd, *t_newname_a);
 	}
 }
 
@@ -680,6 +692,8 @@ void MCScreenDC::copyarea(Drawable s, Drawable d, int2 depth, int2 sx, int2 sy,
 		else
 			t_old_dst = SelectObject(f_dst_dc, d -> handle . pixmap), t_dst_dc = f_dst_dc;
 
+        SetLayout(t_src_dc, 0);
+        SetLayout(t_dst_dc, 0);
 		BitBlt(t_dst_dc, dx, dy, sw, sh, t_src_dc, sx, sy, image_inks[rop]);
 
 		if (d -> type == DC_WINDOW)
@@ -862,6 +876,8 @@ MCImageBitmap *MCScreenDC::snapshot(MCRectangle &r, uint4 window, MCStringRef di
 		snapoffsety = 0;
 	}
 
+    SetLayout(snaphdc, 0);
+    
 	// IM-2014-04-02: [[ Bug 12109 ]] Calculate snapshot rect in screen coords
 	MCRectangle t_device_snaprect;
 
@@ -1435,6 +1451,8 @@ void MCScreenDC::redrawbackdrop(void)
 	{
 		HGDIOBJ t_old_obj;
 		t_old_obj = SelectObject(t_src_dc, t_bitmap);
+        SetLayout(t_src_dc, 0);
+        SetLayout(t_dc, 0);
 		BitBlt(t_dc, 0, 0, t_width, t_height, t_src_dc, 0, 0, SRCCOPY);
 		SelectObject(t_src_dc, t_old_obj);
 	}
