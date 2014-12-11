@@ -816,6 +816,8 @@ Boolean MCScreenDC::wait(real8 duration, Boolean dispatch, Boolean anyevent)
 		
 		// Handle pending events
 		real8 eventtime = exittime;
+        
+        asl_log(NULL, NULL, ASL_LEVEL_NOTICE, "MCScreenDC::wait eventtime before handlepending: %d", done);
 		if (handlepending(curtime, eventtime, dispatch))
 		{
 			if (anyevent)

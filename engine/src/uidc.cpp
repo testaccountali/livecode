@@ -46,6 +46,8 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 
 #include "graphicscontext.h"
 
+#include <asl.h>
+
 #include "resolution.h"
 
 class MCNullPrinter: public MCPrinter
@@ -1195,15 +1197,28 @@ Boolean MCUIDC::handlepending(real8& curtime, real8& eventtime, Boolean dispatch
         }
     }
     
+    real8 t_new_eventtime = eventtime;
+    
     if (moving != NULL)
-        handlemoves(curtime, eventtime);
+        handlemoves(curtime, t_new_eventtime);
+    
+    if (t_new_eventtime != eventtime)
+        asl_log(NULL, NULL, ASL_LEVEL_NOTICE, "MCUIDC::wait handlemoves changed eventtime to: %f", t_new_eventtime);
+    
+    eventtime = t_new_eventtime;
     
 	real8 stime = IO_cleansockets(curtime);
     if (stime < eventtime)
+    {
+        asl_log(NULL, NULL, ASL_LEVEL_NOTICE, "MCUIDC::wait IO_cleansockets changed eventtime to: %f", stime);
         eventtime = stime;
+    }
     
     if (nmessages > 0 && messages[0] . time < eventtime)
+    {
+        asl_log(NULL, NULL, ASL_LEVEL_NOTICE, "MCUIDC::wait nmessages > 0 && messages[0] . time: eventtime changed to: %f", messages[0] . time);
         eventtime = messages[0] . time;
+    }
     
     return t_handled;
 }
