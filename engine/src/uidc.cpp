@@ -1214,7 +1214,9 @@ Boolean MCUIDC::handlepending(real8& curtime, real8& eventtime, Boolean dispatch
         eventtime = stime;
     }
     
-    if (nmessages > 0 && messages[0] . time < eventtime)
+    if (nmessages > 0
+            && (dispatch || messages[0] . id == 0)
+            && messages[0] . time < eventtime)
     {
         asl_log(NULL, NULL, ASL_LEVEL_NOTICE, "MCUIDC::wait nmessages > 0 && messages[0] . time: eventtime changed to: %f", messages[0] . time);
         eventtime = messages[0] . time;
