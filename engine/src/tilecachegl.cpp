@@ -354,7 +354,12 @@ bool MCTileCacheOpenGLCompositor_AllocateTile(void *p_context, int32_t p_size, c
 		
 		// Fill the texture.
 		// IM_2013-08-21: [[ RefactorGraphics ]] set iOS pixel format to RGBA
-		glTexSubImage2D(GL_TEXTURE_2D, 0, t_x * self -> tile_size, t_y * self -> tile_size, self -> tile_size, self -> tile_size, GL_RGBA, GL_UNSIGNED_BYTE, t_data);
+        glTexSubImage2D(GL_TEXTURE_2D, 0, t_x * self -> tile_size, t_y * self -> tile_size, self -> tile_size, self -> tile_size, GL_RGBA, GL_UNSIGNED_BYTE, t_data);
+        {
+            GLenum t_t = glGetError();
+            if (t_t != GL_NO_ERROR)
+                MCLog("glTextSubImage2D(x,x,%d,%d,%d,%d,...) returned error 0x%X", t_x * self -> tile_size, t_y * self -> tile_size, self -> tile_size, self -> tile_size, t_t);
+        }
 
 		// Set the tile id.
 		t_tile = (void *)t_tile_id;
