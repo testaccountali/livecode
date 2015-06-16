@@ -209,8 +209,8 @@ class MCField : public MCControl
 	static Boolean contiguous;
 	static int2 narrowmargin;
 	static int2 widemargin;
-	static Keytranslations emacs_keys[];
-	static Keytranslations std_keys[];
+	static const Keytranslations emacs_keys[];
+	static const Keytranslations std_keys[];
 	static MCRectangle linkrect;
 	static MCBlock *linkstart;
 	static MCBlock *linkend;

@@ -1577,7 +1577,7 @@ extern Exec_stat MCHandleRemoveEvent(void *context, MCParameter *p_parameters);
 // MM-2012-09-07: Added support for setting the category of the current audio session (how mute button is handled etc.
 extern Exec_stat MCHandleSetAudioCategory(void *context, MCParameter *p_parameters);
 
-static MCPlatformMessageSpec s_platform_messages[] =
+static const MCPlatformMessageSpec s_platform_messages[] =
 {
     // MM-2012-02-22: Added support for ad management
     {false, "mobileAdRegister", MCHandleAdRegister, nil},

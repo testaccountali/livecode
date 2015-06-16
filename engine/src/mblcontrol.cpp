@@ -165,7 +165,7 @@ MCNativeControl *MCNativeControl::CurrentTarget(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static struct {const char *name; MCNativeControlType type;} s_native_control_types[] =
+static const struct {const char *name; MCNativeControlType type;} s_native_control_types[] =
 {
 	{"browser", kMCNativeControlTypeBrowser},
 	{"scroller", kMCNativeControlTypeScroller},
@@ -175,7 +175,7 @@ static struct {const char *name; MCNativeControlType type;} s_native_control_typ
 	{nil, kMCNativeControlTypeUnknown}
 };
 
-static struct {const char *name; MCNativeControlProperty property;} s_native_control_properties[] =
+static const struct {const char *name; MCNativeControlProperty property;} s_native_control_properties[] =
 {
 	{"id", kMCNativeControlPropertyId},
 	{"name", kMCNativeControlPropertyName},
@@ -273,7 +273,7 @@ static struct {const char *name; MCNativeControlProperty property;} s_native_con
 	{nil, kMCNativeControlPropertyUnknown}
 };
 
-static struct {const char *name; MCNativeControlAction action;} s_native_control_actions[] =
+static const struct {const char *name; MCNativeControlAction action;} s_native_control_actions[] =
 {
 	{"advance", kMCNativeControlActionAdvance},
 	{"retreat", kMCNativeControlActionRetreat},

@@ -65,7 +65,7 @@ uint2 MCButton::focusedtab = MAXUINT2;
 
 bool MCmenupoppedup = false;
 
-Keynames MCButton::button_keys[] =
+const Keynames MCButton::button_keys[] =
     {
         {XK_F1, "f1"},
         {XK_F2, "f2"},

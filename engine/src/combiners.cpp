@@ -282,7 +282,7 @@ static INLINE uint16_t long_scaled_divide(uint32_t n, uint8_t s, uint16_t d)
 	return d != 0 ? uint16_t((n * s) / d) : 0;
 }
 
-extern uint16_t g_sqrt_table[1024];
+extern const uint16_t g_sqrt_table[1024];
 static INLINE uint8_t sqrt(uint16_t n)
 {
 #ifdef __VISUALC__
@@ -1308,7 +1308,7 @@ surface_combiner_t s_surface_combiners_nda[] =
 	surface_combine<OPERATION_BLEND_EXCLUSION, false, true>,
 };
 
-uint16_t g_sqrt_table[1024] = 
+const uint16_t g_sqrt_table[1024] =
 {
     0,
     2048,2896,3547,4096,4579,5017,5418,5793,6144,6476,6792,7094,7384,7663,7932,8192,8444,

@@ -41,7 +41,7 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 #include "context.h"
 
 
-const char *ER_reverse[256] =
+const char * const ER_reverse[256] =
     {
         "&#0;", "&#1;", "&#2;", "&#3;", "&#4;",
         "&#5;", "&#6;", "&#7;", "&#8;", "&#9;", "&#10;", "&#11;", "&#12;",

@@ -1187,7 +1187,7 @@ Boolean MCU_matchflags(const MCString &s, uint4 &flags, uint4 w, Boolean &c)
 // MM-2014-08-01: [[ Bug ]] Pulled name table initialisation out of MCU_matchname to prevent crah on Linux.
 // IM-2014-08-20: [[ Bug ]] Cannot guarantee that the globals have been initialized before nametable,
 // so use pointers to the globals rather than their value and dereference later.
-static const char **nametable[] =
+static const char * const * const nametable[] =
 {
     &MCstackstring, &MCaudiostring,
     &MCvideostring, &MCbackgroundstring,
@@ -2134,7 +2134,7 @@ void MCU_base64decode(MCExecPoint &ep)
 	ep.setlength(p - ep.getbuffer(0));
 }
 
-static const char *url_table[256] =
+static const char * const url_table[256] =
     {
         "%00", "%01", "%02", "%03", "%04", "%05", "%06", "%07", "%08", "%09",
         "%0D%0A", "%0B", "%0C", "%0D", "%0E", "%0F", "%10", "%11", "%12",

@@ -19,7 +19,7 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 
 //
 
-extern const char *MCnullstring;
+extern const char * const MCnullstring;
 extern uint4 MCU_r8tos(char *&sptr, uint4 &s, real8 n,uint2 fw, uint2 trailing, uint2 force);
 extern Boolean MCU_stor8(const MCString&, real8& d, Boolean co);
 

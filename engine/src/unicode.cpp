@@ -510,7 +510,7 @@ enum
 
 uint4 MCUnicodeCodepointGetWordBreakClass(uint4 x)
 {
-	static uint4 s_word_break_classes[] =
+	static const uint4 s_word_break_classes[] =
 	{
 		0x00270005, 0x002c0004, 0x002e0004, 0x0030004e, 0x003a0003, 0x003b0004, 0x004100ca, 0x005f0007,
 		0x006100ca, 0x00aa0002, 0x00ad0002, 0x00b50002, 0x00b70003, 0x00ba0002, 0x00c000b2, 0x00d800f2,

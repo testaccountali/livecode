@@ -41,7 +41,7 @@ along with LiveCode.  If not see <http://www.gnu.org/licenses/>.  */
 
 #include "globals.h"
 
-const char *MCliststylestrings[] =
+const char * const MCliststylestrings[] =
 {
 	"",
 	"disc",

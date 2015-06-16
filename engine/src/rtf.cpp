@@ -1691,7 +1691,7 @@ RTFStatus RTFReader::Paragraph(void)
 
 RTFStatus RTFReader::LookupKeyword(const char *p_keyword, int4 p_keyword_length, RTFToken& r_token)
 {
-	static RTFKeyword s_keywords[] =
+	static const RTFKeyword s_keywords[] =
 	{
 		{ "\n", kRTFTokenNewLine },
 		{ "line", kRTFTokenNewLine },
