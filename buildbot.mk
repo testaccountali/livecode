@@ -112,7 +112,7 @@ else ifeq ($(BUILD_PLATFORM),linux-x86_64)
 endif
 
 # FIXME add --warn-as-error
-buildtool_command = $(LIVECODE) -ui $(BUILDTOOL_STACK) \
+buildtool_command = gdb -ex run -ex quit --args $(LIVECODE) -ui $(BUILDTOOL_STACK) \
 	--build $(BUILD_STABILITY) \
 	--engine-dir ${engine_dir} --output-dir ${output_dir} --work-dir ${work_dir} \
 	--private-dir ${private_dir}
